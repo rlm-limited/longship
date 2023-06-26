@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Union
+from typing import Optional, Union
 
 import attr
 
@@ -39,9 +39,10 @@ class OperationalStatusChangedData:
     status: ConnectorOperationalStatusDtoOperationalStatus
     errorcode: str
     connectornumber: int
-    locationid: str
-    evseid: str
     statussource: str
+    locationid: Optional[str] = attr.ib(default=None)
+    evseid: Optional[str] = attr.ib(default=None)
+    vendorid: Optional[str] = attr.ib(default=None)
 
 
 @attr.s(auto_attribs=True)

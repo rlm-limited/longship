@@ -5,7 +5,7 @@
 [![Downloads](https://static.pepy.tech/personalized-badge/longship?period=total&units=international_system&left_color=blue&right_color=green&left_text=Downloads)](https://pepy.tech/project/longship)
 
 
-A client library for accessing Longship API
+A client library for accessing [Longship](https://www.longship.io/) API
 
 ## Usage
 First, create a client:
