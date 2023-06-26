@@ -1,0 +1,16 @@
+{
+    "specversion": "1.0",
+    "id": "8e7a55ae-f9f8-46e1-bb42-ed31ebb61569",
+    "type": "SessionStop",
+    "subject": "FRGRN4A7BA75EC4AC418596F4E1124AE30C9",
+    "time": "2023-06-25T13:04:16.4749739Z",
+    "source": "https://beta.api.longship.io/v1/sessions",
+    "datacontenttype": "application/json",
+    "data": {
+      "chargepointid": "ESTG_00669",
+      "connectornumber": 1,
+      "totalenergyinkwh": 0,
+      "totalduration": "00:00:41.4749739",
+      "totalcosts": 0
+    }
+  }

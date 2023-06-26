@@ -1,0 +1,12 @@
+{
+    "specversion": "1.0",
+    "id": "9e2a8108-52e3-4891-a3d1-ac7c66e4fbb0",
+    "type": "ConnectivityStatusChanged",
+    "subject": "ESTG_00669",
+    "time": "2023-06-25T12:41:23.4109788Z",
+    "source": "https://beta.api.longship.io/v1/chargepoints",
+    "datacontenttype": "application/json",
+    "data": {
+      "status": "Offline"
+    }
+  }

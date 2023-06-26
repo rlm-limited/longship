@@ -1,0 +1,12 @@
+{
+    "specversion": "1.0",
+    "id": "a4060f89-af43-430d-b14e-4e6f132acee1",
+    "type": "ChargePointBooted",
+    "subject": "ESTG_00669",
+    "time": "2023-06-25T12:53:23.9079468Z",
+    "source": "https://beta.api.longship.io/v1/chargepoints",
+    "datacontenttype": "application/json",
+    "data": {
+      "registrationstatus": "Accepted"
+    }
+  }
