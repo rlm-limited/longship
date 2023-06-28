@@ -43,6 +43,7 @@ class OperationalStatusChangedData:
     locationid: Optional[str] = attr.ib(default=None)
     evseid: Optional[str] = attr.ib(default=None)
     vendorid: Optional[str] = attr.ib(default=None)
+    vendorerrorcode: Optional[str] = attr.ib(default=None)
 
 
 @attr.s(auto_attribs=True)
