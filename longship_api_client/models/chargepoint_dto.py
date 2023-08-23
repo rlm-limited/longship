@@ -20,7 +20,7 @@ class ChargepointDto:
     Attributes:
         id (Union[Unset, str]):
         charge_point_id (Union[Unset, str]):
-        date_deleted (Union[Unset, None, datetime.datetime]):
+        date_deleted (Union[Unset, datetime.datetime]):
         display_name (Union[Unset, str]):
         roaming_name (Union[Unset, str]):
         charge_box_serial_number (Union[Unset, str]):
@@ -32,12 +32,12 @@ class ChargepointDto:
             ChargepointDtoConnectivityStatus.ONLINE.
         iccid (Union[Unset, str]):
         imsi (Union[Unset, str]):
-        meter_serial_number (Union[Unset, None, str]):
-        meter_type (Union[Unset, None, str]):
+        meter_serial_number (Union[Unset, str]):
+        meter_type (Union[Unset, str]):
         tenant_id (Union[Unset, str]):
         evses (Union[Unset, List['ChargepointEVSEDto']]):
         is_roaming (Union[Unset, bool]):
-        has_guest_usage (Union[Unset, None, bool]):
+        has_guest_usage (Union[Unset, bool]):
         location_id (Union[Unset, str]):
         allow_any_token (Union[Unset, bool]):
         date_created (Union[Unset, datetime.datetime]):
@@ -46,26 +46,26 @@ class ChargepointDto:
         ou_id (Union[Unset, str]):
         ou_name (Union[Unset, str]):
         tariff_id (Union[Unset, str]):
-        tariff_name (Union[Unset, None, str]):
-        start_tariff (Union[Unset, None, float]):
-        tariff_price (Union[Unset, None, float]):
+        tariff_name (Union[Unset, str]):
+        start_tariff (Union[Unset, float]):
+        tariff_price (Union[Unset, float]):
         sim_card_number (Union[Unset, str]):
-        token_groups (Union[Unset, None, List[str]]):
+        token_groups (Union[Unset, List[str]]):
         is_new (Union[Unset, bool]):
-        has_reimbursement (Union[Unset, None, bool]):
-        reimburse_tariff_id (Union[Unset, None, str]):
-        reimburse_tariff_name (Union[Unset, None, str]):
-        reimburse_tariff_price (Union[Unset, None, float]):
-        reimburse_uid (Union[Unset, None, str]):
-        reimburse_token_id (Union[Unset, None, str]):
-        reimburse_ou (Union[Unset, None, str]):
-        use_tenant_fee (Union[Unset, None, bool]):
+        has_reimbursement (Union[Unset, bool]):
+        reimburse_tariff_id (Union[Unset, str]):
+        reimburse_tariff_name (Union[Unset, str]):
+        reimburse_tariff_price (Union[Unset, float]):
+        reimburse_uid (Union[Unset, str]):
+        reimburse_token_id (Union[Unset, str]):
+        reimburse_ou (Union[Unset, str]):
+        use_tenant_fee (Union[Unset, bool]):
         max_capacity_in_kw (Union[Unset, float]):
     """
 
     id: Union[Unset, str] = UNSET
     charge_point_id: Union[Unset, str] = UNSET
-    date_deleted: Union[Unset, None, datetime.datetime] = UNSET
+    date_deleted: Union[Unset, datetime.datetime] = UNSET
     display_name: Union[Unset, str] = UNSET
     roaming_name: Union[Unset, str] = UNSET
     charge_box_serial_number: Union[Unset, str] = UNSET
@@ -76,12 +76,12 @@ class ChargepointDto:
     connectivity_status: Union[Unset, ChargepointDtoConnectivityStatus] = ChargepointDtoConnectivityStatus.ONLINE
     iccid: Union[Unset, str] = UNSET
     imsi: Union[Unset, str] = UNSET
-    meter_serial_number: Union[Unset, None, str] = UNSET
-    meter_type: Union[Unset, None, str] = UNSET
+    meter_serial_number: Union[Unset, str] = UNSET
+    meter_type: Union[Unset, str] = UNSET
     tenant_id: Union[Unset, str] = UNSET
     evses: Union[Unset, List["ChargepointEVSEDto"]] = UNSET
     is_roaming: Union[Unset, bool] = UNSET
-    has_guest_usage: Union[Unset, None, bool] = UNSET
+    has_guest_usage: Union[Unset, bool] = UNSET
     location_id: Union[Unset, str] = UNSET
     allow_any_token: Union[Unset, bool] = UNSET
     date_created: Union[Unset, datetime.datetime] = UNSET
@@ -90,29 +90,29 @@ class ChargepointDto:
     ou_id: Union[Unset, str] = UNSET
     ou_name: Union[Unset, str] = UNSET
     tariff_id: Union[Unset, str] = UNSET
-    tariff_name: Union[Unset, None, str] = UNSET
-    start_tariff: Union[Unset, None, float] = UNSET
-    tariff_price: Union[Unset, None, float] = UNSET
+    tariff_name: Union[Unset, str] = UNSET
+    start_tariff: Union[Unset, float] = UNSET
+    tariff_price: Union[Unset, float] = UNSET
     sim_card_number: Union[Unset, str] = UNSET
-    token_groups: Union[Unset, None, List[str]] = UNSET
+    token_groups: Union[Unset, List[str]] = UNSET
     is_new: Union[Unset, bool] = UNSET
-    has_reimbursement: Union[Unset, None, bool] = UNSET
-    reimburse_tariff_id: Union[Unset, None, str] = UNSET
-    reimburse_tariff_name: Union[Unset, None, str] = UNSET
-    reimburse_tariff_price: Union[Unset, None, float] = UNSET
-    reimburse_uid: Union[Unset, None, str] = UNSET
-    reimburse_token_id: Union[Unset, None, str] = UNSET
-    reimburse_ou: Union[Unset, None, str] = UNSET
-    use_tenant_fee: Union[Unset, None, bool] = UNSET
+    has_reimbursement: Union[Unset, bool] = UNSET
+    reimburse_tariff_id: Union[Unset, str] = UNSET
+    reimburse_tariff_name: Union[Unset, str] = UNSET
+    reimburse_tariff_price: Union[Unset, float] = UNSET
+    reimburse_uid: Union[Unset, str] = UNSET
+    reimburse_token_id: Union[Unset, str] = UNSET
+    reimburse_ou: Union[Unset, str] = UNSET
+    use_tenant_fee: Union[Unset, bool] = UNSET
     max_capacity_in_kw: Union[Unset, float] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
         charge_point_id = self.charge_point_id
-        date_deleted: Union[Unset, None, str] = UNSET
+        date_deleted: Union[Unset, str] = UNSET
         if not isinstance(self.date_deleted, Unset):
-            date_deleted = self.date_deleted.isoformat() if self.date_deleted else None
+            date_deleted = self.date_deleted.isoformat()
 
         display_name = self.display_name
         roaming_name = self.roaming_name
@@ -158,12 +158,9 @@ class ChargepointDto:
         start_tariff = self.start_tariff
         tariff_price = self.tariff_price
         sim_card_number = self.sim_card_number
-        token_groups: Union[Unset, None, List[str]] = UNSET
+        token_groups: Union[Unset, List[str]] = UNSET
         if not isinstance(self.token_groups, Unset):
-            if self.token_groups is None:
-                token_groups = None
-            else:
-                token_groups = self.token_groups
+            token_groups = self.token_groups
 
         is_new = self.is_new
         has_reimbursement = self.has_reimbursement
@@ -276,10 +273,8 @@ class ChargepointDto:
         charge_point_id = d.pop("chargePointId", UNSET)
 
         _date_deleted = d.pop("dateDeleted", UNSET)
-        date_deleted: Union[Unset, None, datetime.datetime]
-        if _date_deleted is None:
-            date_deleted = None
-        elif isinstance(_date_deleted, Unset):
+        date_deleted: Union[Unset, datetime.datetime]
+        if isinstance(_date_deleted, Unset):
             date_deleted = UNSET
         else:
             date_deleted = isoparse(_date_deleted)

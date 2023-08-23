@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 import attr
 from dateutil.parser import isoparse
 
+from ..models.cdr_dto_approval_status import CdrDtoApprovalStatus
 from ..types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -46,6 +47,7 @@ class CdrDto:
         price_info (Union[Unset, PriceInfoDto]):
         local_start_date_time (Union[Unset, datetime.datetime]):
         local_end_date_time (Union[Unset, datetime.datetime]):
+        approval_status (Union[Unset, CdrDtoApprovalStatus]):  Default: CdrDtoApprovalStatus.VALUE_0.
     """
 
     id: Union[Unset, str] = UNSET
@@ -74,6 +76,7 @@ class CdrDto:
     price_info: Union[Unset, "PriceInfoDto"] = UNSET
     local_start_date_time: Union[Unset, datetime.datetime] = UNSET
     local_end_date_time: Union[Unset, datetime.datetime] = UNSET
+    approval_status: Union[Unset, CdrDtoApprovalStatus] = CdrDtoApprovalStatus.VALUE_0
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -137,6 +140,10 @@ class CdrDto:
         if not isinstance(self.local_end_date_time, Unset):
             local_end_date_time = self.local_end_date_time.isoformat()
 
+        approval_status: Union[Unset, int] = UNSET
+        if not isinstance(self.approval_status, Unset):
+            approval_status = self.approval_status.value
+
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
@@ -192,6 +199,8 @@ class CdrDto:
             field_dict["localStartDateTime"] = local_start_date_time
         if local_end_date_time is not UNSET:
             field_dict["localEndDateTime"] = local_end_date_time
+        if approval_status is not UNSET:
+            field_dict["approvalStatus"] = approval_status
 
         return field_dict
 
@@ -305,6 +314,13 @@ class CdrDto:
         else:
             local_end_date_time = isoparse(_local_end_date_time)
 
+        _approval_status = d.pop("approvalStatus", UNSET)
+        approval_status: Union[Unset, CdrDtoApprovalStatus]
+        if isinstance(_approval_status, Unset):
+            approval_status = UNSET
+        else:
+            approval_status = CdrDtoApprovalStatus(_approval_status)
+
         cdr_dto = cls(
             id=id,
             tenant_id=tenant_id,
@@ -332,6 +348,7 @@ class CdrDto:
             price_info=price_info,
             local_start_date_time=local_start_date_time,
             local_end_date_time=local_end_date_time,
+            approval_status=approval_status,
         )
 
         cdr_dto.additional_properties = d

@@ -1,11 +1,15 @@
 import datetime
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
 
 import attr
 from dateutil.parser import isoparse
 
 from ..models.tariff_price_dto_approval_status import TariffPriceDtoApprovalStatus
 from ..types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.tariff_restriction import TariffRestriction
+
 
 T = TypeVar("T", bound="TariffPriceDto")
 
@@ -23,6 +27,7 @@ class TariffPriceDto:
         parking_tariff (Union[Unset, float]):
         parking_step_size_in_minutes (Union[Unset, int]):
         parking_grace_period_in_minutes (Union[Unset, int]):
+        parking_tariff_restriction (Union[Unset, TariffRestriction]):
         time_tariff (Union[Unset, float]):
         time_step_size_in_minutes (Union[Unset, int]):
         time_grace_period_in_minutes (Union[Unset, int]):
@@ -38,6 +43,7 @@ class TariffPriceDto:
     parking_tariff: Union[Unset, float] = UNSET
     parking_step_size_in_minutes: Union[Unset, int] = UNSET
     parking_grace_period_in_minutes: Union[Unset, int] = UNSET
+    parking_tariff_restriction: Union[Unset, "TariffRestriction"] = UNSET
     time_tariff: Union[Unset, float] = UNSET
     time_step_size_in_minutes: Union[Unset, int] = UNSET
     time_grace_period_in_minutes: Union[Unset, int] = UNSET
@@ -60,6 +66,10 @@ class TariffPriceDto:
         parking_tariff = self.parking_tariff
         parking_step_size_in_minutes = self.parking_step_size_in_minutes
         parking_grace_period_in_minutes = self.parking_grace_period_in_minutes
+        parking_tariff_restriction: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.parking_tariff_restriction, Unset):
+            parking_tariff_restriction = self.parking_tariff_restriction.to_dict()
+
         time_tariff = self.time_tariff
         time_step_size_in_minutes = self.time_step_size_in_minutes
         time_grace_period_in_minutes = self.time_grace_period_in_minutes
@@ -88,6 +98,8 @@ class TariffPriceDto:
             field_dict["parkingStepSizeInMinutes"] = parking_step_size_in_minutes
         if parking_grace_period_in_minutes is not UNSET:
             field_dict["parkingGracePeriodInMinutes"] = parking_grace_period_in_minutes
+        if parking_tariff_restriction is not UNSET:
+            field_dict["parkingTariffRestriction"] = parking_tariff_restriction
         if time_tariff is not UNSET:
             field_dict["timeTariff"] = time_tariff
         if time_step_size_in_minutes is not UNSET:
@@ -101,6 +113,8 @@ class TariffPriceDto:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        from ..models.tariff_restriction import TariffRestriction
+
         d = src_dict.copy()
         _created_timestamp = d.pop("createdTimestamp", UNSET)
         created_timestamp: Union[Unset, datetime.datetime]
@@ -130,6 +144,13 @@ class TariffPriceDto:
 
         parking_grace_period_in_minutes = d.pop("parkingGracePeriodInMinutes", UNSET)
 
+        _parking_tariff_restriction = d.pop("parkingTariffRestriction", UNSET)
+        parking_tariff_restriction: Union[Unset, TariffRestriction]
+        if isinstance(_parking_tariff_restriction, Unset):
+            parking_tariff_restriction = UNSET
+        else:
+            parking_tariff_restriction = TariffRestriction.from_dict(_parking_tariff_restriction)
+
         time_tariff = d.pop("timeTariff", UNSET)
 
         time_step_size_in_minutes = d.pop("timeStepSizeInMinutes", UNSET)
@@ -153,6 +174,7 @@ class TariffPriceDto:
             parking_tariff=parking_tariff,
             parking_step_size_in_minutes=parking_step_size_in_minutes,
             parking_grace_period_in_minutes=parking_grace_period_in_minutes,
+            parking_tariff_restriction=parking_tariff_restriction,
             time_tariff=time_tariff,
             time_step_size_in_minutes=time_step_size_in_minutes,
             time_grace_period_in_minutes=time_grace_period_in_minutes,

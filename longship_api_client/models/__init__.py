@@ -5,9 +5,12 @@ from .authorization_data import AuthorizationData
 from .business_details_dto import BusinessDetailsDto
 from .cancel_reservation_request import CancelReservationRequest
 from .cdr_dto import CdrDto
+from .cdr_dto_approval_status import CdrDtoApprovalStatus
 from .cdr_geo_location_dto import CdrGeoLocationDto
 from .cdr_location_dto import CdrLocationDto
 from .cdr_location_dto_power_type import CdrLocationDtoPowerType
+from .cdr_patch_dto import CdrPatchDto
+from .cdr_patch_dto_approval_status import CdrPatchDtoApprovalStatus
 from .cdr_started_by_info_dto import CdrStartedByInfoDto
 from .cdr_started_by_info_dto_authorization_state import CdrStartedByInfoDtoAuthorizationState
 from .cdr_started_by_info_dto_roaming_platform_type import CdrStartedByInfoDtoRoamingPlatformType
@@ -17,6 +20,7 @@ from .cdr_started_by_token_dto_token_type import CdrStartedByTokenDtoTokenType
 from .change_availability_request import ChangeAvailabilityRequest
 from .change_availability_request_type import ChangeAvailabilityRequestType
 from .change_configuration_request import ChangeConfigurationRequest
+from .chargepoint_configuration_items_dto import ChargepointConfigurationItemsDto
 from .chargepoint_connector_dto import ChargepointConnectorDto
 from .chargepoint_connector_dto_format import ChargepointConnectorDtoFormat
 from .chargepoint_connector_dto_operational_status import ChargepointConnectorDtoOperationalStatus
@@ -171,6 +175,8 @@ from .tariff_post_dto_usage_type import TariffPostDtoUsageType
 from .tariff_price_dto import TariffPriceDto
 from .tariff_price_dto_approval_status import TariffPriceDtoApprovalStatus
 from .tariff_put_dto import TariffPutDto
+from .tariff_restriction import TariffRestriction
+from .tariff_restriction_day_of_week_item import TariffRestrictionDayOfWeekItem
 from .trigger_message_request import TriggerMessageRequest
 from .trigger_message_request_requested_message import TriggerMessageRequestRequestedMessage
 from .unlock_connector_request import UnlockConnectorRequest
@@ -191,9 +197,12 @@ __all__ = (
     "BusinessDetailsDto",
     "CancelReservationRequest",
     "CdrDto",
+    "CdrDtoApprovalStatus",
     "CdrGeoLocationDto",
     "CdrLocationDto",
     "CdrLocationDtoPowerType",
+    "CdrPatchDto",
+    "CdrPatchDtoApprovalStatus",
     "CdrStartedByInfoDto",
     "CdrStartedByInfoDtoAuthorizationState",
     "CdrStartedByInfoDtoRoamingPlatformType",
@@ -203,6 +212,7 @@ __all__ = (
     "ChangeAvailabilityRequest",
     "ChangeAvailabilityRequestType",
     "ChangeConfigurationRequest",
+    "ChargepointConfigurationItemsDto",
     "ChargepointConnectorDto",
     "ChargepointConnectorDtoFormat",
     "ChargepointConnectorDtoOperationalStatus",
@@ -357,6 +367,8 @@ __all__ = (
     "TariffPriceDto",
     "TariffPriceDtoApprovalStatus",
     "TariffPutDto",
+    "TariffRestriction",
+    "TariffRestrictionDayOfWeekItem",
     "TriggerMessageRequest",
     "TriggerMessageRequestRequestedMessage",
     "UnlockConnectorRequest",

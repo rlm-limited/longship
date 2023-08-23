@@ -61,6 +61,9 @@ class LocationPutDto:
         ou (Union[Unset, str]):
         ou_id (Union[Unset, str]):
         ou_name (Union[Unset, str]):
+        external_reference_1 (Union[Unset, str]):
+        external_reference_2 (Union[Unset, str]):
+        external_reference_3 (Union[Unset, str]):
     """
 
     id: str
@@ -96,6 +99,9 @@ class LocationPutDto:
     ou: Union[Unset, str] = UNSET
     ou_id: Union[Unset, str] = UNSET
     ou_name: Union[Unset, str] = UNSET
+    external_reference_1: Union[Unset, str] = UNSET
+    external_reference_2: Union[Unset, str] = UNSET
+    external_reference_3: Union[Unset, str] = UNSET
     additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -197,6 +203,9 @@ class LocationPutDto:
         ou = self.ou
         ou_id = self.ou_id
         ou_name = self.ou_name
+        external_reference_1 = self.external_reference_1
+        external_reference_2 = self.external_reference_2
+        external_reference_3 = self.external_reference_3
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -260,6 +269,12 @@ class LocationPutDto:
             field_dict["ouId"] = ou_id
         if ou_name is not UNSET:
             field_dict["ouName"] = ou_name
+        if external_reference_1 is not UNSET:
+            field_dict["externalReference1"] = external_reference_1
+        if external_reference_2 is not UNSET:
+            field_dict["externalReference2"] = external_reference_2
+        if external_reference_3 is not UNSET:
+            field_dict["externalReference3"] = external_reference_3
 
         return field_dict
 
@@ -408,6 +423,12 @@ class LocationPutDto:
 
         ou_name = d.pop("ouName", UNSET)
 
+        external_reference_1 = d.pop("externalReference1", UNSET)
+
+        external_reference_2 = d.pop("externalReference2", UNSET)
+
+        external_reference_3 = d.pop("externalReference3", UNSET)
+
         location_put_dto = cls(
             id=id,
             country_code=country_code,
@@ -442,6 +463,9 @@ class LocationPutDto:
             ou=ou,
             ou_id=ou_id,
             ou_name=ou_name,
+            external_reference_1=external_reference_1,
+            external_reference_2=external_reference_2,
+            external_reference_3=external_reference_3,
         )
 
         location_put_dto.additional_properties = d

@@ -17,7 +17,10 @@ class OrganizationUnitPostDto:
     Attributes:
         parent_id (str): The id of parent ou.
         name (Union[Unset, str]): The name of the ou.
-        external_reference (Union[Unset, str]): A properties which can be used to link this OU to another system.
+        external_reference (Union[Unset, str]): This property can be used to link this OU to another system.
+        grid_owner_reference (Union[Unset, str]): This property can be used to link this OU to a grid owner.
+        tenant_reference (Union[Unset, str]): This property can be used to link this OU to a tenant.
+        customer_reference (Union[Unset, str]): This property can be used to link this OU to a customer.
         address (Union[Unset, str]):
         state (Union[Unset, str]):
         country (Union[Unset, str]):
@@ -38,6 +41,9 @@ class OrganizationUnitPostDto:
     parent_id: str
     name: Union[Unset, str] = UNSET
     external_reference: Union[Unset, str] = UNSET
+    grid_owner_reference: Union[Unset, str] = UNSET
+    tenant_reference: Union[Unset, str] = UNSET
+    customer_reference: Union[Unset, str] = UNSET
     address: Union[Unset, str] = UNSET
     state: Union[Unset, str] = UNSET
     country: Union[Unset, str] = UNSET
@@ -59,6 +65,9 @@ class OrganizationUnitPostDto:
         parent_id = self.parent_id
         name = self.name
         external_reference = self.external_reference
+        grid_owner_reference = self.grid_owner_reference
+        tenant_reference = self.tenant_reference
+        customer_reference = self.customer_reference
         address = self.address
         state = self.state
         country = self.country
@@ -88,6 +97,12 @@ class OrganizationUnitPostDto:
             field_dict["name"] = name
         if external_reference is not UNSET:
             field_dict["externalReference"] = external_reference
+        if grid_owner_reference is not UNSET:
+            field_dict["gridOwnerReference"] = grid_owner_reference
+        if tenant_reference is not UNSET:
+            field_dict["tenantReference"] = tenant_reference
+        if customer_reference is not UNSET:
+            field_dict["customerReference"] = customer_reference
         if address is not UNSET:
             field_dict["address"] = address
         if state is not UNSET:
@@ -132,6 +147,12 @@ class OrganizationUnitPostDto:
 
         external_reference = d.pop("externalReference", UNSET)
 
+        grid_owner_reference = d.pop("gridOwnerReference", UNSET)
+
+        tenant_reference = d.pop("tenantReference", UNSET)
+
+        customer_reference = d.pop("customerReference", UNSET)
+
         address = d.pop("address", UNSET)
 
         state = d.pop("state", UNSET)
@@ -171,6 +192,9 @@ class OrganizationUnitPostDto:
             parent_id=parent_id,
             name=name,
             external_reference=external_reference,
+            grid_owner_reference=grid_owner_reference,
+            tenant_reference=tenant_reference,
+            customer_reference=customer_reference,
             address=address,
             state=state,
             country=country,
