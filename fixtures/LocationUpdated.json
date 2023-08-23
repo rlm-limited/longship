@@ -1,0 +1,8 @@
+{
+    "specversion": "1.0",
+    "id": "e9846adf-e553-41d4-a972-249a0d567e2f",
+    "type": "LocationUpdated",
+    "subject": "ES*ESTG_00669",
+    "time": "2023-08-23T12:30:15.654638Z",
+    "source": "https://beta.api.longship.io/v1/locations"
+}

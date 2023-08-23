@@ -16,6 +16,11 @@ class WebhookPayloadType(str, Enum):
     SessionStart = "SessionStart"
     SessionUpdate = "SessionUpdate"
     SessionStop = "SessionStop"
+    CDRCreated = "CdrCreated"
+    LocationCreated = "LocationCreated"
+    LocationUpdated = "LocationUpdated"
+    MSPInvoiceProposalStatus = "MspInvoiceProposalStatus"
+    Ping = "Ping"
 
     def __str__(self) -> str:
         return str(self.value)
@@ -73,6 +78,33 @@ class SessionStopData(SessionUpdateData):
 
 
 @attr.s(auto_attribs=True)
+class CDRCreatedData:
+    chargepointid: str
+    locationid: Optional[str] = attr.ib(default=None)
+    evseid: Optional[str] = attr.ib(default=None)
+    connectornumber: int
+    totalenergyinkwh: float
+    totalduration: str
+    totalcosts: float
+    transactionid: str
+
+@attr.s(auto_attribs=True)
+class LocationCreatedData:
+    pass
+
+@attr.s(auto_attribs=True)
+class LocationUpdatedData:
+    pass
+
+@attr.s(auto_attribs=True)
+class MSPInvoiceProposalStatusData:
+    pass
+
+@attr.s(auto_attribs=True)
+class PingData:
+    pass
+
+@attr.s(auto_attribs=True)
 class WebhookPayload:
     specversion: str
     id: str
@@ -88,6 +120,11 @@ class WebhookPayload:
         SessionStartData,
         SessionUpdateData,
         SessionStopData,
+        CDRCreatedData,
+        LocationCreatedData,
+        LocationUpdatedData,
+        MSPInvoiceProposalStatusData,
+        PingData,
     ]
 
     def __attrs_post_init__(self):
@@ -96,7 +133,7 @@ class WebhookPayload:
         elif self.type == WebhookPayloadType.OperationalStatusChanged:
             self.data = OperationalStatusChangedData(**self.data)
         elif self.type == WebhookPayloadType.ConnectivityStatusChanged:
-            self.data['status'] = self.data['status'].upper()
+            self.data["status"] = self.data["status"].upper()
             self.data = ConnectivityStatusChangedData(**self.data)
         elif self.type == WebhookPayloadType.SessionStart:
             self.data = SessionStartData(**self.data)
@@ -104,3 +141,13 @@ class WebhookPayload:
             self.data = SessionUpdateData(**self.data)
         elif self.type == WebhookPayloadType.SessionStop:
             self.data = SessionStopData(**self.data)
+        elif self.type == WebhookPayloadType.CDRCreated:
+            self.data = CDRCreatedData(**self.data)
+        elif self.type == WebhookPayloadType.LocationCreated:
+            self.data = LocationCreatedData(**self.data)
+        elif self.type == WebhookPayloadType.LocationUpdated:
+            self.data = LocationUpdatedData(**self.data)
+        elif self.type == WebhookPayloadType.MSPInvoiceProposalStatus:
+            self.data = MSPInvoiceProposalStatusData(**self.data)
+        elif self.type == WebhookPayloadType.Ping:
+            self.data = PingData(**self.data)

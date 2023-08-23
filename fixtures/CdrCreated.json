@@ -1,0 +1,19 @@
+{
+    "specversion": "1.0",
+    "id": "319fcd4c-df4f-43a2-accf-7d025dd94aa8",
+    "type": "CdrCreated",
+    "subject": "FRGRN4A7BA75EC4AC418596F4E1124AE30C9",
+    "time": "2023-08-23T12:37:53.2104009Z",
+    "source": "https://beta.api.longship.io/v1/cdrs",
+    "datacontenttype": "application/json",
+    "data": {
+        "chargepointid": "ESTG_00669",
+        "locationid": "ES*ESTG_00669",
+        "evseid": "FR*ESTG_00669*1",
+        "connectornumber": 1,
+        "totalenergyinkwh": 1.2,
+        "totalduration": "03:59:00.0000069",
+        "totalcosts": 0.3,
+        "transactionid": "1605381954"
+    }
+}
