@@ -1,16 +1,25 @@
-import datetime
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
 
-from ..models.connector_operational_status_dto_operational_status import ConnectorOperationalStatusDtoOperationalStatus
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+from dateutil.parser import isoparse
+import datetime
+from typing import Union
+from ..models.connector_operational_status_dto_operational_status import (
+    ConnectorOperationalStatusDtoOperationalStatus,
+)
+
 
 T = TypeVar("T", bound="ConnectorOperationalStatusDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ConnectorOperationalStatusDto:
     """
     Attributes:
@@ -21,14 +30,15 @@ class ConnectorOperationalStatusDto:
     """
 
     connector_number: Union[Unset, int] = UNSET
-    operational_status: Union[
-        Unset, ConnectorOperationalStatusDtoOperationalStatus
-    ] = ConnectorOperationalStatusDtoOperationalStatus.AVAILABLE
+    operational_status: Union[Unset, ConnectorOperationalStatusDtoOperationalStatus] = (
+        ConnectorOperationalStatusDtoOperationalStatus.AVAILABLE
+    )
     timestamp: Union[Unset, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         connector_number = self.connector_number
+
         operational_status: Union[Unset, str] = UNSET
         if not isinstance(self.operational_status, Unset):
             operational_status = self.operational_status.value
@@ -59,7 +69,9 @@ class ConnectorOperationalStatusDto:
         if isinstance(_operational_status, Unset):
             operational_status = UNSET
         else:
-            operational_status = ConnectorOperationalStatusDtoOperationalStatus(_operational_status)
+            operational_status = ConnectorOperationalStatusDtoOperationalStatus(
+                _operational_status
+            )
 
         _timestamp = d.pop("timestamp", UNSET)
         timestamp: Union[Unset, datetime.datetime]

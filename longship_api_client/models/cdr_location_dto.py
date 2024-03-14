@@ -1,9 +1,15 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
 
 from ..models.cdr_location_dto_power_type import CdrLocationDtoPowerType
-from ..types import UNSET, Unset
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.cdr_geo_location_dto import CdrGeoLocationDto
@@ -12,7 +18,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="CdrLocationDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class CdrLocationDto:
     """
     Attributes:
@@ -36,7 +42,9 @@ class CdrLocationDto:
 
     id: Union[Unset, str] = UNSET
     evse_id: Union[Unset, str] = UNSET
-    power_type: Union[Unset, CdrLocationDtoPowerType] = CdrLocationDtoPowerType.AC_1_PHASE
+    power_type: Union[Unset, CdrLocationDtoPowerType] = (
+        CdrLocationDtoPowerType.AC_1_PHASE
+    )
     country_code: Union[Unset, str] = UNSET
     party_id: Union[Unset, str] = UNSET
     name: Union[Unset, str] = UNSET
@@ -50,30 +58,43 @@ class CdrLocationDto:
     coordinates: Union[Unset, "CdrGeoLocationDto"] = UNSET
     time_zone: Union[Unset, str] = UNSET
     has_reimbursement: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         evse_id = self.evse_id
+
         power_type: Union[Unset, str] = UNSET
         if not isinstance(self.power_type, Unset):
             power_type = self.power_type.value
 
         country_code = self.country_code
+
         party_id = self.party_id
+
         name = self.name
+
         house_number = self.house_number
+
         street = self.street
+
         city = self.city
+
         postal_code = self.postal_code
+
         state = self.state
+
         country = self.country
+
         hotline_phonenumber = self.hotline_phonenumber
+
         coordinates: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.coordinates, Unset):
             coordinates = self.coordinates.to_dict()
 
         time_zone = self.time_zone
+
         has_reimbursement = self.has_reimbursement
 
         field_dict: Dict[str, Any] = {}

@@ -1,11 +1,20 @@
-import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
 
-from ..models.chargepoint_dto_connectivity_status import ChargepointDtoConnectivityStatus
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+from ..models.chargepoint_dto_connectivity_status import (
+    ChargepointDtoConnectivityStatus,
+)
+from dateutil.parser import isoparse
+from typing import cast
+import datetime
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.chargepoint_evse_dto import ChargepointEVSEDto
@@ -14,7 +23,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="ChargepointDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ChargepointDto:
     """
     Attributes:
@@ -73,7 +82,9 @@ class ChargepointDto:
     charge_point_serial_number: Union[Unset, str] = UNSET
     charge_point_vendor: Union[Unset, str] = UNSET
     firmware_version: Union[Unset, str] = UNSET
-    connectivity_status: Union[Unset, ChargepointDtoConnectivityStatus] = ChargepointDtoConnectivityStatus.ONLINE
+    connectivity_status: Union[Unset, ChargepointDtoConnectivityStatus] = (
+        ChargepointDtoConnectivityStatus.ONLINE
+    )
     iccid: Union[Unset, str] = UNSET
     imsi: Union[Unset, str] = UNSET
     meter_serial_number: Union[Unset, str] = UNSET
@@ -105,43 +116,60 @@ class ChargepointDto:
     reimburse_ou: Union[Unset, str] = UNSET
     use_tenant_fee: Union[Unset, bool] = UNSET
     max_capacity_in_kw: Union[Unset, float] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         charge_point_id = self.charge_point_id
+
         date_deleted: Union[Unset, str] = UNSET
         if not isinstance(self.date_deleted, Unset):
             date_deleted = self.date_deleted.isoformat()
 
         display_name = self.display_name
+
         roaming_name = self.roaming_name
+
         charge_box_serial_number = self.charge_box_serial_number
+
         charge_point_model = self.charge_point_model
+
         charge_point_serial_number = self.charge_point_serial_number
+
         charge_point_vendor = self.charge_point_vendor
+
         firmware_version = self.firmware_version
+
         connectivity_status: Union[Unset, str] = UNSET
         if not isinstance(self.connectivity_status, Unset):
             connectivity_status = self.connectivity_status.value
 
         iccid = self.iccid
+
         imsi = self.imsi
+
         meter_serial_number = self.meter_serial_number
+
         meter_type = self.meter_type
+
         tenant_id = self.tenant_id
+
         evses: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.evses, Unset):
             evses = []
             for evses_item_data in self.evses:
                 evses_item = evses_item_data.to_dict()
-
                 evses.append(evses_item)
 
         is_roaming = self.is_roaming
+
         has_guest_usage = self.has_guest_usage
+
         location_id = self.location_id
+
         allow_any_token = self.allow_any_token
+
         date_created: Union[Unset, str] = UNSET
         if not isinstance(self.date_created, Unset):
             date_created = self.date_created.isoformat()
@@ -151,26 +179,43 @@ class ChargepointDto:
             updated = self.updated.isoformat()
 
         ou = self.ou
+
         ou_id = self.ou_id
+
         ou_name = self.ou_name
+
         tariff_id = self.tariff_id
+
         tariff_name = self.tariff_name
+
         start_tariff = self.start_tariff
+
         tariff_price = self.tariff_price
+
         sim_card_number = self.sim_card_number
+
         token_groups: Union[Unset, List[str]] = UNSET
         if not isinstance(self.token_groups, Unset):
             token_groups = self.token_groups
 
         is_new = self.is_new
+
         has_reimbursement = self.has_reimbursement
+
         reimburse_tariff_id = self.reimburse_tariff_id
+
         reimburse_tariff_name = self.reimburse_tariff_name
+
         reimburse_tariff_price = self.reimburse_tariff_price
+
         reimburse_uid = self.reimburse_uid
+
         reimburse_token_id = self.reimburse_token_id
+
         reimburse_ou = self.reimburse_ou
+
         use_tenant_fee = self.use_tenant_fee
+
         max_capacity_in_kw = self.max_capacity_in_kw
 
         field_dict: Dict[str, Any] = {}

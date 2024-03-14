@@ -1,14 +1,23 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
 
-from ..models.get_composite_schedule_request_charging_rate_unit import GetCompositeScheduleRequestChargingRateUnit
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+from ..models.get_composite_schedule_request_charging_rate_unit import (
+    GetCompositeScheduleRequestChargingRateUnit,
+)
+from typing import Union
+
 
 T = TypeVar("T", bound="GetCompositeScheduleRequest")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class GetCompositeScheduleRequest:
     """
     Attributes:
@@ -20,14 +29,16 @@ class GetCompositeScheduleRequest:
 
     connector_id: int
     duration: int
-    charging_rate_unit: Union[
-        Unset, GetCompositeScheduleRequestChargingRateUnit
-    ] = GetCompositeScheduleRequestChargingRateUnit.A
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    charging_rate_unit: Union[Unset, GetCompositeScheduleRequestChargingRateUnit] = (
+        GetCompositeScheduleRequestChargingRateUnit.A
+    )
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         connector_id = self.connector_id
+
         duration = self.duration
+
         charging_rate_unit: Union[Unset, str] = UNSET
         if not isinstance(self.charging_rate_unit, Unset):
             charging_rate_unit = self.charging_rate_unit.value
@@ -57,7 +68,9 @@ class GetCompositeScheduleRequest:
         if isinstance(_charging_rate_unit, Unset):
             charging_rate_unit = UNSET
         else:
-            charging_rate_unit = GetCompositeScheduleRequestChargingRateUnit(_charging_rate_unit)
+            charging_rate_unit = GetCompositeScheduleRequestChargingRateUnit(
+                _charging_rate_unit
+            )
 
         get_composite_schedule_request = cls(
             connector_id=connector_id,

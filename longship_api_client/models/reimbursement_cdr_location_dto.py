@@ -1,18 +1,28 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
 
-from ..models.reimbursement_cdr_location_dto_power_type import ReimbursementCdrLocationDtoPowerType
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
 
+from ..models.reimbursement_cdr_location_dto_power_type import (
+    ReimbursementCdrLocationDtoPowerType,
+)
+from typing import Union
+
 if TYPE_CHECKING:
-    from ..models.reimbursement_cdr_geo_location_dto import ReimbursementCdrGeoLocationDto
+    from ..models.reimbursement_cdr_geo_location_dto import (
+        ReimbursementCdrGeoLocationDto,
+    )
 
 
 T = TypeVar("T", bound="ReimbursementCdrLocationDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ReimbursementCdrLocationDto:
     """
     Attributes:
@@ -37,7 +47,9 @@ class ReimbursementCdrLocationDto:
 
     id: Union[Unset, str] = UNSET
     evse_id: Union[Unset, str] = UNSET
-    power_type: Union[Unset, ReimbursementCdrLocationDtoPowerType] = ReimbursementCdrLocationDtoPowerType.AC_1_PHASE
+    power_type: Union[Unset, ReimbursementCdrLocationDtoPowerType] = (
+        ReimbursementCdrLocationDtoPowerType.AC_1_PHASE
+    )
     country_code: Union[Unset, str] = UNSET
     party_id: Union[Unset, str] = UNSET
     name: Union[Unset, str] = UNSET
@@ -51,30 +63,43 @@ class ReimbursementCdrLocationDto:
     coordinates: Union[Unset, "ReimbursementCdrGeoLocationDto"] = UNSET
     time_zone: Union[Unset, str] = UNSET
     has_reimbursement: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         evse_id = self.evse_id
+
         power_type: Union[Unset, str] = UNSET
         if not isinstance(self.power_type, Unset):
             power_type = self.power_type.value
 
         country_code = self.country_code
+
         party_id = self.party_id
+
         name = self.name
+
         house_number = self.house_number
+
         street = self.street
+
         city = self.city
+
         postal_code = self.postal_code
+
         state = self.state
+
         country = self.country
+
         hotline_phonenumber = self.hotline_phonenumber
+
         coordinates: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.coordinates, Unset):
             coordinates = self.coordinates.to_dict()
 
         time_zone = self.time_zone
+
         has_reimbursement = self.has_reimbursement
 
         field_dict: Dict[str, Any] = {}
@@ -117,7 +142,9 @@ class ReimbursementCdrLocationDto:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.reimbursement_cdr_geo_location_dto import ReimbursementCdrGeoLocationDto
+        from ..models.reimbursement_cdr_geo_location_dto import (
+            ReimbursementCdrGeoLocationDto,
+        )
 
         d = src_dict.copy()
         id = d.pop("id", UNSET)

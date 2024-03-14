@@ -2,13 +2,13 @@ from enum import Enum
 
 
 class LocationPostDtoFacilitiesItem(str, Enum):
+    ACCOMMODATION = "ACCOMMODATION"
     AIRPORT = "AIRPORT"
     BIKE_SHARING = "BIKE_SHARING"
     BUS_STOP = "BUS_STOP"
     CAFE = "CAFE"
     CARPOOL_PARKING = "CARPOOL_PARKING"
     FUEL_STATION = "FUEL_STATION"
-    HOTEL = "HOTEL"
     MALL = "MALL"
     METRO_STATION = "METRO_STATION"
     MUSEUM = "MUSEUM"

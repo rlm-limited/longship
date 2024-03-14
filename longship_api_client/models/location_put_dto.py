@@ -1,30 +1,36 @@
-import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
 
-from ..models.location_put_dto_facilities_item import LocationPutDtoFacilitiesItem
-from ..models.location_put_dto_parking_type import LocationPutDtoParkingType
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
 
+from dateutil.parser import isoparse
+from ..models.location_put_dto_parking_type import LocationPutDtoParkingType
+from ..models.location_put_dto_facilities_item import LocationPutDtoFacilitiesItem
+import datetime
+from typing import Union
+
 if TYPE_CHECKING:
-    from ..models.additional_geo_location_dto import AdditionalGeoLocationDto
-    from ..models.business_details_dto import BusinessDetailsDto
     from ..models.display_text_dto import DisplayTextDto
+    from ..models.reimburse_info_dto import ReimburseInfoDto
+    from ..models.publish_token_type_dto import PublishTokenTypeDto
+    from ..models.image_dto import ImageDto
+    from ..models.hours_dto import HoursDto
     from ..models.energy_mix_dto import EnergyMixDto
     from ..models.geo_location_dto import GeoLocationDto
-    from ..models.hours_dto import HoursDto
-    from ..models.image_dto import ImageDto
+    from ..models.business_details_dto import BusinessDetailsDto
     from ..models.location_evse_dto import LocationEVSEDto
-    from ..models.publish_token_type_dto import PublishTokenTypeDto
-    from ..models.reimburse_info_dto import ReimburseInfoDto
+    from ..models.additional_geo_location_dto import AdditionalGeoLocationDto
 
 
 T = TypeVar("T", bound="LocationPutDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class LocationPutDto:
     """
     Attributes:
@@ -56,6 +62,7 @@ class LocationPutDto:
         charging_when_closed (Union[Unset, bool]):
         images (Union[Unset, List['ImageDto']]):
         energy_mix (Union[Unset, EnergyMixDto]):
+        deleted_on (Union[Unset, datetime.datetime]):
         has_reimbursement (Union[Unset, bool]):
         reimburse_info (Union[Unset, ReimburseInfoDto]):
         ou (Union[Unset, str]):
@@ -83,7 +90,9 @@ class LocationPutDto:
     state: Union[Unset, str] = UNSET
     hotline_phonenumber: Union[Unset, str] = UNSET
     related_locations: Union[Unset, List["AdditionalGeoLocationDto"]] = UNSET
-    parking_type: Union[Unset, LocationPutDtoParkingType] = LocationPutDtoParkingType.ALONG_MOTORWAY
+    parking_type: Union[Unset, LocationPutDtoParkingType] = (
+        LocationPutDtoParkingType.ALONG_MOTORWAY
+    )
     evses: Union[Unset, List["LocationEVSEDto"]] = UNSET
     directions: Union[Unset, List["DisplayTextDto"]] = UNSET
     operator: Union[Unset, "BusinessDetailsDto"] = UNSET
@@ -94,6 +103,7 @@ class LocationPutDto:
     charging_when_closed: Union[Unset, bool] = UNSET
     images: Union[Unset, List["ImageDto"]] = UNSET
     energy_mix: Union[Unset, "EnergyMixDto"] = UNSET
+    deleted_on: Union[Unset, datetime.datetime] = UNSET
     has_reimbursement: Union[Unset, bool] = UNSET
     reimburse_info: Union[Unset, "ReimburseInfoDto"] = UNSET
     ou: Union[Unset, str] = UNSET
@@ -102,19 +112,27 @@ class LocationPutDto:
     external_reference_1: Union[Unset, str] = UNSET
     external_reference_2: Union[Unset, str] = UNSET
     external_reference_3: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         country_code = self.country_code
+
         party_id = self.party_id
+
         publish = self.publish
+
         street = self.street
+
         city = self.city
+
         country = self.country
+
         coordinates = self.coordinates.to_dict()
 
         time_zone = self.time_zone
+
         last_updated = self.last_updated.isoformat()
 
         publish_allowed_to: Union[Unset, List[Dict[str, Any]]] = UNSET
@@ -122,20 +140,23 @@ class LocationPutDto:
             publish_allowed_to = []
             for publish_allowed_to_item_data in self.publish_allowed_to:
                 publish_allowed_to_item = publish_allowed_to_item_data.to_dict()
-
                 publish_allowed_to.append(publish_allowed_to_item)
 
         name = self.name
+
         house_number = self.house_number
+
         postal_code = self.postal_code
+
         state = self.state
+
         hotline_phonenumber = self.hotline_phonenumber
+
         related_locations: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.related_locations, Unset):
             related_locations = []
             for related_locations_item_data in self.related_locations:
                 related_locations_item = related_locations_item_data.to_dict()
-
                 related_locations.append(related_locations_item)
 
         parking_type: Union[Unset, str] = UNSET
@@ -147,7 +168,6 @@ class LocationPutDto:
             evses = []
             for evses_item_data in self.evses:
                 evses_item = evses_item_data.to_dict()
-
                 evses.append(evses_item)
 
         directions: Union[Unset, List[Dict[str, Any]]] = UNSET
@@ -155,7 +175,6 @@ class LocationPutDto:
             directions = []
             for directions_item_data in self.directions:
                 directions_item = directions_item_data.to_dict()
-
                 directions.append(directions_item)
 
         operator: Union[Unset, Dict[str, Any]] = UNSET
@@ -175,7 +194,6 @@ class LocationPutDto:
             facilities = []
             for facilities_item_data in self.facilities:
                 facilities_item = facilities_item_data.value
-
                 facilities.append(facilities_item)
 
         opening_times: Union[Unset, Dict[str, Any]] = UNSET
@@ -183,28 +201,38 @@ class LocationPutDto:
             opening_times = self.opening_times.to_dict()
 
         charging_when_closed = self.charging_when_closed
+
         images: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.images, Unset):
             images = []
             for images_item_data in self.images:
                 images_item = images_item_data.to_dict()
-
                 images.append(images_item)
 
         energy_mix: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.energy_mix, Unset):
             energy_mix = self.energy_mix.to_dict()
 
+        deleted_on: Union[Unset, str] = UNSET
+        if not isinstance(self.deleted_on, Unset):
+            deleted_on = self.deleted_on.isoformat()
+
         has_reimbursement = self.has_reimbursement
+
         reimburse_info: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.reimburse_info, Unset):
             reimburse_info = self.reimburse_info.to_dict()
 
         ou = self.ou
+
         ou_id = self.ou_id
+
         ou_name = self.ou_name
+
         external_reference_1 = self.external_reference_1
+
         external_reference_2 = self.external_reference_2
+
         external_reference_3 = self.external_reference_3
 
         field_dict: Dict[str, Any] = {}
@@ -259,6 +287,8 @@ class LocationPutDto:
             field_dict["images"] = images
         if energy_mix is not UNSET:
             field_dict["energy_mix"] = energy_mix
+        if deleted_on is not UNSET:
+            field_dict["deletedOn"] = deleted_on
         if has_reimbursement is not UNSET:
             field_dict["hasReimbursement"] = has_reimbursement
         if reimburse_info is not UNSET:
@@ -280,16 +310,16 @@ class LocationPutDto:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.additional_geo_location_dto import AdditionalGeoLocationDto
-        from ..models.business_details_dto import BusinessDetailsDto
         from ..models.display_text_dto import DisplayTextDto
+        from ..models.reimburse_info_dto import ReimburseInfoDto
+        from ..models.publish_token_type_dto import PublishTokenTypeDto
+        from ..models.image_dto import ImageDto
+        from ..models.hours_dto import HoursDto
         from ..models.energy_mix_dto import EnergyMixDto
         from ..models.geo_location_dto import GeoLocationDto
-        from ..models.hours_dto import HoursDto
-        from ..models.image_dto import ImageDto
+        from ..models.business_details_dto import BusinessDetailsDto
         from ..models.location_evse_dto import LocationEVSEDto
-        from ..models.publish_token_type_dto import PublishTokenTypeDto
-        from ..models.reimburse_info_dto import ReimburseInfoDto
+        from ..models.additional_geo_location_dto import AdditionalGeoLocationDto
 
         d = src_dict.copy()
         id = d.pop("id")
@@ -315,7 +345,9 @@ class LocationPutDto:
         publish_allowed_to = []
         _publish_allowed_to = d.pop("publish_allowed_to", UNSET)
         for publish_allowed_to_item_data in _publish_allowed_to or []:
-            publish_allowed_to_item = PublishTokenTypeDto.from_dict(publish_allowed_to_item_data)
+            publish_allowed_to_item = PublishTokenTypeDto.from_dict(
+                publish_allowed_to_item_data
+            )
 
             publish_allowed_to.append(publish_allowed_to_item)
 
@@ -332,7 +364,9 @@ class LocationPutDto:
         related_locations = []
         _related_locations = d.pop("related_locations", UNSET)
         for related_locations_item_data in _related_locations or []:
-            related_locations_item = AdditionalGeoLocationDto.from_dict(related_locations_item_data)
+            related_locations_item = AdditionalGeoLocationDto.from_dict(
+                related_locations_item_data
+            )
 
             related_locations.append(related_locations_item)
 
@@ -408,6 +442,13 @@ class LocationPutDto:
         else:
             energy_mix = EnergyMixDto.from_dict(_energy_mix)
 
+        _deleted_on = d.pop("deletedOn", UNSET)
+        deleted_on: Union[Unset, datetime.datetime]
+        if isinstance(_deleted_on, Unset):
+            deleted_on = UNSET
+        else:
+            deleted_on = isoparse(_deleted_on)
+
         has_reimbursement = d.pop("hasReimbursement", UNSET)
 
         _reimburse_info = d.pop("reimburseInfo", UNSET)
@@ -458,6 +499,7 @@ class LocationPutDto:
             charging_when_closed=charging_when_closed,
             images=images,
             energy_mix=energy_mix,
+            deleted_on=deleted_on,
             has_reimbursement=has_reimbursement,
             reimburse_info=reimburse_info,
             ou=ou,

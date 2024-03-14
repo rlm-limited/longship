@@ -3,34 +3,31 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
-from ...client import Client
-from ...models.longship_error import LongshipError
+from ...client import AuthenticatedClient, Client
 from ...types import Response
+from ... import errors
+
+from ...models.longship_error import LongshipError
 
 
 def _get_kwargs(
     id: str,
     token_uid: str,
-    *,
-    client: Client,
 ) -> Dict[str, Any]:
-    url = "{}/v1/localtokengroups/{id}/token/{tokenUid}".format(client.base_url, id=id, tokenUid=token_uid)
-
-    headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "delete",
-        "url": url,
-        "headers": headers,
-        "cookies": cookies,
-        "timeout": client.get_timeout(),
-        "follow_redirects": client.follow_redirects,
+        "url": "/v1/localtokengroups/{id}/token/{token_uid}".format(
+            id=id,
+            token_uid=token_uid,
+        ),
     }
 
+    return _kwargs
 
-def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Union[Any, LongshipError]]:
+
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[Union[Any, LongshipError]]:
     if response.status_code == HTTPStatus.NOT_FOUND:
         response_404 = LongshipError.from_dict(response.json())
 
@@ -56,7 +53,9 @@ def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Uni
         return None
 
 
-def _build_response(*, client: Client, response: httpx.Response) -> Response[Union[Any, LongshipError]]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[Union[Any, LongshipError]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -69,7 +68,7 @@ def sync_detailed(
     id: str,
     token_uid: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
 ) -> Response[Union[Any, LongshipError]]:
     """Deletes a localtokengrouptoken.
 
@@ -90,11 +89,9 @@ def sync_detailed(
     kwargs = _get_kwargs(
         id=id,
         token_uid=token_uid,
-        client=client,
     )
 
-    response = httpx.request(
-        verify=client.verify_ssl,
+    response = client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -105,7 +102,7 @@ def sync(
     id: str,
     token_uid: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
 ) -> Optional[Union[Any, LongshipError]]:
     """Deletes a localtokengrouptoken.
 
@@ -134,7 +131,7 @@ async def asyncio_detailed(
     id: str,
     token_uid: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
 ) -> Response[Union[Any, LongshipError]]:
     """Deletes a localtokengrouptoken.
 
@@ -155,11 +152,9 @@ async def asyncio_detailed(
     kwargs = _get_kwargs(
         id=id,
         token_uid=token_uid,
-        client=client,
     )
 
-    async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
 
@@ -168,7 +163,7 @@ async def asyncio(
     id: str,
     token_uid: str,
     *,
-    client: Client,
+    client: Union[AuthenticatedClient, Client],
 ) -> Optional[Union[Any, LongshipError]]:
     """Deletes a localtokengrouptoken.
 

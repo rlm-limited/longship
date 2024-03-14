@@ -1,17 +1,28 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
 
 from ..models.chargepoint_connector_dto_format import ChargepointConnectorDtoFormat
-from ..models.chargepoint_connector_dto_operational_status import ChargepointConnectorDtoOperationalStatus
-from ..models.chargepoint_connector_dto_power_type import ChargepointConnectorDtoPowerType
 from ..models.chargepoint_connector_dto_standard import ChargepointConnectorDtoStandard
-from ..types import UNSET, Unset
+from ..models.chargepoint_connector_dto_power_type import (
+    ChargepointConnectorDtoPowerType,
+)
+from typing import Union
+from ..models.chargepoint_connector_dto_operational_status import (
+    ChargepointConnectorDtoOperationalStatus,
+)
+
 
 T = TypeVar("T", bound="ChargepointConnectorDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ChargepointConnectorDto:
     """
     Attributes:
@@ -25,22 +36,31 @@ class ChargepointConnectorDto:
         max_voltage (Union[Unset, int]):
         max_amperage (Union[Unset, int]):
         max_electric_power (Union[Unset, int]):
+        tariff_id (Union[Unset, str]):
     """
 
     id: Union[Unset, str] = UNSET
-    operational_status: Union[
-        Unset, ChargepointConnectorDtoOperationalStatus
-    ] = ChargepointConnectorDtoOperationalStatus.AVAILABLE
-    standard: Union[Unset, ChargepointConnectorDtoStandard] = ChargepointConnectorDtoStandard.CHADEMO
-    format_: Union[Unset, ChargepointConnectorDtoFormat] = ChargepointConnectorDtoFormat.SOCKET
-    power_type: Union[Unset, ChargepointConnectorDtoPowerType] = ChargepointConnectorDtoPowerType.AC_1_PHASE
+    operational_status: Union[Unset, ChargepointConnectorDtoOperationalStatus] = (
+        ChargepointConnectorDtoOperationalStatus.AVAILABLE
+    )
+    standard: Union[Unset, ChargepointConnectorDtoStandard] = (
+        ChargepointConnectorDtoStandard.CHADEMO
+    )
+    format_: Union[Unset, ChargepointConnectorDtoFormat] = (
+        ChargepointConnectorDtoFormat.SOCKET
+    )
+    power_type: Union[Unset, ChargepointConnectorDtoPowerType] = (
+        ChargepointConnectorDtoPowerType.AC_1_PHASE
+    )
     max_voltage: Union[Unset, int] = UNSET
     max_amperage: Union[Unset, int] = UNSET
     max_electric_power: Union[Unset, int] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    tariff_id: Union[Unset, str] = UNSET
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         operational_status: Union[Unset, str] = UNSET
         if not isinstance(self.operational_status, Unset):
             operational_status = self.operational_status.value
@@ -58,8 +78,12 @@ class ChargepointConnectorDto:
             power_type = self.power_type.value
 
         max_voltage = self.max_voltage
+
         max_amperage = self.max_amperage
+
         max_electric_power = self.max_electric_power
+
+        tariff_id = self.tariff_id
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -80,6 +104,8 @@ class ChargepointConnectorDto:
             field_dict["maxAmperage"] = max_amperage
         if max_electric_power is not UNSET:
             field_dict["maxElectricPower"] = max_electric_power
+        if tariff_id is not UNSET:
+            field_dict["tariffId"] = tariff_id
 
         return field_dict
 
@@ -93,7 +119,9 @@ class ChargepointConnectorDto:
         if isinstance(_operational_status, Unset):
             operational_status = UNSET
         else:
-            operational_status = ChargepointConnectorDtoOperationalStatus(_operational_status)
+            operational_status = ChargepointConnectorDtoOperationalStatus(
+                _operational_status
+            )
 
         _standard = d.pop("standard", UNSET)
         standard: Union[Unset, ChargepointConnectorDtoStandard]
@@ -122,6 +150,8 @@ class ChargepointConnectorDto:
 
         max_electric_power = d.pop("maxElectricPower", UNSET)
 
+        tariff_id = d.pop("tariffId", UNSET)
+
         chargepoint_connector_dto = cls(
             id=id,
             operational_status=operational_status,
@@ -131,6 +161,7 @@ class ChargepointConnectorDto:
             max_voltage=max_voltage,
             max_amperage=max_amperage,
             max_electric_power=max_electric_power,
+            tariff_id=tariff_id,
         )
 
         chargepoint_connector_dto.additional_properties = d

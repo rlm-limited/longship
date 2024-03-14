@@ -1,10 +1,20 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
 
-from ..models.cdr_started_by_info_dto_authorization_state import CdrStartedByInfoDtoAuthorizationState
-from ..models.cdr_started_by_info_dto_roaming_platform_type import CdrStartedByInfoDtoRoamingPlatformType
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+from ..models.cdr_started_by_info_dto_roaming_platform_type import (
+    CdrStartedByInfoDtoRoamingPlatformType,
+)
+from typing import Union
+from ..models.cdr_started_by_info_dto_authorization_state import (
+    CdrStartedByInfoDtoAuthorizationState,
+)
 
 if TYPE_CHECKING:
     from ..models.cdr_started_by_token_dto import CdrStartedByTokenDto
@@ -13,7 +23,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="CdrStartedByInfoDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class CdrStartedByInfoDto:
     """
     Attributes:
@@ -27,15 +37,15 @@ class CdrStartedByInfoDto:
     """
 
     token_info: Union[Unset, "CdrStartedByTokenDto"] = UNSET
-    roaming_platform_type: Union[
-        Unset, CdrStartedByInfoDtoRoamingPlatformType
-    ] = CdrStartedByInfoDtoRoamingPlatformType.HUBJECT
-    authorization_state: Union[
-        Unset, CdrStartedByInfoDtoAuthorizationState
-    ] = CdrStartedByInfoDtoAuthorizationState.APPROVEDBYREMOTE
+    roaming_platform_type: Union[Unset, CdrStartedByInfoDtoRoamingPlatformType] = (
+        CdrStartedByInfoDtoRoamingPlatformType.HUBJECT
+    )
+    authorization_state: Union[Unset, CdrStartedByInfoDtoAuthorizationState] = (
+        CdrStartedByInfoDtoAuthorizationState.APPROVEDBYREMOTE
+    )
     roaming_platform_connection_id: Union[Unset, str] = UNSET
     is_guest_usage: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         token_info: Union[Unset, Dict[str, Any]] = UNSET
@@ -51,6 +61,7 @@ class CdrStartedByInfoDto:
             authorization_state = self.authorization_state.value
 
         roaming_platform_connection_id = self.roaming_platform_connection_id
+
         is_guest_usage = self.is_guest_usage
 
         field_dict: Dict[str, Any] = {}
@@ -86,14 +97,18 @@ class CdrStartedByInfoDto:
         if isinstance(_roaming_platform_type, Unset):
             roaming_platform_type = UNSET
         else:
-            roaming_platform_type = CdrStartedByInfoDtoRoamingPlatformType(_roaming_platform_type)
+            roaming_platform_type = CdrStartedByInfoDtoRoamingPlatformType(
+                _roaming_platform_type
+            )
 
         _authorization_state = d.pop("authorizationState", UNSET)
         authorization_state: Union[Unset, CdrStartedByInfoDtoAuthorizationState]
         if isinstance(_authorization_state, Unset):
             authorization_state = UNSET
         else:
-            authorization_state = CdrStartedByInfoDtoAuthorizationState(_authorization_state)
+            authorization_state = CdrStartedByInfoDtoAuthorizationState(
+                _authorization_state
+            )
 
         roaming_platform_connection_id = d.pop("roamingPlatformConnectionId", UNSET)
 

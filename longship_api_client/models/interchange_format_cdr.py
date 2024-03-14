@@ -1,15 +1,22 @@
-import datetime
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from dateutil.parser import isoparse
+import datetime
+from typing import Union
+
 
 T = TypeVar("T", bound="InterchangeFormatCdr")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class InterchangeFormatCdr:
     """
     Attributes:
@@ -55,10 +62,11 @@ class InterchangeFormatCdr:
     service_provider_id: Union[Unset, str] = UNSET
     infra_provider_id: Union[Unset, str] = UNSET
     calculated_cost: Union[Unset, float] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         cdr_id = self.cdr_id
+
         start_date_time: Union[Unset, str] = UNSET
         if not isinstance(self.start_date_time, Unset):
             start_date_time = self.start_date_time.isoformat()
@@ -68,21 +76,37 @@ class InterchangeFormatCdr:
             end_date_time = self.end_date_time.isoformat()
 
         duration = self.duration
+
         volume = self.volume
+
         charge_point_address = self.charge_point_address
+
         charge_point_zip = self.charge_point_zip
+
         charge_point_city = self.charge_point_city
+
         charge_point_country = self.charge_point_country
+
         charge_point_type = self.charge_point_type
+
         product_type = self.product_type
+
         tariff_type = self.tariff_type
+
         authentication_id = self.authentication_id
+
         contract_id = self.contract_id
+
         meter_id = self.meter_id
+
         obis_code = self.obis_code
+
         charge_point_id = self.charge_point_id
+
         service_provider_id = self.service_provider_id
+
         infra_provider_id = self.infra_provider_id
+
         calculated_cost = self.calculated_cost
 
         field_dict: Dict[str, Any] = {}

@@ -1,13 +1,20 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
+
 
 T = TypeVar("T", bound="ChargepointPutDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ChargepointPutDto:
     """
     Attributes:
@@ -29,16 +36,23 @@ class ChargepointPutDto:
     sim_card_number: Union[Unset, str] = UNSET
     is_new: Union[Unset, bool] = UNSET
     max_capacity_in_kw: Union[Unset, float] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         display_name = self.display_name
+
         roaming_name = self.roaming_name
+
         allow_any_token = self.allow_any_token
+
         ou_code = self.ou_code
+
         tariff_id = self.tariff_id
+
         sim_card_number = self.sim_card_number
+
         is_new = self.is_new
+
         max_capacity_in_kw = self.max_capacity_in_kw
 
         field_dict: Dict[str, Any] = {}

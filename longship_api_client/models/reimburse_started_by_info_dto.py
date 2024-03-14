@@ -1,9 +1,17 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
 
-from ..models.reimburse_started_by_info_dto_authorization_state import ReimburseStartedByInfoDtoAuthorizationState
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+from ..models.reimburse_started_by_info_dto_authorization_state import (
+    ReimburseStartedByInfoDtoAuthorizationState,
+)
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.reimburse_started_by_token_dto import ReimburseStartedByTokenDto
@@ -12,7 +20,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="ReimburseStartedByInfoDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ReimburseStartedByInfoDto:
     """
     Attributes:
@@ -25,14 +33,15 @@ class ReimburseStartedByInfoDto:
 
     id_tag: Union[Unset, str] = UNSET
     token_info: Union[Unset, "ReimburseStartedByTokenDto"] = UNSET
-    authorization_state: Union[
-        Unset, ReimburseStartedByInfoDtoAuthorizationState
-    ] = ReimburseStartedByInfoDtoAuthorizationState.APPROVEDBYREMOTE
+    authorization_state: Union[Unset, ReimburseStartedByInfoDtoAuthorizationState] = (
+        ReimburseStartedByInfoDtoAuthorizationState.APPROVEDBYREMOTE
+    )
     is_guest_usage: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id_tag = self.id_tag
+
         token_info: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.token_info, Unset):
             token_info = self.token_info.to_dict()
@@ -76,7 +85,9 @@ class ReimburseStartedByInfoDto:
         if isinstance(_authorization_state, Unset):
             authorization_state = UNSET
         else:
-            authorization_state = ReimburseStartedByInfoDtoAuthorizationState(_authorization_state)
+            authorization_state = ReimburseStartedByInfoDtoAuthorizationState(
+                _authorization_state
+            )
 
         is_guest_usage = d.pop("isGuestUsage", UNSET)
 

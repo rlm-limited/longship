@@ -1,17 +1,25 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from typing import Union
+
 if TYPE_CHECKING:
-    from ..models.organization_unit_financial_details_dto import OrganizationUnitFinancialDetailsDto
+    from ..models.organization_unit_financial_details_dto import (
+        OrganizationUnitFinancialDetailsDto,
+    )
 
 
 T = TypeVar("T", bound="OrganizationUnitGetDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class OrganizationUnitGetDto:
     """
     Attributes:
@@ -65,32 +73,55 @@ class OrganizationUnitGetDto:
     msp_ou_code: Union[Unset, str] = UNSET
     msp_external_id: Union[Unset, str] = UNSET
     financial_details: Union[Unset, "OrganizationUnitFinancialDetailsDto"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         code = self.code
+
         parent_id = self.parent_id
+
         name = self.name
+
         external_reference = self.external_reference
+
         grid_owner_reference = self.grid_owner_reference
+
         tenant_reference = self.tenant_reference
+
         customer_reference = self.customer_reference
+
         address = self.address
+
         state = self.state
+
         country = self.country
+
         city = self.city
+
         house_number = self.house_number
+
         postal_code = self.postal_code
+
         hotline_phone_number = self.hotline_phone_number
+
         company_email = self.company_email
+
         primary_contactperson = self.primary_contactperson
+
         primary_contactperson_email = self.primary_contactperson_email
+
         direct_payment_profile_id = self.direct_payment_profile_id
+
         msp_ou_id = self.msp_ou_id
+
         msp_ou_name = self.msp_ou_name
+
         msp_ou_code = self.msp_ou_code
+
         msp_external_id = self.msp_external_id
+
         financial_details: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.financial_details, Unset):
             financial_details = self.financial_details.to_dict()
@@ -152,7 +183,9 @@ class OrganizationUnitGetDto:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.organization_unit_financial_details_dto import OrganizationUnitFinancialDetailsDto
+        from ..models.organization_unit_financial_details_dto import (
+            OrganizationUnitFinancialDetailsDto,
+        )
 
         d = src_dict.copy()
         id = d.pop("id")
@@ -206,7 +239,9 @@ class OrganizationUnitGetDto:
         if isinstance(_financial_details, Unset):
             financial_details = UNSET
         else:
-            financial_details = OrganizationUnitFinancialDetailsDto.from_dict(_financial_details)
+            financial_details = OrganizationUnitFinancialDetailsDto.from_dict(
+                _financial_details
+            )
 
         organization_unit_get_dto = cls(
             id=id,

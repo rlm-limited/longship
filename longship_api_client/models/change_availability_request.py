@@ -1,13 +1,19 @@
-from typing import Any, Dict, List, Type, TypeVar
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 
 from ..models.change_availability_request_type import ChangeAvailabilityRequestType
+
 
 T = TypeVar("T", bound="ChangeAvailabilityRequest")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ChangeAvailabilityRequest:
     """
     Attributes:
@@ -17,10 +23,11 @@ class ChangeAvailabilityRequest:
 
     connector_id: int
     type: ChangeAvailabilityRequestType = ChangeAvailabilityRequestType.INOPERATIVE
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         connector_id = self.connector_id
+
         type = self.type.value
 
         field_dict: Dict[str, Any] = {}

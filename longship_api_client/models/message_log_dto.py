@@ -1,18 +1,25 @@
-import datetime
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
 
-from ..models.message_log_dto_direction import MessageLogDtoDirection
-from ..models.message_log_dto_ocpp_message_type import MessageLogDtoOcppMessageType
-from ..models.message_log_dto_wamp_message_type import MessageLogDtoWampMessageType
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+from dateutil.parser import isoparse
+from ..models.message_log_dto_ocpp_message_type import MessageLogDtoOcppMessageType
+import datetime
+from typing import Union
+from ..models.message_log_dto_wamp_message_type import MessageLogDtoWampMessageType
+from ..models.message_log_dto_direction import MessageLogDtoDirection
+
 
 T = TypeVar("T", bound="MessageLogDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class MessageLogDto:
     """
     Attributes:
@@ -31,18 +38,25 @@ class MessageLogDto:
     id: Union[Unset, str] = UNSET
     charge_point_id: Union[Unset, str] = UNSET
     message_id: Union[Unset, str] = UNSET
-    wamp_message_type: Union[Unset, MessageLogDtoWampMessageType] = MessageLogDtoWampMessageType.UNKNOWN
-    ocpp_message_type: Union[Unset, MessageLogDtoOcppMessageType] = MessageLogDtoOcppMessageType.AUTHORIZE
+    wamp_message_type: Union[Unset, MessageLogDtoWampMessageType] = (
+        MessageLogDtoWampMessageType.UNKNOWN
+    )
+    ocpp_message_type: Union[Unset, MessageLogDtoOcppMessageType] = (
+        MessageLogDtoOcppMessageType.AUTHORIZE
+    )
     direction: Union[Unset, MessageLogDtoDirection] = MessageLogDtoDirection.UNKNOWN
     tenant_id: Union[Unset, str] = UNSET
     payload: Union[Unset, str] = UNSET
     timestamp: Union[Unset, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         charge_point_id = self.charge_point_id
+
         message_id = self.message_id
+
         wamp_message_type: Union[Unset, str] = UNSET
         if not isinstance(self.wamp_message_type, Unset):
             wamp_message_type = self.wamp_message_type.value
@@ -56,7 +70,9 @@ class MessageLogDto:
             direction = self.direction.value
 
         tenant_id = self.tenant_id
+
         payload = self.payload
+
         timestamp: Union[Unset, str] = UNSET
         if not isinstance(self.timestamp, Unset):
             timestamp = self.timestamp.isoformat()

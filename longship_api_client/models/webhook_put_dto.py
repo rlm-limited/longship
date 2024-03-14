@@ -1,9 +1,15 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
 
 from ..models.webhook_put_dto_event_types_item import WebhookPutDtoEventTypesItem
-from ..types import UNSET, Unset
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.webhook_header_dto import WebhookHeaderDto
@@ -12,7 +18,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="WebhookPutDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class WebhookPutDto:
     """
     Attributes:
@@ -30,19 +36,22 @@ class WebhookPutDto:
     enabled: Union[Unset, bool] = UNSET
     event_types: Union[Unset, List[WebhookPutDtoEventTypesItem]] = UNSET
     headers: Union[Unset, List["WebhookHeaderDto"]] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         name = self.name
+
         ou_code = self.ou_code
+
         url = self.url
+
         enabled = self.enabled
+
         event_types: Union[Unset, List[str]] = UNSET
         if not isinstance(self.event_types, Unset):
             event_types = []
             for event_types_item_data in self.event_types:
                 event_types_item = event_types_item_data.value
-
                 event_types.append(event_types_item)
 
         headers: Union[Unset, List[Dict[str, Any]]] = UNSET
@@ -50,7 +59,6 @@ class WebhookPutDto:
             headers = []
             for headers_item_data in self.headers:
                 headers_item = headers_item_data.to_dict()
-
                 headers.append(headers_item)
 
         field_dict: Dict[str, Any] = {}

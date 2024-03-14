@@ -1,14 +1,21 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
 
 from ..models.publish_token_type_dto_type import PublishTokenTypeDtoType
-from ..types import UNSET, Unset
+from typing import Union
+
 
 T = TypeVar("T", bound="PublishTokenTypeDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class PublishTokenTypeDto:
     """
     Attributes:
@@ -24,16 +31,19 @@ class PublishTokenTypeDto:
     visual_number: Union[Unset, str] = UNSET
     issuer: Union[Unset, str] = UNSET
     group_id: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         uid = self.uid
+
         type: Union[Unset, str] = UNSET
         if not isinstance(self.type, Unset):
             type = self.type.value
 
         visual_number = self.visual_number
+
         issuer = self.issuer
+
         group_id = self.group_id
 
         field_dict: Dict[str, Any] = {}

@@ -1,13 +1,20 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
+
 
 T = TypeVar("T", bound="OrganizationUnitFinancialDetailsDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class OrganizationUnitFinancialDetailsDto:
     """
     Attributes:
@@ -19,11 +26,13 @@ class OrganizationUnitFinancialDetailsDto:
     beneficiary_name: Union[Unset, str] = UNSET
     iban: Union[Unset, str] = UNSET
     bic: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         beneficiary_name = self.beneficiary_name
+
         iban = self.iban
+
         bic = self.bic
 
         field_dict: Dict[str, Any] = {}

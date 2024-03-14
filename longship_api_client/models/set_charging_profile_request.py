@@ -1,6 +1,11 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 
 if TYPE_CHECKING:
     from ..models.cs_charging_profiles import CsChargingProfiles
@@ -9,7 +14,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="SetChargingProfileRequest")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class SetChargingProfileRequest:
     """
     Attributes:
@@ -19,10 +24,11 @@ class SetChargingProfileRequest:
 
     connector_id: int
     cs_charging_profiles: "CsChargingProfiles"
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         connector_id = self.connector_id
+
         cs_charging_profiles = self.cs_charging_profiles.to_dict()
 
         field_dict: Dict[str, Any] = {}

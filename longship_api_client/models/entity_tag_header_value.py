@@ -1,8 +1,14 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.string_segment import StringSegment
@@ -11,7 +17,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="EntityTagHeaderValue")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class EntityTagHeaderValue:
     """
     Attributes:
@@ -21,7 +27,7 @@ class EntityTagHeaderValue:
 
     tag: Union[Unset, "StringSegment"] = UNSET
     is_weak: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         tag: Union[Unset, Dict[str, Any]] = UNSET

@@ -1,13 +1,25 @@
-import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
 
-from ..models.cs_charging_profiles_charging_profile_kind import CsChargingProfilesChargingProfileKind
-from ..models.cs_charging_profiles_charging_profile_purpose import CsChargingProfilesChargingProfilePurpose
-from ..models.cs_charging_profiles_recurrency_kind import CsChargingProfilesRecurrencyKind
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+from ..models.cs_charging_profiles_charging_profile_kind import (
+    CsChargingProfilesChargingProfileKind,
+)
+from dateutil.parser import isoparse
+from ..models.cs_charging_profiles_recurrency_kind import (
+    CsChargingProfilesRecurrencyKind,
+)
+import datetime
+from ..models.cs_charging_profiles_charging_profile_purpose import (
+    CsChargingProfilesChargingProfilePurpose,
+)
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.charging_schedule import ChargingSchedule
@@ -16,7 +28,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="CsChargingProfiles")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class CsChargingProfiles:
     """
     Attributes:
@@ -40,16 +52,22 @@ class CsChargingProfiles:
     charging_profile_purpose: CsChargingProfilesChargingProfilePurpose = (
         CsChargingProfilesChargingProfilePurpose.CHARGEPOINTMAXPROFILE
     )
-    charging_profile_kind: CsChargingProfilesChargingProfileKind = CsChargingProfilesChargingProfileKind.ABSOLUTE
+    charging_profile_kind: CsChargingProfilesChargingProfileKind = (
+        CsChargingProfilesChargingProfileKind.ABSOLUTE
+    )
     transaction_id: Union[Unset, int] = UNSET
-    recurrency_kind: Union[Unset, CsChargingProfilesRecurrencyKind] = CsChargingProfilesRecurrencyKind.DAILY
+    recurrency_kind: Union[Unset, CsChargingProfilesRecurrencyKind] = (
+        CsChargingProfilesRecurrencyKind.DAILY
+    )
     valid_from: Union[Unset, datetime.datetime] = UNSET
     valid_to: Union[Unset, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         charging_profile_id = self.charging_profile_id
+
         stack_level = self.stack_level
+
         charging_profile_purpose = self.charging_profile_purpose.value
 
         charging_profile_kind = self.charging_profile_kind.value
@@ -57,6 +75,7 @@ class CsChargingProfiles:
         charging_schedule = self.charging_schedule.to_dict()
 
         transaction_id = self.transaction_id
+
         recurrency_kind: Union[Unset, str] = UNSET
         if not isinstance(self.recurrency_kind, Unset):
             recurrency_kind = self.recurrency_kind.value
@@ -100,9 +119,13 @@ class CsChargingProfiles:
 
         stack_level = d.pop("stackLevel")
 
-        charging_profile_purpose = CsChargingProfilesChargingProfilePurpose(d.pop("chargingProfilePurpose"))
+        charging_profile_purpose = CsChargingProfilesChargingProfilePurpose(
+            d.pop("chargingProfilePurpose")
+        )
 
-        charging_profile_kind = CsChargingProfilesChargingProfileKind(d.pop("chargingProfileKind"))
+        charging_profile_kind = CsChargingProfilesChargingProfileKind(
+            d.pop("chargingProfileKind")
+        )
 
         charging_schedule = ChargingSchedule.from_dict(d.pop("chargingSchedule"))
 

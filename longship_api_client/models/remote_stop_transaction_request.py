@@ -1,11 +1,16 @@
-from typing import Any, Dict, List, Type, TypeVar
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 
 T = TypeVar("T", bound="RemoteStopTransactionRequest")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class RemoteStopTransactionRequest:
     """
     Attributes:
@@ -13,7 +18,7 @@ class RemoteStopTransactionRequest:
     """
 
     transaction_id: int
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         transaction_id = self.transaction_id

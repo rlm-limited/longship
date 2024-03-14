@@ -1,14 +1,21 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
 
-from ..models.tariff_assertion_dto_tariff_type import TariffAssertionDtoTariffType
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+from typing import Union
+from ..models.tariff_assertion_dto_tariff_type import TariffAssertionDtoTariffType
+
 
 T = TypeVar("T", bound="TariffAssertionDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class TariffAssertionDto:
     """
     Attributes:
@@ -18,10 +25,12 @@ class TariffAssertionDto:
         tariff_result (Union[Unset, str]):
     """
 
-    tariff_type: Union[Unset, TariffAssertionDtoTariffType] = TariffAssertionDtoTariffType.REIMBURSEMENTTARIFF
+    tariff_type: Union[Unset, TariffAssertionDtoTariffType] = (
+        TariffAssertionDtoTariffType.REIMBURSEMENTTARIFF
+    )
     is_tariff_used: Union[Unset, bool] = UNSET
     tariff_result: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         tariff_type: Union[Unset, str] = UNSET
@@ -29,6 +38,7 @@ class TariffAssertionDto:
             tariff_type = self.tariff_type.value
 
         is_tariff_used = self.is_tariff_used
+
         tariff_result = self.tariff_result
 
         field_dict: Dict[str, Any] = {}

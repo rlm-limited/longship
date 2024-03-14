@@ -1,8 +1,14 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.tariff_assertion_dto import TariffAssertionDto
@@ -11,7 +17,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="TariffInfoDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class TariffInfoDto:
     """
     Attributes:
@@ -39,25 +45,34 @@ class TariffInfoDto:
     time_step_size_in_minutes: Union[Unset, int] = UNSET
     time_grace_period_in_minutes: Union[Unset, int] = UNSET
     assertions: Union[Unset, List["TariffAssertionDto"]] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         tariff_id = self.tariff_id
+
         tariff_name = self.tariff_name
+
         start_tariff = self.start_tariff
+
         tariff_price = self.tariff_price
+
         parking_tariff = self.parking_tariff
+
         parking_step_size_in_minutes = self.parking_step_size_in_minutes
+
         parking_grace_period_in_minutes = self.parking_grace_period_in_minutes
+
         time_tariff = self.time_tariff
+
         time_step_size_in_minutes = self.time_step_size_in_minutes
+
         time_grace_period_in_minutes = self.time_grace_period_in_minutes
+
         assertions: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.assertions, Unset):
             assertions = []
             for assertions_item_data in self.assertions:
                 assertions_item = assertions_item_data.to_dict()
-
                 assertions.append(assertions_item)
 
         field_dict: Dict[str, Any] = {}

@@ -1,18 +1,25 @@
-import datetime
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
 from dateutil.parser import isoparse
-
+import datetime
 from ..models.connector_dto_format import ConnectorDtoFormat
 from ..models.connector_dto_power_type import ConnectorDtoPowerType
+from typing import Union
 from ..models.connector_dto_standard import ConnectorDtoStandard
-from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="ConnectorDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ConnectorDto:
     """
     Attributes:
@@ -36,10 +43,11 @@ class ConnectorDto:
     max_electric_power: Union[Unset, int] = UNSET
     calc_max_electric_power: Union[Unset, bool] = UNSET
     last_updated: Union[Unset, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         standard: Union[Unset, str] = UNSET
         if not isinstance(self.standard, Unset):
             standard = self.standard.value
@@ -53,9 +61,13 @@ class ConnectorDto:
             power_type = self.power_type.value
 
         max_voltage = self.max_voltage
+
         max_amperage = self.max_amperage
+
         max_electric_power = self.max_electric_power
+
         calc_max_electric_power = self.calc_max_electric_power
+
         last_updated: Union[Unset, str] = UNSET
         if not isinstance(self.last_updated, Unset):
             last_updated = self.last_updated.isoformat()

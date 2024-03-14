@@ -1,8 +1,14 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.longship_error_detail import LongshipErrorDetail
@@ -11,7 +17,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="LongshipError")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class LongshipError:
     """
     Attributes:
@@ -21,10 +27,11 @@ class LongshipError:
 
     code: Union[Unset, str] = UNSET
     error_details: Union[Unset, "LongshipErrorDetail"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         code = self.code
+
         error_details: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.error_details, Unset):
             error_details = self.error_details.to_dict()

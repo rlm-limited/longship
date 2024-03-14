@@ -1,20 +1,26 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
 
 from ..models.reimburse_info_dto_type import ReimburseInfoDtoType
-from ..types import UNSET, Unset
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.location_tariff_distribution_dto import LocationTariffDistributionDto
-    from ..models.reimbursement_bank_details_dto import ReimbursementBankDetailsDto
     from ..models.reimbursement_tariff_dto import ReimbursementTariffDto
+    from ..models.reimbursement_bank_details_dto import ReimbursementBankDetailsDto
 
 
 T = TypeVar("T", bound="ReimburseInfoDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ReimburseInfoDto:
     """
     Attributes:
@@ -54,11 +60,13 @@ class ReimburseInfoDto:
     tariffs: Union[Unset, List["ReimbursementTariffDto"]] = UNSET
     bank_details: Union[Unset, List["ReimbursementBankDetailsDto"]] = UNSET
     tariff_distribution_id: Union[Unset, str] = UNSET
-    tariff_distribution_history: Union[Unset, List["LocationTariffDistributionDto"]] = UNSET
+    tariff_distribution_history: Union[Unset, List["LocationTariffDistributionDto"]] = (
+        UNSET
+    )
     ou: Union[Unset, str] = UNSET
     ou_id: Union[Unset, str] = UNSET
     ou_name: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         type: Union[Unset, str] = UNSET
@@ -66,22 +74,32 @@ class ReimburseInfoDto:
             type = self.type.value
 
         has_guest_usage = self.has_guest_usage
+
         has_guest_charging_reimbursement_fee = self.has_guest_charging_reimbursement_fee
+
         country_code = self.country_code
+
         party_id = self.party_id
+
         external_organization_unit_id = self.external_organization_unit_id
+
         external_organization_unit_name = self.external_organization_unit_name
+
         external_organization_unit_reference = self.external_organization_unit_reference
+
         external_organization_unit_code = self.external_organization_unit_code
+
         charge_card_emaid = self.charge_card_emaid
+
         charge_card_uid = self.charge_card_uid
+
         charge_card_issuer = self.charge_card_issuer
+
         tariffs: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.tariffs, Unset):
             tariffs = []
             for tariffs_item_data in self.tariffs:
                 tariffs_item = tariffs_item_data.to_dict()
-
                 tariffs.append(tariffs_item)
 
         bank_details: Union[Unset, List[Dict[str, Any]]] = UNSET
@@ -89,20 +107,25 @@ class ReimburseInfoDto:
             bank_details = []
             for bank_details_item_data in self.bank_details:
                 bank_details_item = bank_details_item_data.to_dict()
-
                 bank_details.append(bank_details_item)
 
         tariff_distribution_id = self.tariff_distribution_id
+
         tariff_distribution_history: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.tariff_distribution_history, Unset):
             tariff_distribution_history = []
-            for tariff_distribution_history_item_data in self.tariff_distribution_history:
-                tariff_distribution_history_item = tariff_distribution_history_item_data.to_dict()
-
+            for (
+                tariff_distribution_history_item_data
+            ) in self.tariff_distribution_history:
+                tariff_distribution_history_item = (
+                    tariff_distribution_history_item_data.to_dict()
+                )
                 tariff_distribution_history.append(tariff_distribution_history_item)
 
         ou = self.ou
+
         ou_id = self.ou_id
+
         ou_name = self.ou_name
 
         field_dict: Dict[str, Any] = {}
@@ -113,7 +136,9 @@ class ReimburseInfoDto:
         if has_guest_usage is not UNSET:
             field_dict["hasGuestUsage"] = has_guest_usage
         if has_guest_charging_reimbursement_fee is not UNSET:
-            field_dict["hasGuestChargingReimbursementFee"] = has_guest_charging_reimbursement_fee
+            field_dict["hasGuestChargingReimbursementFee"] = (
+                has_guest_charging_reimbursement_fee
+            )
         if country_code is not UNSET:
             field_dict["countryCode"] = country_code
         if party_id is not UNSET:
@@ -123,7 +148,9 @@ class ReimburseInfoDto:
         if external_organization_unit_name is not UNSET:
             field_dict["externalOrganizationUnitName"] = external_organization_unit_name
         if external_organization_unit_reference is not UNSET:
-            field_dict["externalOrganizationUnitReference"] = external_organization_unit_reference
+            field_dict["externalOrganizationUnitReference"] = (
+                external_organization_unit_reference
+            )
         if external_organization_unit_code is not UNSET:
             field_dict["externalOrganizationUnitCode"] = external_organization_unit_code
         if charge_card_emaid is not UNSET:
@@ -151,9 +178,11 @@ class ReimburseInfoDto:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.location_tariff_distribution_dto import LocationTariffDistributionDto
-        from ..models.reimbursement_bank_details_dto import ReimbursementBankDetailsDto
+        from ..models.location_tariff_distribution_dto import (
+            LocationTariffDistributionDto,
+        )
         from ..models.reimbursement_tariff_dto import ReimbursementTariffDto
+        from ..models.reimbursement_bank_details_dto import ReimbursementBankDetailsDto
 
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
@@ -165,7 +194,9 @@ class ReimburseInfoDto:
 
         has_guest_usage = d.pop("hasGuestUsage", UNSET)
 
-        has_guest_charging_reimbursement_fee = d.pop("hasGuestChargingReimbursementFee", UNSET)
+        has_guest_charging_reimbursement_fee = d.pop(
+            "hasGuestChargingReimbursementFee", UNSET
+        )
 
         country_code = d.pop("countryCode", UNSET)
 
@@ -175,7 +206,9 @@ class ReimburseInfoDto:
 
         external_organization_unit_name = d.pop("externalOrganizationUnitName", UNSET)
 
-        external_organization_unit_reference = d.pop("externalOrganizationUnitReference", UNSET)
+        external_organization_unit_reference = d.pop(
+            "externalOrganizationUnitReference", UNSET
+        )
 
         external_organization_unit_code = d.pop("externalOrganizationUnitCode", UNSET)
 
@@ -195,7 +228,9 @@ class ReimburseInfoDto:
         bank_details = []
         _bank_details = d.pop("bankDetails", UNSET)
         for bank_details_item_data in _bank_details or []:
-            bank_details_item = ReimbursementBankDetailsDto.from_dict(bank_details_item_data)
+            bank_details_item = ReimbursementBankDetailsDto.from_dict(
+                bank_details_item_data
+            )
 
             bank_details.append(bank_details_item)
 

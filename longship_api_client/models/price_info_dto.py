@@ -1,13 +1,20 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
+
 
 T = TypeVar("T", bound="PriceInfoDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class PriceInfoDto:
     """
     Attributes:
@@ -31,17 +38,25 @@ class PriceInfoDto:
     total_charging_time_steps: Union[Unset, int] = UNSET
     charging_time_price: Union[Unset, float] = UNSET
     total_price: Union[Unset, float] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         start_price = self.start_price
+
         energy_price = self.energy_price
+
         total_parking_time_in_minutes = self.total_parking_time_in_minutes
+
         total_parking_time_steps = self.total_parking_time_steps
+
         parking_time_price = self.parking_time_price
+
         total_charging_time_in_minutes = self.total_charging_time_in_minutes
+
         total_charging_time_steps = self.total_charging_time_steps
+
         charging_time_price = self.charging_time_price
+
         total_price = self.total_price
 
         field_dict: Dict[str, Any] = {}

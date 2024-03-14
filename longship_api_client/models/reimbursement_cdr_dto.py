@@ -1,22 +1,28 @@
-import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from dateutil.parser import isoparse
+import datetime
+from typing import Union
+
 if TYPE_CHECKING:
-    from ..models.price_info_dto import PriceInfoDto
-    from ..models.reimburse_started_by_info_dto import ReimburseStartedByInfoDto
     from ..models.reimbursement_cdr_location_dto import ReimbursementCdrLocationDto
     from ..models.reimbursement_customer_share_dto import ReimbursementCustomerShareDto
+    from ..models.reimburse_started_by_info_dto import ReimburseStartedByInfoDto
+    from ..models.price_info_dto import PriceInfoDto
 
 
 T = TypeVar("T", bound="ReimbursementCdrDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ReimbursementCdrDto:
     """
     Attributes:
@@ -102,15 +108,21 @@ class ReimbursementCdrDto:
     reimbursement_customer_share: Union[Unset, "ReimbursementCustomerShareDto"] = UNSET
     local_start_date_time: Union[Unset, datetime.datetime] = UNSET
     local_end_date_time: Union[Unset, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         tenant_id = self.tenant_id
+
         charge_point_id = self.charge_point_id
+
         connector_id = self.connector_id
+
         location_id = self.location_id
+
         evse_id = self.evse_id
+
         location: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.location, Unset):
             location = self.location.to_dict()
@@ -124,15 +136,21 @@ class ReimbursementCdrDto:
             end_date_time = self.end_date_time.isoformat()
 
         session_id = self.session_id
+
         started_by_info: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.started_by_info, Unset):
             started_by_info = self.started_by_info.to_dict()
 
         meter_start_in_wh = self.meter_start_in_wh
+
         meter_stop_in_wh = self.meter_stop_in_wh
+
         total_energy_in_kwh = self.total_energy_in_kwh
+
         total_time_in_hours = self.total_time_in_hours
+
         total_price = self.total_price
+
         created: Union[Unset, str] = UNSET
         if not isinstance(self.created, Unset):
             created = self.created.isoformat()
@@ -142,17 +160,27 @@ class ReimbursementCdrDto:
             last_updated = self.last_updated.isoformat()
 
         ou = self.ou
+
         ou_id = self.ou_id
+
         ou_name = self.ou_name
+
         reimburse_tariff_id = self.reimburse_tariff_id
+
         reimburse_tariff_name = self.reimburse_tariff_name
+
         reimburse_tariff_price = self.reimburse_tariff_price
+
         reimburse_tariff_calculated = self.reimburse_tariff_calculated
+
         reimburse_price_calculated_on: Union[Unset, str] = UNSET
         if not isinstance(self.reimburse_price_calculated_on, Unset):
-            reimburse_price_calculated_on = self.reimburse_price_calculated_on.isoformat()
+            reimburse_price_calculated_on = (
+                self.reimburse_price_calculated_on.isoformat()
+            )
 
         bank_account = self.bank_account
+
         bank_account_created_on: Union[Unset, str] = UNSET
         if not isinstance(self.bank_account_created_on, Unset):
             bank_account_created_on = self.bank_account_created_on.isoformat()
@@ -162,16 +190,23 @@ class ReimbursementCdrDto:
             bank_account_valid_from = self.bank_account_valid_from.isoformat()
 
         reimburse_tariff_original_price = self.reimburse_tariff_original_price
+
         has_guest_charging_reimbursement_fee = self.has_guest_charging_reimbursement_fee
+
         reimburse_tenant_fee = self.reimburse_tenant_fee
+
         tenant_fee_calculated = self.tenant_fee_calculated
+
         tariff_distribution_id = self.tariff_distribution_id
+
         price_info: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.price_info, Unset):
             price_info = self.price_info.to_dict()
 
         customer_share = self.customer_share
+
         energy_compensation = self.energy_compensation
+
         reimbursement_customer_share: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.reimbursement_customer_share, Unset):
             reimbursement_customer_share = self.reimbursement_customer_share.to_dict()
@@ -248,7 +283,9 @@ class ReimbursementCdrDto:
         if reimburse_tariff_original_price is not UNSET:
             field_dict["reimburseTariffOriginalPrice"] = reimburse_tariff_original_price
         if has_guest_charging_reimbursement_fee is not UNSET:
-            field_dict["hasGuestChargingReimbursementFee"] = has_guest_charging_reimbursement_fee
+            field_dict["hasGuestChargingReimbursementFee"] = (
+                has_guest_charging_reimbursement_fee
+            )
         if reimburse_tenant_fee is not UNSET:
             field_dict["reimburseTenantFee"] = reimburse_tenant_fee
         if tenant_fee_calculated is not UNSET:
@@ -272,10 +309,12 @@ class ReimbursementCdrDto:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.price_info_dto import PriceInfoDto
-        from ..models.reimburse_started_by_info_dto import ReimburseStartedByInfoDto
         from ..models.reimbursement_cdr_location_dto import ReimbursementCdrLocationDto
-        from ..models.reimbursement_customer_share_dto import ReimbursementCustomerShareDto
+        from ..models.reimbursement_customer_share_dto import (
+            ReimbursementCustomerShareDto,
+        )
+        from ..models.reimburse_started_by_info_dto import ReimburseStartedByInfoDto
+        from ..models.price_info_dto import PriceInfoDto
 
         d = src_dict.copy()
         id = d.pop("id", UNSET)
@@ -383,7 +422,9 @@ class ReimbursementCdrDto:
 
         reimburse_tariff_original_price = d.pop("reimburseTariffOriginalPrice", UNSET)
 
-        has_guest_charging_reimbursement_fee = d.pop("hasGuestChargingReimbursementFee", UNSET)
+        has_guest_charging_reimbursement_fee = d.pop(
+            "hasGuestChargingReimbursementFee", UNSET
+        )
 
         reimburse_tenant_fee = d.pop("reimburseTenantFee", UNSET)
 
@@ -407,7 +448,9 @@ class ReimbursementCdrDto:
         if isinstance(_reimbursement_customer_share, Unset):
             reimbursement_customer_share = UNSET
         else:
-            reimbursement_customer_share = ReimbursementCustomerShareDto.from_dict(_reimbursement_customer_share)
+            reimbursement_customer_share = ReimbursementCustomerShareDto.from_dict(
+                _reimbursement_customer_share
+            )
 
         _local_start_date_time = d.pop("localStartDateTime", UNSET)
         local_start_date_time: Union[Unset, datetime.datetime]

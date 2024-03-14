@@ -1,14 +1,21 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
 
-from ..models.private_emp_tariff_dto_power_type import PrivateEmpTariffDtoPowerType
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+from typing import Union
+from ..models.private_emp_tariff_dto_power_type import PrivateEmpTariffDtoPowerType
+
 
 T = TypeVar("T", bound="PrivateEmpTariffDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class PrivateEmpTariffDto:
     """
     Attributes:
@@ -20,18 +27,24 @@ class PrivateEmpTariffDto:
 
     country_code: Union[Unset, str] = UNSET
     party_id: Union[Unset, str] = UNSET
-    power_type: Union[Unset, PrivateEmpTariffDtoPowerType] = PrivateEmpTariffDtoPowerType.AC
+    power_type: Union[Unset, PrivateEmpTariffDtoPowerType] = (
+        PrivateEmpTariffDtoPowerType.AC
+    )
     use_public_tariff_when_kwh_is_cheaper: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         country_code = self.country_code
+
         party_id = self.party_id
+
         power_type: Union[Unset, str] = UNSET
         if not isinstance(self.power_type, Unset):
             power_type = self.power_type.value
 
-        use_public_tariff_when_kwh_is_cheaper = self.use_public_tariff_when_kwh_is_cheaper
+        use_public_tariff_when_kwh_is_cheaper = (
+            self.use_public_tariff_when_kwh_is_cheaper
+        )
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -43,7 +56,9 @@ class PrivateEmpTariffDto:
         if power_type is not UNSET:
             field_dict["powerType"] = power_type
         if use_public_tariff_when_kwh_is_cheaper is not UNSET:
-            field_dict["usePublicTariffWhenKwhIsCheaper"] = use_public_tariff_when_kwh_is_cheaper
+            field_dict["usePublicTariffWhenKwhIsCheaper"] = (
+                use_public_tariff_when_kwh_is_cheaper
+            )
 
         return field_dict
 
@@ -61,7 +76,9 @@ class PrivateEmpTariffDto:
         else:
             power_type = PrivateEmpTariffDtoPowerType(_power_type)
 
-        use_public_tariff_when_kwh_is_cheaper = d.pop("usePublicTariffWhenKwhIsCheaper", UNSET)
+        use_public_tariff_when_kwh_is_cheaper = d.pop(
+            "usePublicTariffWhenKwhIsCheaper", UNSET
+        )
 
         private_emp_tariff_dto = cls(
             country_code=country_code,

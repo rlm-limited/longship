@@ -1,25 +1,34 @@
-import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
 
-from ..models.session_dto_status import SessionDtoStatus
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+from ..models.session_dto_approval_status import SessionDtoApprovalStatus
+from dateutil.parser import isoparse
+from ..models.session_dto_status import SessionDtoStatus
+import datetime
+from typing import Union
+from ..models.session_dto_review_scenario_type import SessionDtoReviewScenarioType
 
 if TYPE_CHECKING:
     from ..models.charging_meter_value_dto import ChargingMeterValueDto
-    from ..models.charging_period_dto import ChargingPeriodDto
-    from ..models.price_info_dto import PriceInfoDto
     from ..models.session_location_dto import SessionLocationDto
-    from ..models.started_by_info_dto import StartedByInfoDto
+    from ..models.price_info_dto import PriceInfoDto
     from ..models.tariff_info_dto import TariffInfoDto
+    from ..models.session_thresholds_dto import SessionThresholdsDto
+    from ..models.started_by_info_dto import StartedByInfoDto
+    from ..models.charging_period_dto import ChargingPeriodDto
 
 
 T = TypeVar("T", bound="SessionDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class SessionDto:
     """
     Attributes:
@@ -39,6 +48,9 @@ class SessionDto:
         meter_stop_in_wh (Union[Unset, int]):
         session_stop (Union[Unset, datetime.datetime]):
         status (Union[Unset, SessionDtoStatus]):  Default: SessionDtoStatus.ACTIVE.
+        approval_status (Union[Unset, SessionDtoApprovalStatus]):  Default: SessionDtoApprovalStatus.VALUE_0.
+        review_scenario_type (Union[Unset, SessionDtoReviewScenarioType]):  Default:
+            SessionDtoReviewScenarioType.VALUE_0.
         total_energy_in_kwh (Union[Unset, float]):
         total_price (Union[Unset, float]):
         created (Union[Unset, datetime.datetime]):
@@ -53,8 +65,10 @@ class SessionDto:
         start_tariff (Union[Unset, float]):
         tariff_price (Union[Unset, float]):
         parking_tariff (Union[Unset, float]):
+        thresholds (Union[Unset, SessionThresholdsDto]):
         parking_step_size (Union[Unset, int]):
         delay_in_minutes (Union[Unset, int]):
+        parking_time_start (Union[Unset, datetime.datetime]):
     """
 
     id: Union[Unset, str] = UNSET
@@ -73,6 +87,12 @@ class SessionDto:
     meter_stop_in_wh: Union[Unset, int] = UNSET
     session_stop: Union[Unset, datetime.datetime] = UNSET
     status: Union[Unset, SessionDtoStatus] = SessionDtoStatus.ACTIVE
+    approval_status: Union[Unset, SessionDtoApprovalStatus] = (
+        SessionDtoApprovalStatus.VALUE_0
+    )
+    review_scenario_type: Union[Unset, SessionDtoReviewScenarioType] = (
+        SessionDtoReviewScenarioType.VALUE_0
+    )
     total_energy_in_kwh: Union[Unset, float] = UNSET
     total_price: Union[Unset, float] = UNSET
     created: Union[Unset, datetime.datetime] = UNSET
@@ -87,27 +107,37 @@ class SessionDto:
     start_tariff: Union[Unset, float] = UNSET
     tariff_price: Union[Unset, float] = UNSET
     parking_tariff: Union[Unset, float] = UNSET
+    thresholds: Union[Unset, "SessionThresholdsDto"] = UNSET
     parking_step_size: Union[Unset, int] = UNSET
     delay_in_minutes: Union[Unset, int] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    parking_time_start: Union[Unset, datetime.datetime] = UNSET
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         tenant_id = self.tenant_id
+
         charge_point_id = self.charge_point_id
+
         transaction_id = self.transaction_id
+
         ocpp_transaction_id = self.ocpp_transaction_id
+
         connector_id = self.connector_id
+
         session_location: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.session_location, Unset):
             session_location = self.session_location.to_dict()
 
         id_tag = self.id_tag
+
         started_by_info: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.started_by_info, Unset):
             started_by_info = self.started_by_info.to_dict()
 
         meter_start_in_wh = self.meter_start_in_wh
+
         session_start: Union[Unset, str] = UNSET
         if not isinstance(self.session_start, Unset):
             session_start = self.session_start.isoformat()
@@ -117,7 +147,6 @@ class SessionDto:
             charging_periods = []
             for charging_periods_item_data in self.charging_periods:
                 charging_periods_item = charging_periods_item_data.to_dict()
-
                 charging_periods.append(charging_periods_item)
 
         charging_meter_values: Union[Unset, List[Dict[str, Any]]] = UNSET
@@ -125,10 +154,10 @@ class SessionDto:
             charging_meter_values = []
             for charging_meter_values_item_data in self.charging_meter_values:
                 charging_meter_values_item = charging_meter_values_item_data.to_dict()
-
                 charging_meter_values.append(charging_meter_values_item)
 
         meter_stop_in_wh = self.meter_stop_in_wh
+
         session_stop: Union[Unset, str] = UNSET
         if not isinstance(self.session_stop, Unset):
             session_stop = self.session_stop.isoformat()
@@ -137,8 +166,18 @@ class SessionDto:
         if not isinstance(self.status, Unset):
             status = self.status.value
 
+        approval_status: Union[Unset, int] = UNSET
+        if not isinstance(self.approval_status, Unset):
+            approval_status = self.approval_status.value
+
+        review_scenario_type: Union[Unset, int] = UNSET
+        if not isinstance(self.review_scenario_type, Unset):
+            review_scenario_type = self.review_scenario_type.value
+
         total_energy_in_kwh = self.total_energy_in_kwh
+
         total_price = self.total_price
+
         created: Union[Unset, str] = UNSET
         if not isinstance(self.created, Unset):
             created = self.created.isoformat()
@@ -148,8 +187,11 @@ class SessionDto:
             last_updated = self.last_updated.isoformat()
 
         ou = self.ou
+
         ou_id = self.ou_id
+
         ou_name = self.ou_name
+
         tariff_info: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.tariff_info, Unset):
             tariff_info = self.tariff_info.to_dict()
@@ -159,12 +201,26 @@ class SessionDto:
             price_info = self.price_info.to_dict()
 
         tariff_id = self.tariff_id
+
         tariff_name = self.tariff_name
+
         start_tariff = self.start_tariff
+
         tariff_price = self.tariff_price
+
         parking_tariff = self.parking_tariff
+
+        thresholds: Union[Unset, Dict[str, Any]] = UNSET
+        if not isinstance(self.thresholds, Unset):
+            thresholds = self.thresholds.to_dict()
+
         parking_step_size = self.parking_step_size
+
         delay_in_minutes = self.delay_in_minutes
+
+        parking_time_start: Union[Unset, str] = UNSET
+        if not isinstance(self.parking_time_start, Unset):
+            parking_time_start = self.parking_time_start.isoformat()
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -201,6 +257,10 @@ class SessionDto:
             field_dict["sessionStop"] = session_stop
         if status is not UNSET:
             field_dict["status"] = status
+        if approval_status is not UNSET:
+            field_dict["approvalStatus"] = approval_status
+        if review_scenario_type is not UNSET:
+            field_dict["reviewScenarioType"] = review_scenario_type
         if total_energy_in_kwh is not UNSET:
             field_dict["totalEnergyInKwh"] = total_energy_in_kwh
         if total_price is not UNSET:
@@ -229,21 +289,26 @@ class SessionDto:
             field_dict["tariffPrice"] = tariff_price
         if parking_tariff is not UNSET:
             field_dict["parkingTariff"] = parking_tariff
+        if thresholds is not UNSET:
+            field_dict["thresholds"] = thresholds
         if parking_step_size is not UNSET:
             field_dict["parkingStepSize"] = parking_step_size
         if delay_in_minutes is not UNSET:
             field_dict["delayInMinutes"] = delay_in_minutes
+        if parking_time_start is not UNSET:
+            field_dict["parkingTimeStart"] = parking_time_start
 
         return field_dict
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
         from ..models.charging_meter_value_dto import ChargingMeterValueDto
-        from ..models.charging_period_dto import ChargingPeriodDto
-        from ..models.price_info_dto import PriceInfoDto
         from ..models.session_location_dto import SessionLocationDto
-        from ..models.started_by_info_dto import StartedByInfoDto
+        from ..models.price_info_dto import PriceInfoDto
         from ..models.tariff_info_dto import TariffInfoDto
+        from ..models.session_thresholds_dto import SessionThresholdsDto
+        from ..models.started_by_info_dto import StartedByInfoDto
+        from ..models.charging_period_dto import ChargingPeriodDto
 
         d = src_dict.copy()
         id = d.pop("id", UNSET)
@@ -286,14 +351,18 @@ class SessionDto:
         charging_periods = []
         _charging_periods = d.pop("chargingPeriods", UNSET)
         for charging_periods_item_data in _charging_periods or []:
-            charging_periods_item = ChargingPeriodDto.from_dict(charging_periods_item_data)
+            charging_periods_item = ChargingPeriodDto.from_dict(
+                charging_periods_item_data
+            )
 
             charging_periods.append(charging_periods_item)
 
         charging_meter_values = []
         _charging_meter_values = d.pop("chargingMeterValues", UNSET)
         for charging_meter_values_item_data in _charging_meter_values or []:
-            charging_meter_values_item = ChargingMeterValueDto.from_dict(charging_meter_values_item_data)
+            charging_meter_values_item = ChargingMeterValueDto.from_dict(
+                charging_meter_values_item_data
+            )
 
             charging_meter_values.append(charging_meter_values_item)
 
@@ -312,6 +381,20 @@ class SessionDto:
             status = UNSET
         else:
             status = SessionDtoStatus(_status)
+
+        _approval_status = d.pop("approvalStatus", UNSET)
+        approval_status: Union[Unset, SessionDtoApprovalStatus]
+        if isinstance(_approval_status, Unset):
+            approval_status = UNSET
+        else:
+            approval_status = SessionDtoApprovalStatus(_approval_status)
+
+        _review_scenario_type = d.pop("reviewScenarioType", UNSET)
+        review_scenario_type: Union[Unset, SessionDtoReviewScenarioType]
+        if isinstance(_review_scenario_type, Unset):
+            review_scenario_type = UNSET
+        else:
+            review_scenario_type = SessionDtoReviewScenarioType(_review_scenario_type)
 
         total_energy_in_kwh = d.pop("totalEnergyInKwh", UNSET)
 
@@ -361,9 +444,23 @@ class SessionDto:
 
         parking_tariff = d.pop("parkingTariff", UNSET)
 
+        _thresholds = d.pop("thresholds", UNSET)
+        thresholds: Union[Unset, SessionThresholdsDto]
+        if isinstance(_thresholds, Unset):
+            thresholds = UNSET
+        else:
+            thresholds = SessionThresholdsDto.from_dict(_thresholds)
+
         parking_step_size = d.pop("parkingStepSize", UNSET)
 
         delay_in_minutes = d.pop("delayInMinutes", UNSET)
+
+        _parking_time_start = d.pop("parkingTimeStart", UNSET)
+        parking_time_start: Union[Unset, datetime.datetime]
+        if isinstance(_parking_time_start, Unset):
+            parking_time_start = UNSET
+        else:
+            parking_time_start = isoparse(_parking_time_start)
 
         session_dto = cls(
             id=id,
@@ -382,6 +479,8 @@ class SessionDto:
             meter_stop_in_wh=meter_stop_in_wh,
             session_stop=session_stop,
             status=status,
+            approval_status=approval_status,
+            review_scenario_type=review_scenario_type,
             total_energy_in_kwh=total_energy_in_kwh,
             total_price=total_price,
             created=created,
@@ -396,8 +495,10 @@ class SessionDto:
             start_tariff=start_tariff,
             tariff_price=tariff_price,
             parking_tariff=parking_tariff,
+            thresholds=thresholds,
             parking_step_size=parking_step_size,
             delay_in_minutes=delay_in_minutes,
+            parking_time_start=parking_time_start,
         )
 
         session_dto.additional_properties = d

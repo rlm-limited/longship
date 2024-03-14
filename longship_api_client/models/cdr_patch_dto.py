@@ -1,25 +1,34 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
 
-from ..models.cdr_patch_dto_approval_status import CdrPatchDtoApprovalStatus
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+from typing import Union
+from ..models.cdr_patch_dto_approval_status import CdrPatchDtoApprovalStatus
+
 
 T = TypeVar("T", bound="CdrPatchDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class CdrPatchDto:
     """
     Attributes:
-        approval_status (Union[Unset, CdrPatchDtoApprovalStatus]):  Default: CdrPatchDtoApprovalStatus.VALUE_0.
+        approval_status (Union[Unset, CdrPatchDtoApprovalStatus]):  Default: CdrPatchDtoApprovalStatus.APPROVED.
     """
 
-    approval_status: Union[Unset, CdrPatchDtoApprovalStatus] = CdrPatchDtoApprovalStatus.VALUE_0
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    approval_status: Union[Unset, CdrPatchDtoApprovalStatus] = (
+        CdrPatchDtoApprovalStatus.APPROVED
+    )
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
-        approval_status: Union[Unset, int] = UNSET
+        approval_status: Union[Unset, str] = UNSET
         if not isinstance(self.approval_status, Unset):
             approval_status = self.approval_status.value
 

@@ -1,10 +1,17 @@
-import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union, cast
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from dateutil.parser import isoparse
+from typing import cast
+import datetime
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.local_token_group_token_get_dto import LocalTokenGroupTokenGetDto
@@ -13,7 +20,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="LocalTokenGroupGetDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class LocalTokenGroupGetDto:
     """
     Attributes:
@@ -23,6 +30,7 @@ class LocalTokenGroupGetDto:
         target_ou_codes (Union[Unset, List[str]]):
         tokens (Union[Unset, List['LocalTokenGroupTokenGetDto']]):
         target_chargepoint_ids (Union[Unset, List[str]]):
+        override_tariff_id (Union[Unset, str]):
         created (Union[Unset, datetime.datetime]):
         updated (Union[Unset, datetime.datetime]):
     """
@@ -33,14 +41,18 @@ class LocalTokenGroupGetDto:
     target_ou_codes: Union[Unset, List[str]] = UNSET
     tokens: Union[Unset, List["LocalTokenGroupTokenGetDto"]] = UNSET
     target_chargepoint_ids: Union[Unset, List[str]] = UNSET
+    override_tariff_id: Union[Unset, str] = UNSET
     created: Union[Unset, datetime.datetime] = UNSET
     updated: Union[Unset, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         oucode = self.oucode
+
         token_group_name = self.token_group_name
+
         target_ou_codes: Union[Unset, List[str]] = UNSET
         if not isinstance(self.target_ou_codes, Unset):
             target_ou_codes = self.target_ou_codes
@@ -50,12 +62,13 @@ class LocalTokenGroupGetDto:
             tokens = []
             for tokens_item_data in self.tokens:
                 tokens_item = tokens_item_data.to_dict()
-
                 tokens.append(tokens_item)
 
         target_chargepoint_ids: Union[Unset, List[str]] = UNSET
         if not isinstance(self.target_chargepoint_ids, Unset):
             target_chargepoint_ids = self.target_chargepoint_ids
+
+        override_tariff_id = self.override_tariff_id
 
         created: Union[Unset, str] = UNSET
         if not isinstance(self.created, Unset):
@@ -80,6 +93,8 @@ class LocalTokenGroupGetDto:
             field_dict["tokens"] = tokens
         if target_chargepoint_ids is not UNSET:
             field_dict["targetChargepointIds"] = target_chargepoint_ids
+        if override_tariff_id is not UNSET:
+            field_dict["overrideTariffId"] = override_tariff_id
         if created is not UNSET:
             field_dict["created"] = created
         if updated is not UNSET:
@@ -109,6 +124,8 @@ class LocalTokenGroupGetDto:
 
         target_chargepoint_ids = cast(List[str], d.pop("targetChargepointIds", UNSET))
 
+        override_tariff_id = d.pop("overrideTariffId", UNSET)
+
         _created = d.pop("created", UNSET)
         created: Union[Unset, datetime.datetime]
         if isinstance(_created, Unset):
@@ -130,6 +147,7 @@ class LocalTokenGroupGetDto:
             target_ou_codes=target_ou_codes,
             tokens=tokens,
             target_chargepoint_ids=target_chargepoint_ids,
+            override_tariff_id=override_tariff_id,
             created=created,
             updated=updated,
         )

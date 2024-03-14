@@ -1,16 +1,25 @@
-import datetime
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
 
-from ..models.webhook_summary_get_dto_event_types_item import WebhookSummaryGetDtoEventTypesItem
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+from dateutil.parser import isoparse
+import datetime
+from typing import Union
+from ..models.webhook_summary_get_dto_event_types_item import (
+    WebhookSummaryGetDtoEventTypesItem,
+)
+
 
 T = TypeVar("T", bound="WebhookSummaryGetDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class WebhookSummaryGetDto:
     """
     Attributes:
@@ -28,18 +37,20 @@ class WebhookSummaryGetDto:
     event_types: Union[Unset, List[WebhookSummaryGetDtoEventTypesItem]] = UNSET
     created: Union[Unset, datetime.datetime] = UNSET
     updated: Union[Unset, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         name = self.name
+
         enabled = self.enabled
+
         event_types: Union[Unset, List[str]] = UNSET
         if not isinstance(self.event_types, Unset):
             event_types = []
             for event_types_item_data in self.event_types:
                 event_types_item = event_types_item_data.value
-
                 event_types.append(event_types_item)
 
         created: Union[Unset, str] = UNSET

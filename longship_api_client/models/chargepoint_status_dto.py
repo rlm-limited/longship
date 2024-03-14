@@ -1,11 +1,19 @@
-import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
 
-from ..models.chargepoint_status_dto_connectivity_status import ChargepointStatusDtoConnectivityStatus
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+from dateutil.parser import isoparse
+import datetime
+from ..models.chargepoint_status_dto_connectivity_status import (
+    ChargepointStatusDtoConnectivityStatus,
+)
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.connector_operational_status_dto import ConnectorOperationalStatusDto
@@ -14,7 +22,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="ChargepointStatusDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ChargepointStatusDto:
     """
     Attributes:
@@ -39,21 +47,27 @@ class ChargepointStatusDto:
     ou_id: Union[Unset, str] = UNSET
     ou_name: Union[Unset, str] = UNSET
     timestamp: Union[Unset, datetime.datetime] = UNSET
-    connectivity_status: Union[
-        Unset, ChargepointStatusDtoConnectivityStatus
-    ] = ChargepointStatusDtoConnectivityStatus.ONLINE
+    connectivity_status: Union[Unset, ChargepointStatusDtoConnectivityStatus] = (
+        ChargepointStatusDtoConnectivityStatus.ONLINE
+    )
     connectors: Union[Unset, List["ConnectorOperationalStatusDto"]] = UNSET
     websocket_connected: Union[Unset, datetime.datetime] = UNSET
     websocket_disconnected: Union[Unset, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         display_name = self.display_name
+
         tenant_id = self.tenant_id
+
         ou = self.ou
+
         ou_id = self.ou_id
+
         ou_name = self.ou_name
+
         timestamp: Union[Unset, str] = UNSET
         if not isinstance(self.timestamp, Unset):
             timestamp = self.timestamp.isoformat()
@@ -67,7 +81,6 @@ class ChargepointStatusDto:
             connectors = []
             for connectors_item_data in self.connectors:
                 connectors_item = connectors_item_data.to_dict()
-
                 connectors.append(connectors_item)
 
         websocket_connected: Union[Unset, str] = UNSET
@@ -108,7 +121,9 @@ class ChargepointStatusDto:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.connector_operational_status_dto import ConnectorOperationalStatusDto
+        from ..models.connector_operational_status_dto import (
+            ConnectorOperationalStatusDto,
+        )
 
         d = src_dict.copy()
         id = d.pop("id", UNSET)
@@ -135,12 +150,16 @@ class ChargepointStatusDto:
         if isinstance(_connectivity_status, Unset):
             connectivity_status = UNSET
         else:
-            connectivity_status = ChargepointStatusDtoConnectivityStatus(_connectivity_status)
+            connectivity_status = ChargepointStatusDtoConnectivityStatus(
+                _connectivity_status
+            )
 
         connectors = []
         _connectors = d.pop("connectors", UNSET)
         for connectors_item_data in _connectors or []:
-            connectors_item = ConnectorOperationalStatusDto.from_dict(connectors_item_data)
+            connectors_item = ConnectorOperationalStatusDto.from_dict(
+                connectors_item_data
+            )
 
             connectors.append(connectors_item)
 

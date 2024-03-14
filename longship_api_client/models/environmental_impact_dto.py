@@ -1,14 +1,21 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
 
-from ..models.environmental_impact_dto_category import EnvironmentalImpactDtoCategory
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+from typing import Union
+from ..models.environmental_impact_dto_category import EnvironmentalImpactDtoCategory
+
 
 T = TypeVar("T", bound="EnvironmentalImpactDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class EnvironmentalImpactDto:
     """
     Attributes:
@@ -16,9 +23,11 @@ class EnvironmentalImpactDto:
         amount (Union[Unset, int]):
     """
 
-    category: Union[Unset, EnvironmentalImpactDtoCategory] = EnvironmentalImpactDtoCategory.NUCLEAR_WASTE
+    category: Union[Unset, EnvironmentalImpactDtoCategory] = (
+        EnvironmentalImpactDtoCategory.NUCLEAR_WASTE
+    )
     amount: Union[Unset, int] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         category: Union[Unset, str] = UNSET

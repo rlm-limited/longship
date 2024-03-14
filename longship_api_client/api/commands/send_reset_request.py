@@ -3,38 +3,40 @@ from typing import Any, Dict, Optional, Union, cast
 
 import httpx
 
-from ... import errors
-from ...client import Client
-from ...models.longship_error import LongshipError
-from ...models.reset_request import ResetRequest
+from ...client import AuthenticatedClient, Client
 from ...types import Response
+from ... import errors
+
+from ...models.reset_request import ResetRequest
+from ...models.longship_error import LongshipError
 
 
 def _get_kwargs(
     id: str,
     *,
-    client: Client,
-    json_body: ResetRequest,
+    body: ResetRequest,
 ) -> Dict[str, Any]:
-    url = "{}/v1/chargepoints/{id}/reset".format(client.base_url, id=id)
+    headers: Dict[str, Any] = {}
 
-    headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
-
-    json_json_body = json_body.to_dict()
-
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "post",
-        "url": url,
-        "headers": headers,
-        "cookies": cookies,
-        "timeout": client.get_timeout(),
-        "follow_redirects": client.follow_redirects,
-        "json": json_json_body,
+        "url": "/v1/chargepoints/{id}/reset".format(
+            id=id,
+        ),
     }
 
+    _body = body.to_dict()
 
-def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Union[Any, LongshipError]]:
+    _kwargs["json"] = _body
+    headers["Content-Type"] = "application/json"
+
+    _kwargs["headers"] = headers
+    return _kwargs
+
+
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[Union[Any, LongshipError]]:
     if response.status_code == HTTPStatus.UNAUTHORIZED:
         response_401 = LongshipError.from_dict(response.json())
 
@@ -56,7 +58,9 @@ def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Uni
         return None
 
 
-def _build_response(*, client: Client, response: httpx.Response) -> Response[Union[Any, LongshipError]]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[Union[Any, LongshipError]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -68,16 +72,16 @@ def _build_response(*, client: Client, response: httpx.Response) -> Response[Uni
 def sync_detailed(
     id: str,
     *,
-    client: Client,
-    json_body: ResetRequest,
+    client: Union[AuthenticatedClient, Client],
+    body: ResetRequest,
 ) -> Response[Union[Any, LongshipError]]:
     """Sends a ResetRequest.
 
-     Sends a ResetRequest command to the chargepoint.
+     This command has been moved to the dedicated commands api
 
     Args:
         id (str):
-        json_body (ResetRequest):
+        body (ResetRequest):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -89,12 +93,10 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         id=id,
-        client=client,
-        json_body=json_body,
+        body=body,
     )
 
-    response = httpx.request(
-        verify=client.verify_ssl,
+    response = client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -104,16 +106,16 @@ def sync_detailed(
 def sync(
     id: str,
     *,
-    client: Client,
-    json_body: ResetRequest,
+    client: Union[AuthenticatedClient, Client],
+    body: ResetRequest,
 ) -> Optional[Union[Any, LongshipError]]:
     """Sends a ResetRequest.
 
-     Sends a ResetRequest command to the chargepoint.
+     This command has been moved to the dedicated commands api
 
     Args:
         id (str):
-        json_body (ResetRequest):
+        body (ResetRequest):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -126,23 +128,23 @@ def sync(
     return sync_detailed(
         id=id,
         client=client,
-        json_body=json_body,
+        body=body,
     ).parsed
 
 
 async def asyncio_detailed(
     id: str,
     *,
-    client: Client,
-    json_body: ResetRequest,
+    client: Union[AuthenticatedClient, Client],
+    body: ResetRequest,
 ) -> Response[Union[Any, LongshipError]]:
     """Sends a ResetRequest.
 
-     Sends a ResetRequest command to the chargepoint.
+     This command has been moved to the dedicated commands api
 
     Args:
         id (str):
-        json_body (ResetRequest):
+        body (ResetRequest):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -154,12 +156,10 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         id=id,
-        client=client,
-        json_body=json_body,
+        body=body,
     )
 
-    async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
 
@@ -167,16 +167,16 @@ async def asyncio_detailed(
 async def asyncio(
     id: str,
     *,
-    client: Client,
-    json_body: ResetRequest,
+    client: Union[AuthenticatedClient, Client],
+    body: ResetRequest,
 ) -> Optional[Union[Any, LongshipError]]:
     """Sends a ResetRequest.
 
-     Sends a ResetRequest command to the chargepoint.
+     This command has been moved to the dedicated commands api
 
     Args:
         id (str):
-        json_body (ResetRequest):
+        body (ResetRequest):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -190,6 +190,6 @@ async def asyncio(
         await asyncio_detailed(
             id=id,
             client=client,
-            json_body=json_body,
+            body=body,
         )
     ).parsed

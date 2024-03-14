@@ -1,15 +1,22 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
 
 from ..models.cdr_started_by_token_dto_auth_method import CdrStartedByTokenDtoAuthMethod
 from ..models.cdr_started_by_token_dto_token_type import CdrStartedByTokenDtoTokenType
-from ..types import UNSET, Unset
+from typing import Union
+
 
 T = TypeVar("T", bound="CdrStartedByTokenDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class CdrStartedByTokenDto:
     """
     Attributes:
@@ -28,32 +35,43 @@ class CdrStartedByTokenDto:
 
     uid: Union[Unset, str] = UNSET
     auth_reference: Union[Unset, str] = UNSET
-    token_type: Union[Unset, CdrStartedByTokenDtoTokenType] = CdrStartedByTokenDtoTokenType.AD_HOC_USER
+    token_type: Union[Unset, CdrStartedByTokenDtoTokenType] = (
+        CdrStartedByTokenDtoTokenType.AD_HOC_USER
+    )
     contract_id: Union[Unset, str] = UNSET
-    auth_method: Union[Unset, CdrStartedByTokenDtoAuthMethod] = CdrStartedByTokenDtoAuthMethod.AUTH_REQUEST
+    auth_method: Union[Unset, CdrStartedByTokenDtoAuthMethod] = (
+        CdrStartedByTokenDtoAuthMethod.AUTH_REQUEST
+    )
     provider_country_code: Union[Unset, str] = UNSET
     provider_party_id: Union[Unset, str] = UNSET
     token_ou_id: Union[Unset, str] = UNSET
     token_ou_name: Union[Unset, str] = UNSET
     token_ou: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         uid = self.uid
+
         auth_reference = self.auth_reference
+
         token_type: Union[Unset, str] = UNSET
         if not isinstance(self.token_type, Unset):
             token_type = self.token_type.value
 
         contract_id = self.contract_id
+
         auth_method: Union[Unset, str] = UNSET
         if not isinstance(self.auth_method, Unset):
             auth_method = self.auth_method.value
 
         provider_country_code = self.provider_country_code
+
         provider_party_id = self.provider_party_id
+
         token_ou_id = self.token_ou_id
+
         token_ou_name = self.token_ou_name
+
         token_ou = self.token_ou
 
         field_dict: Dict[str, Any] = {}

@@ -1,11 +1,17 @@
-import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
 
-from ..models.reimbursement_tariff_dto_status import ReimbursementTariffDtoStatus
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+from dateutil.parser import isoparse
+import datetime
+from ..models.reimbursement_tariff_dto_status import ReimbursementTariffDtoStatus
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.reimbursement_price_dto import ReimbursementPriceDto
@@ -14,7 +20,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="ReimbursementTariffDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ReimbursementTariffDto:
     """
     Attributes:
@@ -31,11 +37,14 @@ class ReimbursementTariffDto:
     valid_from: Union[Unset, datetime.datetime] = UNSET
     currency: Union[Unset, str] = UNSET
     price: Union[Unset, "ReimbursementPriceDto"] = UNSET
-    status: Union[Unset, ReimbursementTariffDtoStatus] = ReimbursementTariffDtoStatus.PENDING
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    status: Union[Unset, ReimbursementTariffDtoStatus] = (
+        ReimbursementTariffDtoStatus.PENDING
+    )
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         date_created: Union[Unset, str] = UNSET
         if not isinstance(self.date_created, Unset):
             date_created = self.date_created.isoformat()
@@ -45,6 +54,7 @@ class ReimbursementTariffDto:
             valid_from = self.valid_from.isoformat()
 
         currency = self.currency
+
         price: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.price, Unset):
             price = self.price.to_dict()

@@ -1,13 +1,20 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
+
 
 T = TypeVar("T", bound="TariffDistributionPutDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class TariffDistributionPutDto:
     """
     Attributes:
@@ -25,14 +32,19 @@ class TariffDistributionPutDto:
     fixed_tenant_k_wh_fee: Union[Unset, float] = UNSET
     percentage_fee_customer: Union[Unset, float] = UNSET
     percentage_fee_tenant: Union[Unset, float] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         name = self.name
+
         ou_code = self.ou_code
+
         energy_compensation = self.energy_compensation
+
         fixed_tenant_k_wh_fee = self.fixed_tenant_k_wh_fee
+
         percentage_fee_customer = self.percentage_fee_customer
+
         percentage_fee_tenant = self.percentage_fee_tenant
 
         field_dict: Dict[str, Any] = {}

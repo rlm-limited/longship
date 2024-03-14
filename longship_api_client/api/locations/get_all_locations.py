@@ -3,38 +3,58 @@ from typing import Any, Dict, List, Optional, Union
 
 import httpx
 
+from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
 from ... import errors
-from ...client import Client
+
+from ...models.get_all_locations_accesstype import GetAllLocationsAccesstype
+from ...models.get_all_locations_chargerpowertype import GetAllLocationsChargerpowertype
 from ...models.get_all_locations_order_by import GetAllLocationsOrderBy
-from ...models.location_dto import LocationDto
+from ...types import Unset
 from ...models.longship_error import LongshipError
-from ...types import UNSET, Response, Unset
+from ...models.location_dto import LocationDto
 
 
 def _get_kwargs(
     *,
-    client: Client,
-    skip: Union[Unset, None, int] = UNSET,
-    take: Union[Unset, None, int] = UNSET,
-    search: Union[Unset, None, str] = UNSET,
-    order_by: Union[Unset, None, GetAllLocationsOrderBy] = GetAllLocationsOrderBy.NAME,
-    descending: Union[Unset, None, bool] = UNSET,
+    skip: Union[Unset, int] = UNSET,
+    take: Union[Unset, int] = UNSET,
+    search: Union[Unset, str] = UNSET,
+    organizationunitcode: Union[Unset, str] = UNSET,
+    accesstype: Union[
+        Unset, GetAllLocationsAccesstype
+    ] = GetAllLocationsAccesstype.PUBLIC,
+    chargerpowertype: Union[
+        Unset, GetAllLocationsChargerpowertype
+    ] = GetAllLocationsChargerpowertype.AC,
+    order_by: Union[Unset, GetAllLocationsOrderBy] = GetAllLocationsOrderBy.NAME,
+    descending: Union[Unset, bool] = UNSET,
 ) -> Dict[str, Any]:
-    url = "{}/v1/locations".format(client.base_url)
-
-    headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
-
     params: Dict[str, Any] = {}
+
     params["skip"] = skip
 
     params["take"] = take
 
     params["search"] = search
 
-    json_order_by: Union[Unset, None, str] = UNSET
+    params["organizationunitcode"] = organizationunitcode
+
+    json_accesstype: Union[Unset, str] = UNSET
+    if not isinstance(accesstype, Unset):
+        json_accesstype = accesstype.value
+
+    params["accesstype"] = json_accesstype
+
+    json_chargerpowertype: Union[Unset, str] = UNSET
+    if not isinstance(chargerpowertype, Unset):
+        json_chargerpowertype = chargerpowertype.value
+
+    params["chargerpowertype"] = json_chargerpowertype
+
+    json_order_by: Union[Unset, str] = UNSET
     if not isinstance(order_by, Unset):
-        json_order_by = order_by.value if order_by else None
+        json_order_by = order_by.value
 
     params["orderBy"] = json_order_by
 
@@ -42,18 +62,18 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": url,
-        "headers": headers,
-        "cookies": cookies,
-        "timeout": client.get_timeout(),
-        "follow_redirects": client.follow_redirects,
+        "url": "/v1/locations",
         "params": params,
     }
 
+    return _kwargs
 
-def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Union[List["LocationDto"], LongshipError]]:
+
+def _parse_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Optional[Union[List["LocationDto"], LongshipError]]:
     if response.status_code == HTTPStatus.OK:
         response_200 = []
         _response_200 = response.json()
@@ -83,7 +103,9 @@ def _parse_response(*, client: Client, response: httpx.Response) -> Optional[Uni
         return None
 
 
-def _build_response(*, client: Client, response: httpx.Response) -> Response[Union[List["LocationDto"], LongshipError]]:
+def _build_response(
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
+) -> Response[Union[List["LocationDto"], LongshipError]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -94,24 +116,35 @@ def _build_response(*, client: Client, response: httpx.Response) -> Response[Uni
 
 def sync_detailed(
     *,
-    client: Client,
-    skip: Union[Unset, None, int] = UNSET,
-    take: Union[Unset, None, int] = UNSET,
-    search: Union[Unset, None, str] = UNSET,
-    order_by: Union[Unset, None, GetAllLocationsOrderBy] = GetAllLocationsOrderBy.NAME,
-    descending: Union[Unset, None, bool] = UNSET,
+    client: Union[AuthenticatedClient, Client],
+    skip: Union[Unset, int] = UNSET,
+    take: Union[Unset, int] = UNSET,
+    search: Union[Unset, str] = UNSET,
+    organizationunitcode: Union[Unset, str] = UNSET,
+    accesstype: Union[
+        Unset, GetAllLocationsAccesstype
+    ] = GetAllLocationsAccesstype.PUBLIC,
+    chargerpowertype: Union[
+        Unset, GetAllLocationsChargerpowertype
+    ] = GetAllLocationsChargerpowertype.AC,
+    order_by: Union[Unset, GetAllLocationsOrderBy] = GetAllLocationsOrderBy.NAME,
+    descending: Union[Unset, bool] = UNSET,
 ) -> Response[Union[List["LocationDto"], LongshipError]]:
     """Get a list of locations.
 
      Get a paged list of locations, taken the filters into account.
 
     Args:
-        skip (Union[Unset, None, int]):
-        take (Union[Unset, None, int]):
-        search (Union[Unset, None, str]):
-        order_by (Union[Unset, None, GetAllLocationsOrderBy]):  Default:
-            GetAllLocationsOrderBy.NAME.
-        descending (Union[Unset, None, bool]):
+        skip (Union[Unset, int]):
+        take (Union[Unset, int]):
+        search (Union[Unset, str]):
+        organizationunitcode (Union[Unset, str]):
+        accesstype (Union[Unset, GetAllLocationsAccesstype]):  Default:
+            GetAllLocationsAccesstype.PUBLIC.
+        chargerpowertype (Union[Unset, GetAllLocationsChargerpowertype]):  Default:
+            GetAllLocationsChargerpowertype.AC.
+        order_by (Union[Unset, GetAllLocationsOrderBy]):  Default: GetAllLocationsOrderBy.NAME.
+        descending (Union[Unset, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -122,16 +155,17 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        client=client,
         skip=skip,
         take=take,
         search=search,
+        organizationunitcode=organizationunitcode,
+        accesstype=accesstype,
+        chargerpowertype=chargerpowertype,
         order_by=order_by,
         descending=descending,
     )
 
-    response = httpx.request(
-        verify=client.verify_ssl,
+    response = client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -140,24 +174,35 @@ def sync_detailed(
 
 def sync(
     *,
-    client: Client,
-    skip: Union[Unset, None, int] = UNSET,
-    take: Union[Unset, None, int] = UNSET,
-    search: Union[Unset, None, str] = UNSET,
-    order_by: Union[Unset, None, GetAllLocationsOrderBy] = GetAllLocationsOrderBy.NAME,
-    descending: Union[Unset, None, bool] = UNSET,
+    client: Union[AuthenticatedClient, Client],
+    skip: Union[Unset, int] = UNSET,
+    take: Union[Unset, int] = UNSET,
+    search: Union[Unset, str] = UNSET,
+    organizationunitcode: Union[Unset, str] = UNSET,
+    accesstype: Union[
+        Unset, GetAllLocationsAccesstype
+    ] = GetAllLocationsAccesstype.PUBLIC,
+    chargerpowertype: Union[
+        Unset, GetAllLocationsChargerpowertype
+    ] = GetAllLocationsChargerpowertype.AC,
+    order_by: Union[Unset, GetAllLocationsOrderBy] = GetAllLocationsOrderBy.NAME,
+    descending: Union[Unset, bool] = UNSET,
 ) -> Optional[Union[List["LocationDto"], LongshipError]]:
     """Get a list of locations.
 
      Get a paged list of locations, taken the filters into account.
 
     Args:
-        skip (Union[Unset, None, int]):
-        take (Union[Unset, None, int]):
-        search (Union[Unset, None, str]):
-        order_by (Union[Unset, None, GetAllLocationsOrderBy]):  Default:
-            GetAllLocationsOrderBy.NAME.
-        descending (Union[Unset, None, bool]):
+        skip (Union[Unset, int]):
+        take (Union[Unset, int]):
+        search (Union[Unset, str]):
+        organizationunitcode (Union[Unset, str]):
+        accesstype (Union[Unset, GetAllLocationsAccesstype]):  Default:
+            GetAllLocationsAccesstype.PUBLIC.
+        chargerpowertype (Union[Unset, GetAllLocationsChargerpowertype]):  Default:
+            GetAllLocationsChargerpowertype.AC.
+        order_by (Union[Unset, GetAllLocationsOrderBy]):  Default: GetAllLocationsOrderBy.NAME.
+        descending (Union[Unset, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -172,6 +217,9 @@ def sync(
         skip=skip,
         take=take,
         search=search,
+        organizationunitcode=organizationunitcode,
+        accesstype=accesstype,
+        chargerpowertype=chargerpowertype,
         order_by=order_by,
         descending=descending,
     ).parsed
@@ -179,24 +227,35 @@ def sync(
 
 async def asyncio_detailed(
     *,
-    client: Client,
-    skip: Union[Unset, None, int] = UNSET,
-    take: Union[Unset, None, int] = UNSET,
-    search: Union[Unset, None, str] = UNSET,
-    order_by: Union[Unset, None, GetAllLocationsOrderBy] = GetAllLocationsOrderBy.NAME,
-    descending: Union[Unset, None, bool] = UNSET,
+    client: Union[AuthenticatedClient, Client],
+    skip: Union[Unset, int] = UNSET,
+    take: Union[Unset, int] = UNSET,
+    search: Union[Unset, str] = UNSET,
+    organizationunitcode: Union[Unset, str] = UNSET,
+    accesstype: Union[
+        Unset, GetAllLocationsAccesstype
+    ] = GetAllLocationsAccesstype.PUBLIC,
+    chargerpowertype: Union[
+        Unset, GetAllLocationsChargerpowertype
+    ] = GetAllLocationsChargerpowertype.AC,
+    order_by: Union[Unset, GetAllLocationsOrderBy] = GetAllLocationsOrderBy.NAME,
+    descending: Union[Unset, bool] = UNSET,
 ) -> Response[Union[List["LocationDto"], LongshipError]]:
     """Get a list of locations.
 
      Get a paged list of locations, taken the filters into account.
 
     Args:
-        skip (Union[Unset, None, int]):
-        take (Union[Unset, None, int]):
-        search (Union[Unset, None, str]):
-        order_by (Union[Unset, None, GetAllLocationsOrderBy]):  Default:
-            GetAllLocationsOrderBy.NAME.
-        descending (Union[Unset, None, bool]):
+        skip (Union[Unset, int]):
+        take (Union[Unset, int]):
+        search (Union[Unset, str]):
+        organizationunitcode (Union[Unset, str]):
+        accesstype (Union[Unset, GetAllLocationsAccesstype]):  Default:
+            GetAllLocationsAccesstype.PUBLIC.
+        chargerpowertype (Union[Unset, GetAllLocationsChargerpowertype]):  Default:
+            GetAllLocationsChargerpowertype.AC.
+        order_by (Union[Unset, GetAllLocationsOrderBy]):  Default: GetAllLocationsOrderBy.NAME.
+        descending (Union[Unset, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -207,40 +266,52 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        client=client,
         skip=skip,
         take=take,
         search=search,
+        organizationunitcode=organizationunitcode,
+        accesstype=accesstype,
+        chargerpowertype=chargerpowertype,
         order_by=order_by,
         descending=descending,
     )
 
-    async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
 
 
 async def asyncio(
     *,
-    client: Client,
-    skip: Union[Unset, None, int] = UNSET,
-    take: Union[Unset, None, int] = UNSET,
-    search: Union[Unset, None, str] = UNSET,
-    order_by: Union[Unset, None, GetAllLocationsOrderBy] = GetAllLocationsOrderBy.NAME,
-    descending: Union[Unset, None, bool] = UNSET,
+    client: Union[AuthenticatedClient, Client],
+    skip: Union[Unset, int] = UNSET,
+    take: Union[Unset, int] = UNSET,
+    search: Union[Unset, str] = UNSET,
+    organizationunitcode: Union[Unset, str] = UNSET,
+    accesstype: Union[
+        Unset, GetAllLocationsAccesstype
+    ] = GetAllLocationsAccesstype.PUBLIC,
+    chargerpowertype: Union[
+        Unset, GetAllLocationsChargerpowertype
+    ] = GetAllLocationsChargerpowertype.AC,
+    order_by: Union[Unset, GetAllLocationsOrderBy] = GetAllLocationsOrderBy.NAME,
+    descending: Union[Unset, bool] = UNSET,
 ) -> Optional[Union[List["LocationDto"], LongshipError]]:
     """Get a list of locations.
 
      Get a paged list of locations, taken the filters into account.
 
     Args:
-        skip (Union[Unset, None, int]):
-        take (Union[Unset, None, int]):
-        search (Union[Unset, None, str]):
-        order_by (Union[Unset, None, GetAllLocationsOrderBy]):  Default:
-            GetAllLocationsOrderBy.NAME.
-        descending (Union[Unset, None, bool]):
+        skip (Union[Unset, int]):
+        take (Union[Unset, int]):
+        search (Union[Unset, str]):
+        organizationunitcode (Union[Unset, str]):
+        accesstype (Union[Unset, GetAllLocationsAccesstype]):  Default:
+            GetAllLocationsAccesstype.PUBLIC.
+        chargerpowertype (Union[Unset, GetAllLocationsChargerpowertype]):  Default:
+            GetAllLocationsChargerpowertype.AC.
+        order_by (Union[Unset, GetAllLocationsOrderBy]):  Default: GetAllLocationsOrderBy.NAME.
+        descending (Union[Unset, bool]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -256,6 +327,9 @@ async def asyncio(
             skip=skip,
             take=take,
             search=search,
+            organizationunitcode=organizationunitcode,
+            accesstype=accesstype,
+            chargerpowertype=chargerpowertype,
             order_by=order_by,
             descending=descending,
         )

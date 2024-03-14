@@ -1,8 +1,14 @@
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.image_dto import ImageDto
@@ -11,7 +17,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="BusinessDetailsDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class BusinessDetailsDto:
     """
     Attributes:
@@ -23,11 +29,13 @@ class BusinessDetailsDto:
     name: Union[Unset, str] = UNSET
     website: Union[Unset, str] = UNSET
     image: Union[Unset, "ImageDto"] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         name = self.name
+
         website = self.website
+
         image: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.image, Unset):
             image = self.image.to_dict()

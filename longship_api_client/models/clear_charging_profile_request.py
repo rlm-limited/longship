@@ -1,16 +1,23 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
 
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
+
+from typing import Union
 from ..models.clear_charging_profile_request_charging_profile_purpose import (
     ClearChargingProfileRequestChargingProfilePurpose,
 )
-from ..types import UNSET, Unset
+
 
 T = TypeVar("T", bound="ClearChargingProfileRequest")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ClearChargingProfileRequest:
     """
     Attributes:
@@ -27,11 +34,13 @@ class ClearChargingProfileRequest:
         Unset, ClearChargingProfileRequestChargingProfilePurpose
     ] = ClearChargingProfileRequestChargingProfilePurpose.CHARGEPOINTMAXPROFILE
     stack_level: Union[Unset, int] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         connector_id = self.connector_id
+
         charging_profile_purpose: Union[Unset, str] = UNSET
         if not isinstance(self.charging_profile_purpose, Unset):
             charging_profile_purpose = self.charging_profile_purpose.value
@@ -60,11 +69,17 @@ class ClearChargingProfileRequest:
         connector_id = d.pop("connectorId", UNSET)
 
         _charging_profile_purpose = d.pop("chargingProfilePurpose", UNSET)
-        charging_profile_purpose: Union[Unset, ClearChargingProfileRequestChargingProfilePurpose]
+        charging_profile_purpose: Union[
+            Unset, ClearChargingProfileRequestChargingProfilePurpose
+        ]
         if isinstance(_charging_profile_purpose, Unset):
             charging_profile_purpose = UNSET
         else:
-            charging_profile_purpose = ClearChargingProfileRequestChargingProfilePurpose(_charging_profile_purpose)
+            charging_profile_purpose = (
+                ClearChargingProfileRequestChargingProfilePurpose(
+                    _charging_profile_purpose
+                )
+            )
 
         stack_level = d.pop("stackLevel", UNSET)
 

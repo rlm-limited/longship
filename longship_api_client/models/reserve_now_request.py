@@ -1,15 +1,22 @@
-import datetime
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from dateutil.parser import isoparse
+import datetime
+from typing import Union
+
 
 T = TypeVar("T", bound="ReserveNowRequest")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ReserveNowRequest:
     """
     Attributes:
@@ -25,14 +32,17 @@ class ReserveNowRequest:
     id_tag: str
     reservation_id: int
     parent_id_tag: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         connector_id = self.connector_id
+
         expiry_date = self.expiry_date.isoformat()
 
         id_tag = self.id_tag
+
         reservation_id = self.reservation_id
+
         parent_id_tag = self.parent_id_tag
 
         field_dict: Dict[str, Any] = {}

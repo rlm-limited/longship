@@ -1,13 +1,20 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
+
 
 T = TypeVar("T", bound="StringSegment")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class StringSegment:
     """
     Attributes:
@@ -23,13 +30,17 @@ class StringSegment:
     length: Union[Unset, int] = UNSET
     value: Union[Unset, str] = UNSET
     has_value: Union[Unset, bool] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         buffer = self.buffer
+
         offset = self.offset
+
         length = self.length
+
         value = self.value
+
         has_value = self.has_value
 
         field_dict: Dict[str, Any] = {}

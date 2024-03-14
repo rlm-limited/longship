@@ -1,71 +1,66 @@
-import datetime
 from http import HTTPStatus
 from typing import Any, Dict, List, Optional, Union
 
 import httpx
 
+from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
 from ... import errors
-from ...client import Client
+
 from ...models.interchange_format_cdr import InterchangeFormatCdr
+from ...types import Unset
+import datetime
 from ...models.longship_error import LongshipError
-from ...types import UNSET, Response, Unset
 
 
 def _get_kwargs(
     *,
-    client: Client,
-    skip: Union[Unset, None, int] = UNSET,
-    take: Union[Unset, None, int] = UNSET,
-    providerexclude: Union[Unset, None, str] = UNSET,
-    from_: Union[Unset, None, datetime.datetime] = UNSET,
-    to: Union[Unset, None, datetime.datetime] = UNSET,
+    skip: Union[Unset, int] = UNSET,
+    take: Union[Unset, int] = UNSET,
+    providerexclude: Union[Unset, str] = UNSET,
+    from_: Union[Unset, datetime.datetime] = UNSET,
+    to: Union[Unset, datetime.datetime] = UNSET,
 ) -> Dict[str, Any]:
-    url = "{}/v1/cdrs/export".format(client.base_url)
-
-    headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
-
     params: Dict[str, Any] = {}
+
     params["skip"] = skip
 
     params["take"] = take
 
     params["providerexclude"] = providerexclude
 
-    json_from_: Union[Unset, None, str] = UNSET
+    json_from_: Union[Unset, str] = UNSET
     if not isinstance(from_, Unset):
-        json_from_ = from_.isoformat() if from_ else None
-
+        json_from_ = from_.isoformat()
     params["from"] = json_from_
 
-    json_to: Union[Unset, None, str] = UNSET
+    json_to: Union[Unset, str] = UNSET
     if not isinstance(to, Unset):
-        json_to = to.isoformat() if to else None
-
+        json_to = to.isoformat()
     params["to"] = json_to
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": url,
-        "headers": headers,
-        "cookies": cookies,
-        "timeout": client.get_timeout(),
-        "follow_redirects": client.follow_redirects,
+        "url": "/v1/cdrs/export",
         "params": params,
     }
 
+    return _kwargs
+
 
 def _parse_response(
-    *, client: Client, response: httpx.Response
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[Union[List["InterchangeFormatCdr"], LongshipError]]:
     if response.status_code == HTTPStatus.OK:
         response_200 = []
         _response_200 = response.json()
         for componentsschemasinterchange_format_cdr_array_item_data in _response_200:
-            componentsschemasinterchange_format_cdr_array_item = InterchangeFormatCdr.from_dict(
-                componentsschemasinterchange_format_cdr_array_item_data
+            componentsschemasinterchange_format_cdr_array_item = (
+                InterchangeFormatCdr.from_dict(
+                    componentsschemasinterchange_format_cdr_array_item_data
+                )
             )
 
             response_200.append(componentsschemasinterchange_format_cdr_array_item)
@@ -90,7 +85,7 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Client, response: httpx.Response
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Response[Union[List["InterchangeFormatCdr"], LongshipError]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
@@ -102,23 +97,23 @@ def _build_response(
 
 def sync_detailed(
     *,
-    client: Client,
-    skip: Union[Unset, None, int] = UNSET,
-    take: Union[Unset, None, int] = UNSET,
-    providerexclude: Union[Unset, None, str] = UNSET,
-    from_: Union[Unset, None, datetime.datetime] = UNSET,
-    to: Union[Unset, None, datetime.datetime] = UNSET,
+    client: Union[AuthenticatedClient, Client],
+    skip: Union[Unset, int] = UNSET,
+    take: Union[Unset, int] = UNSET,
+    providerexclude: Union[Unset, str] = UNSET,
+    from_: Union[Unset, datetime.datetime] = UNSET,
+    to: Union[Unset, datetime.datetime] = UNSET,
 ) -> Response[Union[List["InterchangeFormatCdr"], LongshipError]]:
     """Get a list of interchangeformat.
 
      Get a paged list of interchangeformat, taken the filters into account.
 
     Args:
-        skip (Union[Unset, None, int]):
-        take (Union[Unset, None, int]):
-        providerexclude (Union[Unset, None, str]):
-        from_ (Union[Unset, None, datetime.datetime]):
-        to (Union[Unset, None, datetime.datetime]):
+        skip (Union[Unset, int]):
+        take (Union[Unset, int]):
+        providerexclude (Union[Unset, str]):
+        from_ (Union[Unset, datetime.datetime]):
+        to (Union[Unset, datetime.datetime]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -129,7 +124,6 @@ def sync_detailed(
     """
 
     kwargs = _get_kwargs(
-        client=client,
         skip=skip,
         take=take,
         providerexclude=providerexclude,
@@ -137,8 +131,7 @@ def sync_detailed(
         to=to,
     )
 
-    response = httpx.request(
-        verify=client.verify_ssl,
+    response = client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -147,23 +140,23 @@ def sync_detailed(
 
 def sync(
     *,
-    client: Client,
-    skip: Union[Unset, None, int] = UNSET,
-    take: Union[Unset, None, int] = UNSET,
-    providerexclude: Union[Unset, None, str] = UNSET,
-    from_: Union[Unset, None, datetime.datetime] = UNSET,
-    to: Union[Unset, None, datetime.datetime] = UNSET,
+    client: Union[AuthenticatedClient, Client],
+    skip: Union[Unset, int] = UNSET,
+    take: Union[Unset, int] = UNSET,
+    providerexclude: Union[Unset, str] = UNSET,
+    from_: Union[Unset, datetime.datetime] = UNSET,
+    to: Union[Unset, datetime.datetime] = UNSET,
 ) -> Optional[Union[List["InterchangeFormatCdr"], LongshipError]]:
     """Get a list of interchangeformat.
 
      Get a paged list of interchangeformat, taken the filters into account.
 
     Args:
-        skip (Union[Unset, None, int]):
-        take (Union[Unset, None, int]):
-        providerexclude (Union[Unset, None, str]):
-        from_ (Union[Unset, None, datetime.datetime]):
-        to (Union[Unset, None, datetime.datetime]):
+        skip (Union[Unset, int]):
+        take (Union[Unset, int]):
+        providerexclude (Union[Unset, str]):
+        from_ (Union[Unset, datetime.datetime]):
+        to (Union[Unset, datetime.datetime]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -185,23 +178,23 @@ def sync(
 
 async def asyncio_detailed(
     *,
-    client: Client,
-    skip: Union[Unset, None, int] = UNSET,
-    take: Union[Unset, None, int] = UNSET,
-    providerexclude: Union[Unset, None, str] = UNSET,
-    from_: Union[Unset, None, datetime.datetime] = UNSET,
-    to: Union[Unset, None, datetime.datetime] = UNSET,
+    client: Union[AuthenticatedClient, Client],
+    skip: Union[Unset, int] = UNSET,
+    take: Union[Unset, int] = UNSET,
+    providerexclude: Union[Unset, str] = UNSET,
+    from_: Union[Unset, datetime.datetime] = UNSET,
+    to: Union[Unset, datetime.datetime] = UNSET,
 ) -> Response[Union[List["InterchangeFormatCdr"], LongshipError]]:
     """Get a list of interchangeformat.
 
      Get a paged list of interchangeformat, taken the filters into account.
 
     Args:
-        skip (Union[Unset, None, int]):
-        take (Union[Unset, None, int]):
-        providerexclude (Union[Unset, None, str]):
-        from_ (Union[Unset, None, datetime.datetime]):
-        to (Union[Unset, None, datetime.datetime]):
+        skip (Union[Unset, int]):
+        take (Union[Unset, int]):
+        providerexclude (Union[Unset, str]):
+        from_ (Union[Unset, datetime.datetime]):
+        to (Union[Unset, datetime.datetime]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -212,7 +205,6 @@ async def asyncio_detailed(
     """
 
     kwargs = _get_kwargs(
-        client=client,
         skip=skip,
         take=take,
         providerexclude=providerexclude,
@@ -220,31 +212,30 @@ async def asyncio_detailed(
         to=to,
     )
 
-    async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
 
 
 async def asyncio(
     *,
-    client: Client,
-    skip: Union[Unset, None, int] = UNSET,
-    take: Union[Unset, None, int] = UNSET,
-    providerexclude: Union[Unset, None, str] = UNSET,
-    from_: Union[Unset, None, datetime.datetime] = UNSET,
-    to: Union[Unset, None, datetime.datetime] = UNSET,
+    client: Union[AuthenticatedClient, Client],
+    skip: Union[Unset, int] = UNSET,
+    take: Union[Unset, int] = UNSET,
+    providerexclude: Union[Unset, str] = UNSET,
+    from_: Union[Unset, datetime.datetime] = UNSET,
+    to: Union[Unset, datetime.datetime] = UNSET,
 ) -> Optional[Union[List["InterchangeFormatCdr"], LongshipError]]:
     """Get a list of interchangeformat.
 
      Get a paged list of interchangeformat, taken the filters into account.
 
     Args:
-        skip (Union[Unset, None, int]):
-        take (Union[Unset, None, int]):
-        providerexclude (Union[Unset, None, str]):
-        from_ (Union[Unset, None, datetime.datetime]):
-        to (Union[Unset, None, datetime.datetime]):
+        skip (Union[Unset, int]):
+        take (Union[Unset, int]):
+        providerexclude (Union[Unset, str]):
+        from_ (Union[Unset, datetime.datetime]):
+        to (Union[Unset, datetime.datetime]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

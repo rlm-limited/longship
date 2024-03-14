@@ -1,13 +1,20 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from typing import Union
+
 
 T = TypeVar("T", bound="RegularHoursDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class RegularHoursDto:
     """
     Attributes:
@@ -19,11 +26,13 @@ class RegularHoursDto:
     weekday: Union[Unset, int] = UNSET
     period_begin: Union[Unset, str] = UNSET
     period_end: Union[Unset, str] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         weekday = self.weekday
+
         period_begin = self.period_begin
+
         period_end = self.period_end
 
         field_dict: Dict[str, Any] = {}

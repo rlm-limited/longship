@@ -1,14 +1,21 @@
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
+from typing import List
 
-from ..models.energy_source_dto_source import EnergySourceDtoSource
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+from typing import Union
+from ..models.energy_source_dto_source import EnergySourceDtoSource
+
 
 T = TypeVar("T", bound="EnergySourceDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class EnergySourceDto:
     """
     Attributes:
@@ -18,7 +25,7 @@ class EnergySourceDto:
 
     source: Union[Unset, EnergySourceDtoSource] = EnergySourceDtoSource.NUCLEAR
     percentage: Union[Unset, int] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         source: Union[Unset, str] = UNSET

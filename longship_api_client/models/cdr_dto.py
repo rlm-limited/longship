@@ -1,11 +1,18 @@
-import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from ..types import UNSET, Unset
 
 from ..models.cdr_dto_approval_status import CdrDtoApprovalStatus
-from ..types import UNSET, Unset
+from dateutil.parser import isoparse
+from ..models.cdr_dto_financial_type import CdrDtoFinancialType
+import datetime
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.cdr_location_dto import CdrLocationDto
@@ -17,7 +24,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="CdrDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class CdrDto:
     """
     Attributes:
@@ -44,10 +51,14 @@ class CdrDto:
         tariff_name (Union[Unset, str]):
         start_tariff (Union[Unset, float]):
         tariff_price (Union[Unset, float]):
+        charging_time_tariff (Union[Unset, float]):
+        parking_time_tariff (Union[Unset, float]):
         price_info (Union[Unset, PriceInfoDto]):
         local_start_date_time (Union[Unset, datetime.datetime]):
         local_end_date_time (Union[Unset, datetime.datetime]):
-        approval_status (Union[Unset, CdrDtoApprovalStatus]):  Default: CdrDtoApprovalStatus.VALUE_0.
+        approval_status (Union[Unset, CdrDtoApprovalStatus]):  Default: CdrDtoApprovalStatus.APPROVED.
+        financial_type (Union[Unset, CdrDtoFinancialType]):  Default: CdrDtoFinancialType.DEBIT.
+        debit_cdr_id (Union[Unset, str]):
     """
 
     id: Union[Unset, str] = UNSET
@@ -73,17 +84,25 @@ class CdrDto:
     tariff_name: Union[Unset, str] = UNSET
     start_tariff: Union[Unset, float] = UNSET
     tariff_price: Union[Unset, float] = UNSET
+    charging_time_tariff: Union[Unset, float] = UNSET
+    parking_time_tariff: Union[Unset, float] = UNSET
     price_info: Union[Unset, "PriceInfoDto"] = UNSET
     local_start_date_time: Union[Unset, datetime.datetime] = UNSET
     local_end_date_time: Union[Unset, datetime.datetime] = UNSET
-    approval_status: Union[Unset, CdrDtoApprovalStatus] = CdrDtoApprovalStatus.VALUE_0
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    approval_status: Union[Unset, CdrDtoApprovalStatus] = CdrDtoApprovalStatus.APPROVED
+    financial_type: Union[Unset, CdrDtoFinancialType] = CdrDtoFinancialType.DEBIT
+    debit_cdr_id: Union[Unset, str] = UNSET
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         tenant_id = self.tenant_id
+
         charge_point_id = self.charge_point_id
+
         connector_id = self.connector_id
+
         cdr_location: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.cdr_location, Unset):
             cdr_location = self.cdr_location.to_dict()
@@ -97,22 +116,26 @@ class CdrDto:
             end_date_time = self.end_date_time.isoformat()
 
         session_id = self.session_id
+
         token = self.token
+
         started_by_info: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.started_by_info, Unset):
             started_by_info = self.started_by_info.to_dict()
 
         total_energy_in_kwh = self.total_energy_in_kwh
+
         total_time_in_hours = self.total_time_in_hours
+
         charging_periods: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.charging_periods, Unset):
             charging_periods = []
             for charging_periods_item_data in self.charging_periods:
                 charging_periods_item = charging_periods_item_data.to_dict()
-
                 charging_periods.append(charging_periods_item)
 
         total_price = self.total_price
+
         created: Union[Unset, str] = UNSET
         if not isinstance(self.created, Unset):
             created = self.created.isoformat()
@@ -122,12 +145,23 @@ class CdrDto:
             last_updated = self.last_updated.isoformat()
 
         ou = self.ou
+
         ou_id = self.ou_id
+
         ou_name = self.ou_name
+
         tariff_id = self.tariff_id
+
         tariff_name = self.tariff_name
+
         start_tariff = self.start_tariff
+
         tariff_price = self.tariff_price
+
+        charging_time_tariff = self.charging_time_tariff
+
+        parking_time_tariff = self.parking_time_tariff
+
         price_info: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.price_info, Unset):
             price_info = self.price_info.to_dict()
@@ -140,9 +174,15 @@ class CdrDto:
         if not isinstance(self.local_end_date_time, Unset):
             local_end_date_time = self.local_end_date_time.isoformat()
 
-        approval_status: Union[Unset, int] = UNSET
+        approval_status: Union[Unset, str] = UNSET
         if not isinstance(self.approval_status, Unset):
             approval_status = self.approval_status.value
+
+        financial_type: Union[Unset, str] = UNSET
+        if not isinstance(self.financial_type, Unset):
+            financial_type = self.financial_type.value
+
+        debit_cdr_id = self.debit_cdr_id
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -193,6 +233,10 @@ class CdrDto:
             field_dict["startTariff"] = start_tariff
         if tariff_price is not UNSET:
             field_dict["tariffPrice"] = tariff_price
+        if charging_time_tariff is not UNSET:
+            field_dict["chargingTimeTariff"] = charging_time_tariff
+        if parking_time_tariff is not UNSET:
+            field_dict["parkingTimeTariff"] = parking_time_tariff
         if price_info is not UNSET:
             field_dict["priceInfo"] = price_info
         if local_start_date_time is not UNSET:
@@ -201,6 +245,10 @@ class CdrDto:
             field_dict["localEndDateTime"] = local_end_date_time
         if approval_status is not UNSET:
             field_dict["approvalStatus"] = approval_status
+        if financial_type is not UNSET:
+            field_dict["financialType"] = financial_type
+        if debit_cdr_id is not UNSET:
+            field_dict["debitCdrId"] = debit_cdr_id
 
         return field_dict
 
@@ -259,7 +307,9 @@ class CdrDto:
         charging_periods = []
         _charging_periods = d.pop("chargingPeriods", UNSET)
         for charging_periods_item_data in _charging_periods or []:
-            charging_periods_item = ChargingPeriodDto.from_dict(charging_periods_item_data)
+            charging_periods_item = ChargingPeriodDto.from_dict(
+                charging_periods_item_data
+            )
 
             charging_periods.append(charging_periods_item)
 
@@ -293,6 +343,10 @@ class CdrDto:
 
         tariff_price = d.pop("tariffPrice", UNSET)
 
+        charging_time_tariff = d.pop("chargingTimeTariff", UNSET)
+
+        parking_time_tariff = d.pop("parkingTimeTariff", UNSET)
+
         _price_info = d.pop("priceInfo", UNSET)
         price_info: Union[Unset, PriceInfoDto]
         if isinstance(_price_info, Unset):
@@ -321,6 +375,15 @@ class CdrDto:
         else:
             approval_status = CdrDtoApprovalStatus(_approval_status)
 
+        _financial_type = d.pop("financialType", UNSET)
+        financial_type: Union[Unset, CdrDtoFinancialType]
+        if isinstance(_financial_type, Unset):
+            financial_type = UNSET
+        else:
+            financial_type = CdrDtoFinancialType(_financial_type)
+
+        debit_cdr_id = d.pop("debitCdrId", UNSET)
+
         cdr_dto = cls(
             id=id,
             tenant_id=tenant_id,
@@ -345,10 +408,14 @@ class CdrDto:
             tariff_name=tariff_name,
             start_tariff=start_tariff,
             tariff_price=tariff_price,
+            charging_time_tariff=charging_time_tariff,
+            parking_time_tariff=parking_time_tariff,
             price_info=price_info,
             local_start_date_time=local_start_date_time,
             local_end_date_time=local_end_date_time,
             approval_status=approval_status,
+            financial_type=financial_type,
+            debit_cdr_id=debit_cdr_id,
         )
 
         cdr_dto.additional_properties = d

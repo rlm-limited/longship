@@ -3,7 +3,9 @@ from typing import Optional, Union
 
 import attr
 
-from longship_api_client.models.chargepoint_dto_connectivity_status import ChargepointDtoConnectivityStatus
+from longship_api_client.models.chargepoint_dto_connectivity_status import (
+    ChargepointDtoConnectivityStatus,
+)
 from longship_api_client.models.connector_operational_status_dto_operational_status import (
     ConnectorOperationalStatusDtoOperationalStatus,
 )
@@ -88,21 +90,26 @@ class CDRCreatedData:
     totalcosts: float
     transactionid: str
 
+
 @attr.s(auto_attribs=True)
 class LocationCreatedData:
     pass
+
 
 @attr.s(auto_attribs=True)
 class LocationUpdatedData:
     pass
 
+
 @attr.s(auto_attribs=True)
 class MSPInvoiceProposalStatusData:
     pass
 
+
 @attr.s(auto_attribs=True)
 class PingData:
     pass
+
 
 @attr.s(auto_attribs=True)
 class WebhookPayload:

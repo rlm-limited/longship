@@ -1,15 +1,22 @@
-import datetime
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
+
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
+
+from dateutil.parser import isoparse
+import datetime
+from typing import Union
+
 
 T = TypeVar("T", bound="ChargingPeriodDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ChargingPeriodDto:
     """
     Attributes:
@@ -17,13 +24,15 @@ class ChargingPeriodDto:
         delta_kwh (Union[Unset, float]):
         absolute_kwh (Union[Unset, float]):
         price (Union[Unset, float]):
+        parking_time_minutes (Union[Unset, float]):
     """
 
     timestamp: Union[Unset, datetime.datetime] = UNSET
     delta_kwh: Union[Unset, float] = UNSET
     absolute_kwh: Union[Unset, float] = UNSET
     price: Union[Unset, float] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    parking_time_minutes: Union[Unset, float] = UNSET
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         timestamp: Union[Unset, str] = UNSET
@@ -31,8 +40,12 @@ class ChargingPeriodDto:
             timestamp = self.timestamp.isoformat()
 
         delta_kwh = self.delta_kwh
+
         absolute_kwh = self.absolute_kwh
+
         price = self.price
+
+        parking_time_minutes = self.parking_time_minutes
 
         field_dict: Dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -45,6 +58,8 @@ class ChargingPeriodDto:
             field_dict["absoluteKwh"] = absolute_kwh
         if price is not UNSET:
             field_dict["price"] = price
+        if parking_time_minutes is not UNSET:
+            field_dict["parkingTimeMinutes"] = parking_time_minutes
 
         return field_dict
 
@@ -64,11 +79,14 @@ class ChargingPeriodDto:
 
         price = d.pop("price", UNSET)
 
+        parking_time_minutes = d.pop("parkingTimeMinutes", UNSET)
+
         charging_period_dto = cls(
             timestamp=timestamp,
             delta_kwh=delta_kwh,
             absolute_kwh=absolute_kwh,
             price=price,
+            parking_time_minutes=parking_time_minutes,
         )
 
         charging_period_dto.additional_properties = d

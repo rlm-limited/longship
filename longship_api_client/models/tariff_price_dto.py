@@ -1,11 +1,17 @@
-import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
 
-from ..models.tariff_price_dto_approval_status import TariffPriceDtoApprovalStatus
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+from dateutil.parser import isoparse
+from ..models.tariff_price_dto_approval_status import TariffPriceDtoApprovalStatus
+import datetime
+from typing import Union
 
 if TYPE_CHECKING:
     from ..models.tariff_restriction import TariffRestriction
@@ -14,7 +20,7 @@ if TYPE_CHECKING:
 T = TypeVar("T", bound="TariffPriceDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class TariffPriceDto:
     """
     Attributes:
@@ -27,7 +33,7 @@ class TariffPriceDto:
         parking_tariff (Union[Unset, float]):
         parking_step_size_in_minutes (Union[Unset, int]):
         parking_grace_period_in_minutes (Union[Unset, int]):
-        parking_tariff_restriction (Union[Unset, TariffRestriction]):
+        parking_tariff_restrictions (Union[Unset, List['TariffRestriction']]):
         time_tariff (Union[Unset, float]):
         time_step_size_in_minutes (Union[Unset, int]):
         time_grace_period_in_minutes (Union[Unset, int]):
@@ -43,12 +49,14 @@ class TariffPriceDto:
     parking_tariff: Union[Unset, float] = UNSET
     parking_step_size_in_minutes: Union[Unset, int] = UNSET
     parking_grace_period_in_minutes: Union[Unset, int] = UNSET
-    parking_tariff_restriction: Union[Unset, "TariffRestriction"] = UNSET
+    parking_tariff_restrictions: Union[Unset, List["TariffRestriction"]] = UNSET
     time_tariff: Union[Unset, float] = UNSET
     time_step_size_in_minutes: Union[Unset, int] = UNSET
     time_grace_period_in_minutes: Union[Unset, int] = UNSET
-    approval_status: Union[Unset, TariffPriceDtoApprovalStatus] = TariffPriceDtoApprovalStatus.PENDING
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    approval_status: Union[Unset, TariffPriceDtoApprovalStatus] = (
+        TariffPriceDtoApprovalStatus.PENDING
+    )
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         created_timestamp: Union[Unset, str] = UNSET
@@ -60,19 +68,36 @@ class TariffPriceDto:
             valid_from = self.valid_from.isoformat()
 
         start_tariff = self.start_tariff
+
         price_per_kwh = self.price_per_kwh
+
         price_per_kwh_incl_vat = self.price_per_kwh_incl_vat
+
         is_vat_relevant = self.is_vat_relevant
+
         parking_tariff = self.parking_tariff
+
         parking_step_size_in_minutes = self.parking_step_size_in_minutes
+
         parking_grace_period_in_minutes = self.parking_grace_period_in_minutes
-        parking_tariff_restriction: Union[Unset, Dict[str, Any]] = UNSET
-        if not isinstance(self.parking_tariff_restriction, Unset):
-            parking_tariff_restriction = self.parking_tariff_restriction.to_dict()
+
+        parking_tariff_restrictions: Union[Unset, List[Dict[str, Any]]] = UNSET
+        if not isinstance(self.parking_tariff_restrictions, Unset):
+            parking_tariff_restrictions = []
+            for (
+                parking_tariff_restrictions_item_data
+            ) in self.parking_tariff_restrictions:
+                parking_tariff_restrictions_item = (
+                    parking_tariff_restrictions_item_data.to_dict()
+                )
+                parking_tariff_restrictions.append(parking_tariff_restrictions_item)
 
         time_tariff = self.time_tariff
+
         time_step_size_in_minutes = self.time_step_size_in_minutes
+
         time_grace_period_in_minutes = self.time_grace_period_in_minutes
+
         approval_status: Union[Unset, str] = UNSET
         if not isinstance(self.approval_status, Unset):
             approval_status = self.approval_status.value
@@ -98,8 +123,8 @@ class TariffPriceDto:
             field_dict["parkingStepSizeInMinutes"] = parking_step_size_in_minutes
         if parking_grace_period_in_minutes is not UNSET:
             field_dict["parkingGracePeriodInMinutes"] = parking_grace_period_in_minutes
-        if parking_tariff_restriction is not UNSET:
-            field_dict["parkingTariffRestriction"] = parking_tariff_restriction
+        if parking_tariff_restrictions is not UNSET:
+            field_dict["parkingTariffRestrictions"] = parking_tariff_restrictions
         if time_tariff is not UNSET:
             field_dict["timeTariff"] = time_tariff
         if time_step_size_in_minutes is not UNSET:
@@ -144,12 +169,14 @@ class TariffPriceDto:
 
         parking_grace_period_in_minutes = d.pop("parkingGracePeriodInMinutes", UNSET)
 
-        _parking_tariff_restriction = d.pop("parkingTariffRestriction", UNSET)
-        parking_tariff_restriction: Union[Unset, TariffRestriction]
-        if isinstance(_parking_tariff_restriction, Unset):
-            parking_tariff_restriction = UNSET
-        else:
-            parking_tariff_restriction = TariffRestriction.from_dict(_parking_tariff_restriction)
+        parking_tariff_restrictions = []
+        _parking_tariff_restrictions = d.pop("parkingTariffRestrictions", UNSET)
+        for parking_tariff_restrictions_item_data in _parking_tariff_restrictions or []:
+            parking_tariff_restrictions_item = TariffRestriction.from_dict(
+                parking_tariff_restrictions_item_data
+            )
+
+            parking_tariff_restrictions.append(parking_tariff_restrictions_item)
 
         time_tariff = d.pop("timeTariff", UNSET)
 
@@ -174,7 +201,7 @@ class TariffPriceDto:
             parking_tariff=parking_tariff,
             parking_step_size_in_minutes=parking_step_size_in_minutes,
             parking_grace_period_in_minutes=parking_grace_period_in_minutes,
-            parking_tariff_restriction=parking_tariff_restriction,
+            parking_tariff_restrictions=parking_tariff_restrictions,
             time_tariff=time_tariff,
             time_step_size_in_minutes=time_step_size_in_minutes,
             time_grace_period_in_minutes=time_grace_period_in_minutes,

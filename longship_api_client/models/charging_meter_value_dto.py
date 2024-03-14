@@ -1,17 +1,24 @@
-import datetime
-from typing import Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
 
-from ..models.charging_meter_value_dto_measurand import ChargingMeterValueDtoMeasurand
-from ..models.charging_meter_value_dto_unit import ChargingMeterValueDtoUnit
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
+
+from dateutil.parser import isoparse
+from ..models.charging_meter_value_dto_measurand import ChargingMeterValueDtoMeasurand
+import datetime
+from ..models.charging_meter_value_dto_unit import ChargingMeterValueDtoUnit
+from typing import Union
+
 
 T = TypeVar("T", bound="ChargingMeterValueDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class ChargingMeterValueDto:
     """
     Attributes:
@@ -24,11 +31,11 @@ class ChargingMeterValueDto:
 
     timestamp: Union[Unset, datetime.datetime] = UNSET
     value: Union[Unset, str] = UNSET
-    measurand: Union[
-        Unset, ChargingMeterValueDtoMeasurand
-    ] = ChargingMeterValueDtoMeasurand.ENERGY_ACTIVE_EXPORT_REGISTER
+    measurand: Union[Unset, ChargingMeterValueDtoMeasurand] = (
+        ChargingMeterValueDtoMeasurand.ENERGY_ACTIVE_EXPORT_REGISTER
+    )
     unit: Union[Unset, ChargingMeterValueDtoUnit] = ChargingMeterValueDtoUnit.WH
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         timestamp: Union[Unset, str] = UNSET
@@ -36,6 +43,7 @@ class ChargingMeterValueDto:
             timestamp = self.timestamp.isoformat()
 
         value = self.value
+
         measurand: Union[Unset, str] = UNSET
         if not isinstance(self.measurand, Unset):
             measurand = self.measurand.value

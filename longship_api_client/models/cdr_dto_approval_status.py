@@ -1,9 +1,9 @@
-from enum import IntEnum
+from enum import Enum
 
 
-class CdrDtoApprovalStatus(IntEnum):
-    VALUE_0 = 0
-    VALUE_1 = 1
+class CdrDtoApprovalStatus(str, Enum):
+    APPROVED = "Approved"
+    REJECTED = "Rejected"
 
     def __str__(self) -> str:
         return str(self.value)

@@ -1,26 +1,34 @@
-import datetime
-from typing import TYPE_CHECKING, Any, Dict, List, Type, TypeVar, Union
+from typing import Any, Dict, Type, TypeVar, TYPE_CHECKING
 
-import attr
-from dateutil.parser import isoparse
+from typing import List
 
-from ..models.location_evse_dto_capabilities_item import LocationEVSEDtoCapabilitiesItem
-from ..models.location_evse_dto_parking_restrictions_item import LocationEVSEDtoParkingRestrictionsItem
-from ..models.location_evse_dto_status import LocationEVSEDtoStatus
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
 from ..types import UNSET, Unset
 
+from dateutil.parser import isoparse
+from ..models.location_evse_dto_parking_restrictions_item import (
+    LocationEVSEDtoParkingRestrictionsItem,
+)
+from ..models.location_evse_dto_capabilities_item import LocationEVSEDtoCapabilitiesItem
+import datetime
+from typing import Union
+from ..models.location_evse_dto_status import LocationEVSEDtoStatus
+
 if TYPE_CHECKING:
-    from ..models.connector_dto import ConnectorDto
     from ..models.display_text_dto import DisplayTextDto
-    from ..models.geo_location_dto import GeoLocationDto
     from ..models.image_dto import ImageDto
+    from ..models.geo_location_dto import GeoLocationDto
     from ..models.status_schedule_dto import StatusScheduleDto
+    from ..models.connector_dto import ConnectorDto
 
 
 T = TypeVar("T", bound="LocationEVSEDto")
 
 
-@attr.s(auto_attribs=True)
+@_attrs_define
 class LocationEVSEDto:
     """
     Attributes:
@@ -57,18 +65,26 @@ class LocationEVSEDto:
     coordinates: Union[Unset, "GeoLocationDto"] = UNSET
     physical_reference: Union[Unset, str] = UNSET
     directions: Union[Unset, List["DisplayTextDto"]] = UNSET
-    parking_restrictions: Union[Unset, List[LocationEVSEDtoParkingRestrictionsItem]] = UNSET
+    parking_restrictions: Union[Unset, List[LocationEVSEDtoParkingRestrictionsItem]] = (
+        UNSET
+    )
     images: Union[Unset, List["ImageDto"]] = UNSET
     last_updated: Union[Unset, datetime.datetime] = UNSET
-    additional_properties: Dict[str, Any] = attr.ib(init=False, factory=dict)
+    additional_properties: Dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> Dict[str, Any]:
         id = self.id
+
         chargepointid = self.chargepointid
+
         latitude = self.latitude
+
         longitude = self.longitude
+
         uid = self.uid
+
         evse_id = self.evse_id
+
         status: Union[Unset, str] = UNSET
         if not isinstance(self.status, Unset):
             status = self.status.value
@@ -78,7 +94,6 @@ class LocationEVSEDto:
             status_schedule = []
             for status_schedule_item_data in self.status_schedule:
                 status_schedule_item = status_schedule_item_data.to_dict()
-
                 status_schedule.append(status_schedule_item)
 
         capabilities: Union[Unset, List[str]] = UNSET
@@ -86,7 +101,6 @@ class LocationEVSEDto:
             capabilities = []
             for capabilities_item_data in self.capabilities:
                 capabilities_item = capabilities_item_data.value
-
                 capabilities.append(capabilities_item)
 
         connectors: Union[Unset, List[Dict[str, Any]]] = UNSET
@@ -94,21 +108,21 @@ class LocationEVSEDto:
             connectors = []
             for connectors_item_data in self.connectors:
                 connectors_item = connectors_item_data.to_dict()
-
                 connectors.append(connectors_item)
 
         floor_level = self.floor_level
+
         coordinates: Union[Unset, Dict[str, Any]] = UNSET
         if not isinstance(self.coordinates, Unset):
             coordinates = self.coordinates.to_dict()
 
         physical_reference = self.physical_reference
+
         directions: Union[Unset, List[Dict[str, Any]]] = UNSET
         if not isinstance(self.directions, Unset):
             directions = []
             for directions_item_data in self.directions:
                 directions_item = directions_item_data.to_dict()
-
                 directions.append(directions_item)
 
         parking_restrictions: Union[Unset, List[str]] = UNSET
@@ -116,7 +130,6 @@ class LocationEVSEDto:
             parking_restrictions = []
             for parking_restrictions_item_data in self.parking_restrictions:
                 parking_restrictions_item = parking_restrictions_item_data.value
-
                 parking_restrictions.append(parking_restrictions_item)
 
         images: Union[Unset, List[Dict[str, Any]]] = UNSET
@@ -124,7 +137,6 @@ class LocationEVSEDto:
             images = []
             for images_item_data in self.images:
                 images_item = images_item_data.to_dict()
-
                 images.append(images_item)
 
         last_updated: Union[Unset, str] = UNSET
@@ -173,11 +185,11 @@ class LocationEVSEDto:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
-        from ..models.connector_dto import ConnectorDto
         from ..models.display_text_dto import DisplayTextDto
-        from ..models.geo_location_dto import GeoLocationDto
         from ..models.image_dto import ImageDto
+        from ..models.geo_location_dto import GeoLocationDto
         from ..models.status_schedule_dto import StatusScheduleDto
+        from ..models.connector_dto import ConnectorDto
 
         d = src_dict.copy()
         id = d.pop("id", UNSET)
@@ -202,7 +214,9 @@ class LocationEVSEDto:
         status_schedule = []
         _status_schedule = d.pop("status_schedule", UNSET)
         for status_schedule_item_data in _status_schedule or []:
-            status_schedule_item = StatusScheduleDto.from_dict(status_schedule_item_data)
+            status_schedule_item = StatusScheduleDto.from_dict(
+                status_schedule_item_data
+            )
 
             status_schedule.append(status_schedule_item)
 
@@ -241,7 +255,9 @@ class LocationEVSEDto:
         parking_restrictions = []
         _parking_restrictions = d.pop("parking_restrictions", UNSET)
         for parking_restrictions_item_data in _parking_restrictions or []:
-            parking_restrictions_item = LocationEVSEDtoParkingRestrictionsItem(parking_restrictions_item_data)
+            parking_restrictions_item = LocationEVSEDtoParkingRestrictionsItem(
+                parking_restrictions_item_data
+            )
 
             parking_restrictions.append(parking_restrictions_item)
 

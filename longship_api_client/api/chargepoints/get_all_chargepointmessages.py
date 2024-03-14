@@ -1,54 +1,49 @@
-import datetime
 from http import HTTPStatus
 from typing import Any, Dict, List, Optional, Union
 
 import httpx
 
+from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
 from ... import errors
-from ...client import Client
-from ...models.longship_error import LongshipError
+
 from ...models.message_log_dto import MessageLogDto
-from ...types import UNSET, Response, Unset
+from ...types import Unset
+import datetime
+from ...models.longship_error import LongshipError
 
 
 def _get_kwargs(
     id: str,
     *,
-    client: Client,
-    skip: Union[Unset, None, int] = UNSET,
-    take: Union[Unset, None, int] = UNSET,
-    search: Union[Unset, None, str] = UNSET,
-    from_: Union[Unset, None, datetime.datetime] = UNSET,
-    to: Union[Unset, None, datetime.datetime] = UNSET,
-    transaction_id: Union[Unset, None, str] = UNSET,
-    response_only: Union[Unset, None, bool] = UNSET,
-    request_only: Union[Unset, None, bool] = UNSET,
-    charger_to_cpo_only: Union[Unset, None, bool] = UNSET,
-    cpo_to_charger_only: Union[Unset, None, bool] = UNSET,
-    message_id: Union[Unset, None, str] = UNSET,
+    skip: Union[Unset, int] = UNSET,
+    take: Union[Unset, int] = UNSET,
+    search: Union[Unset, str] = UNSET,
+    from_: Union[Unset, datetime.datetime] = UNSET,
+    to: Union[Unset, datetime.datetime] = UNSET,
+    transaction_id: Union[Unset, str] = UNSET,
+    response_only: Union[Unset, bool] = UNSET,
+    request_only: Union[Unset, bool] = UNSET,
+    charger_to_cpo_only: Union[Unset, bool] = UNSET,
+    cpo_to_charger_only: Union[Unset, bool] = UNSET,
+    message_id: Union[Unset, str] = UNSET,
 ) -> Dict[str, Any]:
-    url = "{}/v1/chargepoints/{id}/messages".format(client.base_url, id=id)
-
-    headers: Dict[str, str] = client.get_headers()
-    cookies: Dict[str, Any] = client.get_cookies()
-
     params: Dict[str, Any] = {}
+
     params["skip"] = skip
 
     params["take"] = take
 
     params["search"] = search
 
-    json_from_: Union[Unset, None, str] = UNSET
+    json_from_: Union[Unset, str] = UNSET
     if not isinstance(from_, Unset):
-        json_from_ = from_.isoformat() if from_ else None
-
+        json_from_ = from_.isoformat()
     params["from"] = json_from_
 
-    json_to: Union[Unset, None, str] = UNSET
+    json_to: Union[Unset, str] = UNSET
     if not isinstance(to, Unset):
-        json_to = to.isoformat() if to else None
-
+        json_to = to.isoformat()
     params["to"] = json_to
 
     params["transactionId"] = transaction_id
@@ -65,19 +60,19 @@ def _get_kwargs(
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
-    return {
+    _kwargs: Dict[str, Any] = {
         "method": "get",
-        "url": url,
-        "headers": headers,
-        "cookies": cookies,
-        "timeout": client.get_timeout(),
-        "follow_redirects": client.follow_redirects,
+        "url": "/v1/chargepoints/{id}/messages".format(
+            id=id,
+        ),
         "params": params,
     }
 
+    return _kwargs
+
 
 def _parse_response(
-    *, client: Client, response: httpx.Response
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Optional[Union[List["MessageLogDto"], LongshipError]]:
     if response.status_code == HTTPStatus.OK:
         response_200 = []
@@ -109,7 +104,7 @@ def _parse_response(
 
 
 def _build_response(
-    *, client: Client, response: httpx.Response
+    *, client: Union[AuthenticatedClient, Client], response: httpx.Response
 ) -> Response[Union[List["MessageLogDto"], LongshipError]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
@@ -122,18 +117,18 @@ def _build_response(
 def sync_detailed(
     id: str,
     *,
-    client: Client,
-    skip: Union[Unset, None, int] = UNSET,
-    take: Union[Unset, None, int] = UNSET,
-    search: Union[Unset, None, str] = UNSET,
-    from_: Union[Unset, None, datetime.datetime] = UNSET,
-    to: Union[Unset, None, datetime.datetime] = UNSET,
-    transaction_id: Union[Unset, None, str] = UNSET,
-    response_only: Union[Unset, None, bool] = UNSET,
-    request_only: Union[Unset, None, bool] = UNSET,
-    charger_to_cpo_only: Union[Unset, None, bool] = UNSET,
-    cpo_to_charger_only: Union[Unset, None, bool] = UNSET,
-    message_id: Union[Unset, None, str] = UNSET,
+    client: Union[AuthenticatedClient, Client],
+    skip: Union[Unset, int] = UNSET,
+    take: Union[Unset, int] = UNSET,
+    search: Union[Unset, str] = UNSET,
+    from_: Union[Unset, datetime.datetime] = UNSET,
+    to: Union[Unset, datetime.datetime] = UNSET,
+    transaction_id: Union[Unset, str] = UNSET,
+    response_only: Union[Unset, bool] = UNSET,
+    request_only: Union[Unset, bool] = UNSET,
+    charger_to_cpo_only: Union[Unset, bool] = UNSET,
+    cpo_to_charger_only: Union[Unset, bool] = UNSET,
+    message_id: Union[Unset, str] = UNSET,
 ) -> Response[Union[List["MessageLogDto"], LongshipError]]:
     """Get a list of chargepointmessages.
 
@@ -141,17 +136,17 @@ def sync_detailed(
 
     Args:
         id (str):
-        skip (Union[Unset, None, int]):
-        take (Union[Unset, None, int]):
-        search (Union[Unset, None, str]):
-        from_ (Union[Unset, None, datetime.datetime]):
-        to (Union[Unset, None, datetime.datetime]):
-        transaction_id (Union[Unset, None, str]):
-        response_only (Union[Unset, None, bool]):
-        request_only (Union[Unset, None, bool]):
-        charger_to_cpo_only (Union[Unset, None, bool]):
-        cpo_to_charger_only (Union[Unset, None, bool]):
-        message_id (Union[Unset, None, str]):
+        skip (Union[Unset, int]):
+        take (Union[Unset, int]):
+        search (Union[Unset, str]):
+        from_ (Union[Unset, datetime.datetime]):
+        to (Union[Unset, datetime.datetime]):
+        transaction_id (Union[Unset, str]):
+        response_only (Union[Unset, bool]):
+        request_only (Union[Unset, bool]):
+        charger_to_cpo_only (Union[Unset, bool]):
+        cpo_to_charger_only (Union[Unset, bool]):
+        message_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -163,7 +158,6 @@ def sync_detailed(
 
     kwargs = _get_kwargs(
         id=id,
-        client=client,
         skip=skip,
         take=take,
         search=search,
@@ -177,8 +171,7 @@ def sync_detailed(
         message_id=message_id,
     )
 
-    response = httpx.request(
-        verify=client.verify_ssl,
+    response = client.get_httpx_client().request(
         **kwargs,
     )
 
@@ -188,18 +181,18 @@ def sync_detailed(
 def sync(
     id: str,
     *,
-    client: Client,
-    skip: Union[Unset, None, int] = UNSET,
-    take: Union[Unset, None, int] = UNSET,
-    search: Union[Unset, None, str] = UNSET,
-    from_: Union[Unset, None, datetime.datetime] = UNSET,
-    to: Union[Unset, None, datetime.datetime] = UNSET,
-    transaction_id: Union[Unset, None, str] = UNSET,
-    response_only: Union[Unset, None, bool] = UNSET,
-    request_only: Union[Unset, None, bool] = UNSET,
-    charger_to_cpo_only: Union[Unset, None, bool] = UNSET,
-    cpo_to_charger_only: Union[Unset, None, bool] = UNSET,
-    message_id: Union[Unset, None, str] = UNSET,
+    client: Union[AuthenticatedClient, Client],
+    skip: Union[Unset, int] = UNSET,
+    take: Union[Unset, int] = UNSET,
+    search: Union[Unset, str] = UNSET,
+    from_: Union[Unset, datetime.datetime] = UNSET,
+    to: Union[Unset, datetime.datetime] = UNSET,
+    transaction_id: Union[Unset, str] = UNSET,
+    response_only: Union[Unset, bool] = UNSET,
+    request_only: Union[Unset, bool] = UNSET,
+    charger_to_cpo_only: Union[Unset, bool] = UNSET,
+    cpo_to_charger_only: Union[Unset, bool] = UNSET,
+    message_id: Union[Unset, str] = UNSET,
 ) -> Optional[Union[List["MessageLogDto"], LongshipError]]:
     """Get a list of chargepointmessages.
 
@@ -207,17 +200,17 @@ def sync(
 
     Args:
         id (str):
-        skip (Union[Unset, None, int]):
-        take (Union[Unset, None, int]):
-        search (Union[Unset, None, str]):
-        from_ (Union[Unset, None, datetime.datetime]):
-        to (Union[Unset, None, datetime.datetime]):
-        transaction_id (Union[Unset, None, str]):
-        response_only (Union[Unset, None, bool]):
-        request_only (Union[Unset, None, bool]):
-        charger_to_cpo_only (Union[Unset, None, bool]):
-        cpo_to_charger_only (Union[Unset, None, bool]):
-        message_id (Union[Unset, None, str]):
+        skip (Union[Unset, int]):
+        take (Union[Unset, int]):
+        search (Union[Unset, str]):
+        from_ (Union[Unset, datetime.datetime]):
+        to (Union[Unset, datetime.datetime]):
+        transaction_id (Union[Unset, str]):
+        response_only (Union[Unset, bool]):
+        request_only (Union[Unset, bool]):
+        charger_to_cpo_only (Union[Unset, bool]):
+        cpo_to_charger_only (Union[Unset, bool]):
+        message_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -247,18 +240,18 @@ def sync(
 async def asyncio_detailed(
     id: str,
     *,
-    client: Client,
-    skip: Union[Unset, None, int] = UNSET,
-    take: Union[Unset, None, int] = UNSET,
-    search: Union[Unset, None, str] = UNSET,
-    from_: Union[Unset, None, datetime.datetime] = UNSET,
-    to: Union[Unset, None, datetime.datetime] = UNSET,
-    transaction_id: Union[Unset, None, str] = UNSET,
-    response_only: Union[Unset, None, bool] = UNSET,
-    request_only: Union[Unset, None, bool] = UNSET,
-    charger_to_cpo_only: Union[Unset, None, bool] = UNSET,
-    cpo_to_charger_only: Union[Unset, None, bool] = UNSET,
-    message_id: Union[Unset, None, str] = UNSET,
+    client: Union[AuthenticatedClient, Client],
+    skip: Union[Unset, int] = UNSET,
+    take: Union[Unset, int] = UNSET,
+    search: Union[Unset, str] = UNSET,
+    from_: Union[Unset, datetime.datetime] = UNSET,
+    to: Union[Unset, datetime.datetime] = UNSET,
+    transaction_id: Union[Unset, str] = UNSET,
+    response_only: Union[Unset, bool] = UNSET,
+    request_only: Union[Unset, bool] = UNSET,
+    charger_to_cpo_only: Union[Unset, bool] = UNSET,
+    cpo_to_charger_only: Union[Unset, bool] = UNSET,
+    message_id: Union[Unset, str] = UNSET,
 ) -> Response[Union[List["MessageLogDto"], LongshipError]]:
     """Get a list of chargepointmessages.
 
@@ -266,17 +259,17 @@ async def asyncio_detailed(
 
     Args:
         id (str):
-        skip (Union[Unset, None, int]):
-        take (Union[Unset, None, int]):
-        search (Union[Unset, None, str]):
-        from_ (Union[Unset, None, datetime.datetime]):
-        to (Union[Unset, None, datetime.datetime]):
-        transaction_id (Union[Unset, None, str]):
-        response_only (Union[Unset, None, bool]):
-        request_only (Union[Unset, None, bool]):
-        charger_to_cpo_only (Union[Unset, None, bool]):
-        cpo_to_charger_only (Union[Unset, None, bool]):
-        message_id (Union[Unset, None, str]):
+        skip (Union[Unset, int]):
+        take (Union[Unset, int]):
+        search (Union[Unset, str]):
+        from_ (Union[Unset, datetime.datetime]):
+        to (Union[Unset, datetime.datetime]):
+        transaction_id (Union[Unset, str]):
+        response_only (Union[Unset, bool]):
+        request_only (Union[Unset, bool]):
+        charger_to_cpo_only (Union[Unset, bool]):
+        cpo_to_charger_only (Union[Unset, bool]):
+        message_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -288,7 +281,6 @@ async def asyncio_detailed(
 
     kwargs = _get_kwargs(
         id=id,
-        client=client,
         skip=skip,
         take=take,
         search=search,
@@ -302,8 +294,7 @@ async def asyncio_detailed(
         message_id=message_id,
     )
 
-    async with httpx.AsyncClient(verify=client.verify_ssl) as _client:
-        response = await _client.request(**kwargs)
+    response = await client.get_async_httpx_client().request(**kwargs)
 
     return _build_response(client=client, response=response)
 
@@ -311,18 +302,18 @@ async def asyncio_detailed(
 async def asyncio(
     id: str,
     *,
-    client: Client,
-    skip: Union[Unset, None, int] = UNSET,
-    take: Union[Unset, None, int] = UNSET,
-    search: Union[Unset, None, str] = UNSET,
-    from_: Union[Unset, None, datetime.datetime] = UNSET,
-    to: Union[Unset, None, datetime.datetime] = UNSET,
-    transaction_id: Union[Unset, None, str] = UNSET,
-    response_only: Union[Unset, None, bool] = UNSET,
-    request_only: Union[Unset, None, bool] = UNSET,
-    charger_to_cpo_only: Union[Unset, None, bool] = UNSET,
-    cpo_to_charger_only: Union[Unset, None, bool] = UNSET,
-    message_id: Union[Unset, None, str] = UNSET,
+    client: Union[AuthenticatedClient, Client],
+    skip: Union[Unset, int] = UNSET,
+    take: Union[Unset, int] = UNSET,
+    search: Union[Unset, str] = UNSET,
+    from_: Union[Unset, datetime.datetime] = UNSET,
+    to: Union[Unset, datetime.datetime] = UNSET,
+    transaction_id: Union[Unset, str] = UNSET,
+    response_only: Union[Unset, bool] = UNSET,
+    request_only: Union[Unset, bool] = UNSET,
+    charger_to_cpo_only: Union[Unset, bool] = UNSET,
+    cpo_to_charger_only: Union[Unset, bool] = UNSET,
+    message_id: Union[Unset, str] = UNSET,
 ) -> Optional[Union[List["MessageLogDto"], LongshipError]]:
     """Get a list of chargepointmessages.
 
@@ -330,17 +321,17 @@ async def asyncio(
 
     Args:
         id (str):
-        skip (Union[Unset, None, int]):
-        take (Union[Unset, None, int]):
-        search (Union[Unset, None, str]):
-        from_ (Union[Unset, None, datetime.datetime]):
-        to (Union[Unset, None, datetime.datetime]):
-        transaction_id (Union[Unset, None, str]):
-        response_only (Union[Unset, None, bool]):
-        request_only (Union[Unset, None, bool]):
-        charger_to_cpo_only (Union[Unset, None, bool]):
-        cpo_to_charger_only (Union[Unset, None, bool]):
-        message_id (Union[Unset, None, str]):
+        skip (Union[Unset, int]):
+        take (Union[Unset, int]):
+        search (Union[Unset, str]):
+        from_ (Union[Unset, datetime.datetime]):
+        to (Union[Unset, datetime.datetime]):
+        transaction_id (Union[Unset, str]):
+        response_only (Union[Unset, bool]):
+        request_only (Union[Unset, bool]):
+        charger_to_cpo_only (Union[Unset, bool]):
+        cpo_to_charger_only (Union[Unset, bool]):
+        message_id (Union[Unset, str]):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
