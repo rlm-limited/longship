@@ -82,13 +82,13 @@ class SessionStopData(SessionUpdateData):
 @attr.s(auto_attribs=True)
 class CDRCreatedData:
     chargepointid: str
-    locationid: Optional[str] = attr.ib(default=None)
-    evseid: Optional[str] = attr.ib(default=None)
     connectornumber: int
     totalenergyinkwh: float
     totalduration: str
     totalcosts: float
     transactionid: str
+    locationid: Optional[str] = attr.ib(default=None)
+    evseid: Optional[str] = attr.ib(default=None)
 
 
 @attr.s(auto_attribs=True)
