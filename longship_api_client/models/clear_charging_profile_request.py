@@ -72,7 +72,7 @@ class ClearChargingProfileRequest:
         charging_profile_purpose: Union[
             Unset, ClearChargingProfileRequestChargingProfilePurpose
         ]
-        if isinstance(_charging_profile_purpose, Unset):
+        if isinstance(_charging_profile_purpose, Unset) or _charging_profile_purpose is None:
             charging_profile_purpose = UNSET
         else:
             charging_profile_purpose = (

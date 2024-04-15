@@ -213,7 +213,7 @@ class OrganizationUnitPostDto:
 
         _financial_details = d.pop("financialDetails", UNSET)
         financial_details: Union[Unset, OrganizationUnitFinancialDetailsDto]
-        if isinstance(_financial_details, Unset):
+        if isinstance(_financial_details, Unset) or _financial_details is None:
             financial_details = UNSET
         else:
             financial_details = OrganizationUnitFinancialDetailsDto.from_dict(

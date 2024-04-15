@@ -372,7 +372,7 @@ class LocationPutDto:
 
         _parking_type = d.pop("parking_type", UNSET)
         parking_type: Union[Unset, LocationPutDtoParkingType]
-        if isinstance(_parking_type, Unset):
+        if isinstance(_parking_type, Unset) or _parking_type is None:
             parking_type = UNSET
         else:
             parking_type = LocationPutDtoParkingType(_parking_type)
@@ -393,21 +393,21 @@ class LocationPutDto:
 
         _operator = d.pop("operator", UNSET)
         operator: Union[Unset, BusinessDetailsDto]
-        if isinstance(_operator, Unset):
+        if isinstance(_operator, Unset) or _operator is None:
             operator = UNSET
         else:
             operator = BusinessDetailsDto.from_dict(_operator)
 
         _suboperator = d.pop("suboperator", UNSET)
         suboperator: Union[Unset, BusinessDetailsDto]
-        if isinstance(_suboperator, Unset):
+        if isinstance(_suboperator, Unset) or _suboperator is None:
             suboperator = UNSET
         else:
             suboperator = BusinessDetailsDto.from_dict(_suboperator)
 
         _owner = d.pop("owner", UNSET)
         owner: Union[Unset, BusinessDetailsDto]
-        if isinstance(_owner, Unset):
+        if isinstance(_owner, Unset) or _owner is None:
             owner = UNSET
         else:
             owner = BusinessDetailsDto.from_dict(_owner)
@@ -421,7 +421,7 @@ class LocationPutDto:
 
         _opening_times = d.pop("opening_times", UNSET)
         opening_times: Union[Unset, HoursDto]
-        if isinstance(_opening_times, Unset):
+        if isinstance(_opening_times, Unset) or _opening_times is None:
             opening_times = UNSET
         else:
             opening_times = HoursDto.from_dict(_opening_times)
@@ -437,14 +437,14 @@ class LocationPutDto:
 
         _energy_mix = d.pop("energy_mix", UNSET)
         energy_mix: Union[Unset, EnergyMixDto]
-        if isinstance(_energy_mix, Unset):
+        if isinstance(_energy_mix, Unset) or _energy_mix is None:
             energy_mix = UNSET
         else:
             energy_mix = EnergyMixDto.from_dict(_energy_mix)
 
         _deleted_on = d.pop("deletedOn", UNSET)
         deleted_on: Union[Unset, datetime.datetime]
-        if isinstance(_deleted_on, Unset):
+        if isinstance(_deleted_on, Unset) or _deleted_on is None:
             deleted_on = UNSET
         else:
             deleted_on = isoparse(_deleted_on)
@@ -453,7 +453,7 @@ class LocationPutDto:
 
         _reimburse_info = d.pop("reimburseInfo", UNSET)
         reimburse_info: Union[Unset, ReimburseInfoDto]
-        if isinstance(_reimburse_info, Unset):
+        if isinstance(_reimburse_info, Unset) or _reimburse_info is None:
             reimburse_info = UNSET
         else:
             reimburse_info = ReimburseInfoDto.from_dict(_reimburse_info)

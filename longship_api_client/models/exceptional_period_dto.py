@@ -52,14 +52,14 @@ class ExceptionalPeriodDto:
         d = src_dict.copy()
         _period_begin = d.pop("period_begin", UNSET)
         period_begin: Union[Unset, datetime.datetime]
-        if isinstance(_period_begin, Unset):
+        if isinstance(_period_begin, Unset) or _period_begin is None:
             period_begin = UNSET
         else:
             period_begin = isoparse(_period_begin)
 
         _period_end = d.pop("period_end", UNSET)
         period_end: Union[Unset, datetime.datetime]
-        if isinstance(_period_end, Unset):
+        if isinstance(_period_end, Unset) or _period_end is None:
             period_end = UNSET
         else:
             period_end = isoparse(_period_end)

@@ -79,21 +79,21 @@ class TariffRestriction:
 
         _start_date = d.pop("startDate", UNSET)
         start_date: Union[Unset, datetime.datetime]
-        if isinstance(_start_date, Unset):
+        if isinstance(_start_date, Unset) or _start_date is None:
             start_date = UNSET
         else:
             start_date = isoparse(_start_date)
 
         _end_date = d.pop("endDate", UNSET)
         end_date: Union[Unset, datetime.datetime]
-        if isinstance(_end_date, Unset):
+        if isinstance(_end_date, Unset) or _end_date is None:
             end_date = UNSET
         else:
             end_date = isoparse(_end_date)
 
         _day_of_week = d.pop("dayOfWeek", UNSET)
         day_of_week: Union[Unset, TariffRestrictionDayOfWeek]
-        if isinstance(_day_of_week, Unset):
+        if isinstance(_day_of_week, Unset) or _day_of_week is None:
             day_of_week = UNSET
         else:
             day_of_week = TariffRestrictionDayOfWeek(_day_of_week)

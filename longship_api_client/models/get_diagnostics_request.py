@@ -78,14 +78,14 @@ class GetDiagnosticsRequest:
 
         _start_time = d.pop("startTime", UNSET)
         start_time: Union[Unset, datetime.datetime]
-        if isinstance(_start_time, Unset):
+        if isinstance(_start_time, Unset) or _start_time is None:
             start_time = UNSET
         else:
             start_time = isoparse(_start_time)
 
         _stop_time = d.pop("stopTime", UNSET)
         stop_time: Union[Unset, datetime.datetime]
-        if isinstance(_stop_time, Unset):
+        if isinstance(_stop_time, Unset) or _stop_time is None:
             stop_time = UNSET
         else:
             stop_time = isoparse(_stop_time)

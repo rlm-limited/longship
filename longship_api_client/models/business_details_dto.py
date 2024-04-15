@@ -63,7 +63,7 @@ class BusinessDetailsDto:
 
         _image = d.pop("image", UNSET)
         image: Union[Unset, ImageDto]
-        if isinstance(_image, Unset):
+        if isinstance(_image, Unset) or _image is None:
             image = UNSET
         else:
             image = ImageDto.from_dict(_image)

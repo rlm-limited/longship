@@ -187,7 +187,7 @@ class ReimburseInfoDto:
         d = src_dict.copy()
         _type = d.pop("type", UNSET)
         type: Union[Unset, ReimburseInfoDtoType]
-        if isinstance(_type, Unset):
+        if isinstance(_type, Unset) or _type is None:
             type = UNSET
         else:
             type = ReimburseInfoDtoType(_type)

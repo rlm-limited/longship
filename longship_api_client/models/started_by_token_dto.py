@@ -108,7 +108,7 @@ class StartedByTokenDto:
 
         _token_type = d.pop("tokenType", UNSET)
         token_type: Union[Unset, StartedByTokenDtoTokenType]
-        if isinstance(_token_type, Unset):
+        if isinstance(_token_type, Unset) or _token_type is None:
             token_type = UNSET
         else:
             token_type = StartedByTokenDtoTokenType(_token_type)
@@ -117,7 +117,7 @@ class StartedByTokenDto:
 
         _auth_method = d.pop("authMethod", UNSET)
         auth_method: Union[Unset, StartedByTokenDtoAuthMethod]
-        if isinstance(_auth_method, Unset):
+        if isinstance(_auth_method, Unset) or _auth_method is None:
             auth_method = UNSET
         else:
             auth_method = StartedByTokenDtoAuthMethod(_auth_method)

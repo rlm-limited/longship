@@ -66,7 +66,7 @@ class ConnectorOperationalStatusDto:
 
         _operational_status = d.pop("operationalStatus", UNSET)
         operational_status: Union[Unset, ConnectorOperationalStatusDtoOperationalStatus]
-        if isinstance(_operational_status, Unset):
+        if isinstance(_operational_status, Unset) or _operational_status is None:
             operational_status = UNSET
         else:
             operational_status = ConnectorOperationalStatusDtoOperationalStatus(
@@ -75,7 +75,7 @@ class ConnectorOperationalStatusDto:
 
         _timestamp = d.pop("timestamp", UNSET)
         timestamp: Union[Unset, datetime.datetime]
-        if isinstance(_timestamp, Unset):
+        if isinstance(_timestamp, Unset) or _timestamp is None:
             timestamp = UNSET
         else:
             timestamp = isoparse(_timestamp)

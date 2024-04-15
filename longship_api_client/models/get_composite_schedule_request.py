@@ -65,7 +65,7 @@ class GetCompositeScheduleRequest:
 
         _charging_rate_unit = d.pop("chargingRateUnit", UNSET)
         charging_rate_unit: Union[Unset, GetCompositeScheduleRequestChargingRateUnit]
-        if isinstance(_charging_rate_unit, Unset):
+        if isinstance(_charging_rate_unit, Unset) or _charging_rate_unit is None:
             charging_rate_unit = UNSET
         else:
             charging_rate_unit = GetCompositeScheduleRequestChargingRateUnit(

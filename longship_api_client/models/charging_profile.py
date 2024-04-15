@@ -130,21 +130,21 @@ class ChargingProfile:
 
         _recurrency_kind = d.pop("recurrencyKind", UNSET)
         recurrency_kind: Union[Unset, ChargingProfileRecurrencyKind]
-        if isinstance(_recurrency_kind, Unset):
+        if isinstance(_recurrency_kind, Unset) or _recurrency_kind is None:
             recurrency_kind = UNSET
         else:
             recurrency_kind = ChargingProfileRecurrencyKind(_recurrency_kind)
 
         _valid_from = d.pop("validFrom", UNSET)
         valid_from: Union[Unset, datetime.datetime]
-        if isinstance(_valid_from, Unset):
+        if isinstance(_valid_from, Unset) or _valid_from is None:
             valid_from = UNSET
         else:
             valid_from = isoparse(_valid_from)
 
         _valid_to = d.pop("validTo", UNSET)
         valid_to: Union[Unset, datetime.datetime]
-        if isinstance(_valid_to, Unset):
+        if isinstance(_valid_to, Unset) or _valid_to is None:
             valid_to = UNSET
         else:
             valid_to = isoparse(_valid_to)

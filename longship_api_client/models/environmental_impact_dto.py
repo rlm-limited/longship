@@ -51,7 +51,7 @@ class EnvironmentalImpactDto:
         d = src_dict.copy()
         _category = d.pop("category", UNSET)
         category: Union[Unset, EnvironmentalImpactDtoCategory]
-        if isinstance(_category, Unset):
+        if isinstance(_category, Unset) or _category is None:
             category = UNSET
         else:
             category = EnvironmentalImpactDtoCategory(_category)

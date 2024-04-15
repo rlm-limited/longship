@@ -71,7 +71,7 @@ class ChargingMeterValueDto:
         d = src_dict.copy()
         _timestamp = d.pop("timestamp", UNSET)
         timestamp: Union[Unset, datetime.datetime]
-        if isinstance(_timestamp, Unset):
+        if isinstance(_timestamp, Unset) or _timestamp is None:
             timestamp = UNSET
         else:
             timestamp = isoparse(_timestamp)
@@ -80,14 +80,14 @@ class ChargingMeterValueDto:
 
         _measurand = d.pop("measurand", UNSET)
         measurand: Union[Unset, ChargingMeterValueDtoMeasurand]
-        if isinstance(_measurand, Unset):
+        if isinstance(_measurand, Unset) or _measurand is None:
             measurand = UNSET
         else:
             measurand = ChargingMeterValueDtoMeasurand(_measurand)
 
         _unit = d.pop("unit", UNSET)
         unit: Union[Unset, ChargingMeterValueDtoUnit]
-        if isinstance(_unit, Unset):
+        if isinstance(_unit, Unset) or _unit is None:
             unit = UNSET
         else:
             unit = ChargingMeterValueDtoUnit(_unit)

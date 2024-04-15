@@ -103,21 +103,21 @@ class ConnectorDto:
 
         _standard = d.pop("standard", UNSET)
         standard: Union[Unset, ConnectorDtoStandard]
-        if isinstance(_standard, Unset):
+        if isinstance(_standard, Unset) or _standard is None:
             standard = UNSET
         else:
             standard = ConnectorDtoStandard(_standard)
 
         _format_ = d.pop("format", UNSET)
         format_: Union[Unset, ConnectorDtoFormat]
-        if isinstance(_format_, Unset):
+        if isinstance(_format_, Unset) or _format_ is None:
             format_ = UNSET
         else:
             format_ = ConnectorDtoFormat(_format_)
 
         _power_type = d.pop("power_type", UNSET)
         power_type: Union[Unset, ConnectorDtoPowerType]
-        if isinstance(_power_type, Unset):
+        if isinstance(_power_type, Unset) or _power_type is None:
             power_type = UNSET
         else:
             power_type = ConnectorDtoPowerType(_power_type)
@@ -132,7 +132,7 @@ class ConnectorDto:
 
         _last_updated = d.pop("last_updated", UNSET)
         last_updated: Union[Unset, datetime.datetime]
-        if isinstance(_last_updated, Unset):
+        if isinstance(_last_updated, Unset) or _last_updated is None:
             last_updated = UNSET
         else:
             last_updated = isoparse(_last_updated)

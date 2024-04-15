@@ -61,7 +61,7 @@ class IdTagInfo:
 
         _expiry_date = d.pop("expiryDate", UNSET)
         expiry_date: Union[Unset, datetime.datetime]
-        if isinstance(_expiry_date, Unset):
+        if isinstance(_expiry_date, Unset) or _expiry_date is None:
             expiry_date = UNSET
         else:
             expiry_date = isoparse(_expiry_date)

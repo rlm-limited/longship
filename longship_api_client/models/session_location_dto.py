@@ -146,7 +146,7 @@ class SessionLocationDto:
 
         _power_type = d.pop("powerType", UNSET)
         power_type: Union[Unset, SessionLocationDtoPowerType]
-        if isinstance(_power_type, Unset):
+        if isinstance(_power_type, Unset) or _power_type is None:
             power_type = UNSET
         else:
             power_type = SessionLocationDtoPowerType(_power_type)
@@ -173,7 +173,7 @@ class SessionLocationDto:
 
         _coordinates = d.pop("coordinates", UNSET)
         coordinates: Union[Unset, SessionGeoLocationDto]
-        if isinstance(_coordinates, Unset):
+        if isinstance(_coordinates, Unset) or _coordinates is None:
             coordinates = UNSET
         else:
             coordinates = SessionGeoLocationDto.from_dict(_coordinates)

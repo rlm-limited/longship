@@ -85,7 +85,7 @@ class FileContentResult:
         d = src_dict.copy()
         _file_contents = d.pop("fileContents", UNSET)
         file_contents: Union[Unset, File]
-        if isinstance(_file_contents, Unset):
+        if isinstance(_file_contents, Unset) or _file_contents is None:
             file_contents = UNSET
         else:
             file_contents = File(payload=BytesIO(_file_contents))
@@ -96,14 +96,14 @@ class FileContentResult:
 
         _last_modified = d.pop("lastModified", UNSET)
         last_modified: Union[Unset, datetime.datetime]
-        if isinstance(_last_modified, Unset):
+        if isinstance(_last_modified, Unset) or _last_modified is None:
             last_modified = UNSET
         else:
             last_modified = isoparse(_last_modified)
 
         _entity_tag = d.pop("entityTag", UNSET)
         entity_tag: Union[Unset, EntityTagHeaderValue]
-        if isinstance(_entity_tag, Unset):
+        if isinstance(_entity_tag, Unset) or _entity_tag is None:
             entity_tag = UNSET
         else:
             entity_tag = EntityTagHeaderValue.from_dict(_entity_tag)

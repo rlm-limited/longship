@@ -68,7 +68,7 @@ class ChargingPeriodDto:
         d = src_dict.copy()
         _timestamp = d.pop("timestamp", UNSET)
         timestamp: Union[Unset, datetime.datetime]
-        if isinstance(_timestamp, Unset):
+        if isinstance(_timestamp, Unset) or _timestamp is None:
             timestamp = UNSET
         else:
             timestamp = isoparse(_timestamp)

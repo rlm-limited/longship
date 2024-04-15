@@ -331,21 +331,21 @@ class ReimbursementCdrDto:
 
         _location = d.pop("location", UNSET)
         location: Union[Unset, ReimbursementCdrLocationDto]
-        if isinstance(_location, Unset):
+        if isinstance(_location, Unset) or _location is None:
             location = UNSET
         else:
             location = ReimbursementCdrLocationDto.from_dict(_location)
 
         _start_datetime = d.pop("startDatetime", UNSET)
         start_datetime: Union[Unset, datetime.datetime]
-        if isinstance(_start_datetime, Unset):
+        if isinstance(_start_datetime, Unset) or _start_datetime is None:
             start_datetime = UNSET
         else:
             start_datetime = isoparse(_start_datetime)
 
         _end_date_time = d.pop("endDateTime", UNSET)
         end_date_time: Union[Unset, datetime.datetime]
-        if isinstance(_end_date_time, Unset):
+        if isinstance(_end_date_time, Unset) or _end_date_time is None:
             end_date_time = UNSET
         else:
             end_date_time = isoparse(_end_date_time)
@@ -354,7 +354,7 @@ class ReimbursementCdrDto:
 
         _started_by_info = d.pop("startedByInfo", UNSET)
         started_by_info: Union[Unset, ReimburseStartedByInfoDto]
-        if isinstance(_started_by_info, Unset):
+        if isinstance(_started_by_info, Unset) or _started_by_info is None:
             started_by_info = UNSET
         else:
             started_by_info = ReimburseStartedByInfoDto.from_dict(_started_by_info)
@@ -371,14 +371,14 @@ class ReimbursementCdrDto:
 
         _created = d.pop("created", UNSET)
         created: Union[Unset, datetime.datetime]
-        if isinstance(_created, Unset):
+        if isinstance(_created, Unset) or _created is None:
             created = UNSET
         else:
             created = isoparse(_created)
 
         _last_updated = d.pop("lastUpdated", UNSET)
         last_updated: Union[Unset, datetime.datetime]
-        if isinstance(_last_updated, Unset):
+        if isinstance(_last_updated, Unset) or _last_updated is None:
             last_updated = UNSET
         else:
             last_updated = isoparse(_last_updated)
@@ -399,7 +399,7 @@ class ReimbursementCdrDto:
 
         _reimburse_price_calculated_on = d.pop("reimbursePriceCalculatedOn", UNSET)
         reimburse_price_calculated_on: Union[Unset, datetime.datetime]
-        if isinstance(_reimburse_price_calculated_on, Unset):
+        if isinstance(_reimburse_price_calculated_on, Unset) or _reimburse_price_calculated_on is None:
             reimburse_price_calculated_on = UNSET
         else:
             reimburse_price_calculated_on = isoparse(_reimburse_price_calculated_on)
@@ -408,14 +408,14 @@ class ReimbursementCdrDto:
 
         _bank_account_created_on = d.pop("bankAccountCreatedOn", UNSET)
         bank_account_created_on: Union[Unset, datetime.datetime]
-        if isinstance(_bank_account_created_on, Unset):
+        if isinstance(_bank_account_created_on, Unset) or _bank_account_created_on is None:
             bank_account_created_on = UNSET
         else:
             bank_account_created_on = isoparse(_bank_account_created_on)
 
         _bank_account_valid_from = d.pop("bankAccountValidFrom", UNSET)
         bank_account_valid_from: Union[Unset, datetime.datetime]
-        if isinstance(_bank_account_valid_from, Unset):
+        if isinstance(_bank_account_valid_from, Unset) or _bank_account_valid_from is None:
             bank_account_valid_from = UNSET
         else:
             bank_account_valid_from = isoparse(_bank_account_valid_from)
@@ -434,7 +434,7 @@ class ReimbursementCdrDto:
 
         _price_info = d.pop("priceInfo", UNSET)
         price_info: Union[Unset, PriceInfoDto]
-        if isinstance(_price_info, Unset):
+        if isinstance(_price_info, Unset) or _price_info is None:
             price_info = UNSET
         else:
             price_info = PriceInfoDto.from_dict(_price_info)
@@ -445,7 +445,7 @@ class ReimbursementCdrDto:
 
         _reimbursement_customer_share = d.pop("reimbursementCustomerShare", UNSET)
         reimbursement_customer_share: Union[Unset, ReimbursementCustomerShareDto]
-        if isinstance(_reimbursement_customer_share, Unset):
+        if isinstance(_reimbursement_customer_share, Unset) or _reimbursement_customer_share is None:
             reimbursement_customer_share = UNSET
         else:
             reimbursement_customer_share = ReimbursementCustomerShareDto.from_dict(
@@ -454,14 +454,14 @@ class ReimbursementCdrDto:
 
         _local_start_date_time = d.pop("localStartDateTime", UNSET)
         local_start_date_time: Union[Unset, datetime.datetime]
-        if isinstance(_local_start_date_time, Unset):
+        if isinstance(_local_start_date_time, Unset) or _local_start_date_time is None:
             local_start_date_time = UNSET
         else:
             local_start_date_time = isoparse(_local_start_date_time)
 
         _local_end_date_time = d.pop("localEndDateTime", UNSET)
         local_end_date_time: Union[Unset, datetime.datetime]
-        if isinstance(_local_end_date_time, Unset):
+        if isinstance(_local_end_date_time, Unset) or _local_end_date_time is None:
             local_end_date_time = UNSET
         else:
             local_end_date_time = isoparse(_local_end_date_time)

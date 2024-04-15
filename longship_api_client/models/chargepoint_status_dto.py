@@ -140,14 +140,14 @@ class ChargepointStatusDto:
 
         _timestamp = d.pop("timestamp", UNSET)
         timestamp: Union[Unset, datetime.datetime]
-        if isinstance(_timestamp, Unset):
+        if isinstance(_timestamp, Unset) or _timestamp is None:
             timestamp = UNSET
         else:
             timestamp = isoparse(_timestamp)
 
         _connectivity_status = d.pop("connectivityStatus", UNSET)
         connectivity_status: Union[Unset, ChargepointStatusDtoConnectivityStatus]
-        if isinstance(_connectivity_status, Unset):
+        if isinstance(_connectivity_status, Unset) or _connectivity_status is None:
             connectivity_status = UNSET
         else:
             connectivity_status = ChargepointStatusDtoConnectivityStatus(
@@ -165,14 +165,14 @@ class ChargepointStatusDto:
 
         _websocket_connected = d.pop("websocketConnected", UNSET)
         websocket_connected: Union[Unset, datetime.datetime]
-        if isinstance(_websocket_connected, Unset):
+        if isinstance(_websocket_connected, Unset) or _websocket_connected is None:
             websocket_connected = UNSET
         else:
             websocket_connected = isoparse(_websocket_connected)
 
         _websocket_disconnected = d.pop("websocketDisconnected", UNSET)
         websocket_disconnected: Union[Unset, datetime.datetime]
-        if isinstance(_websocket_disconnected, Unset):
+        if isinstance(_websocket_disconnected, Unset) or _websocket_disconnected is None:
             websocket_disconnected = UNSET
         else:
             websocket_disconnected = isoparse(_websocket_disconnected)

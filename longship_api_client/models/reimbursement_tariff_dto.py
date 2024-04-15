@@ -90,14 +90,14 @@ class ReimbursementTariffDto:
 
         _date_created = d.pop("dateCreated", UNSET)
         date_created: Union[Unset, datetime.datetime]
-        if isinstance(_date_created, Unset):
+        if isinstance(_date_created, Unset) or _date_created is None:
             date_created = UNSET
         else:
             date_created = isoparse(_date_created)
 
         _valid_from = d.pop("validFrom", UNSET)
         valid_from: Union[Unset, datetime.datetime]
-        if isinstance(_valid_from, Unset):
+        if isinstance(_valid_from, Unset) or _valid_from is None:
             valid_from = UNSET
         else:
             valid_from = isoparse(_valid_from)
@@ -106,14 +106,14 @@ class ReimbursementTariffDto:
 
         _price = d.pop("price", UNSET)
         price: Union[Unset, ReimbursementPriceDto]
-        if isinstance(_price, Unset):
+        if isinstance(_price, Unset) or _price is None:
             price = UNSET
         else:
             price = ReimbursementPriceDto.from_dict(_price)
 
         _status = d.pop("status", UNSET)
         status: Union[Unset, ReimbursementTariffDtoStatus]
-        if isinstance(_status, Unset):
+        if isinstance(_status, Unset) or _status is None:
             status = UNSET
         else:
             status = ReimbursementTariffDtoStatus(_status)

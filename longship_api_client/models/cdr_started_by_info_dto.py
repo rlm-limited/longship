@@ -87,14 +87,14 @@ class CdrStartedByInfoDto:
         d = src_dict.copy()
         _token_info = d.pop("tokenInfo", UNSET)
         token_info: Union[Unset, CdrStartedByTokenDto]
-        if isinstance(_token_info, Unset):
+        if isinstance(_token_info, Unset) or _token_info is None:
             token_info = UNSET
         else:
             token_info = CdrStartedByTokenDto.from_dict(_token_info)
 
         _roaming_platform_type = d.pop("roamingPlatformType", UNSET)
         roaming_platform_type: Union[Unset, CdrStartedByInfoDtoRoamingPlatformType]
-        if isinstance(_roaming_platform_type, Unset):
+        if isinstance(_roaming_platform_type, Unset) or _roaming_platform_type is None:
             roaming_platform_type = UNSET
         else:
             roaming_platform_type = CdrStartedByInfoDtoRoamingPlatformType(
@@ -103,7 +103,7 @@ class CdrStartedByInfoDto:
 
         _authorization_state = d.pop("authorizationState", UNSET)
         authorization_state: Union[Unset, CdrStartedByInfoDtoAuthorizationState]
-        if isinstance(_authorization_state, Unset):
+        if isinstance(_authorization_state, Unset) or _authorization_state is None:
             authorization_state = UNSET
         else:
             authorization_state = CdrStartedByInfoDtoAuthorizationState(

@@ -112,21 +112,21 @@ class MessageLogDto:
 
         _wamp_message_type = d.pop("wampMessageType", UNSET)
         wamp_message_type: Union[Unset, MessageLogDtoWampMessageType]
-        if isinstance(_wamp_message_type, Unset):
+        if isinstance(_wamp_message_type, Unset) or _wamp_message_type is None:
             wamp_message_type = UNSET
         else:
             wamp_message_type = MessageLogDtoWampMessageType(_wamp_message_type)
 
         _ocpp_message_type = d.pop("ocppMessageType", UNSET)
         ocpp_message_type: Union[Unset, MessageLogDtoOcppMessageType]
-        if isinstance(_ocpp_message_type, Unset):
+        if isinstance(_ocpp_message_type, Unset) or _ocpp_message_type is None:
             ocpp_message_type = UNSET
         else:
             ocpp_message_type = MessageLogDtoOcppMessageType(_ocpp_message_type)
 
         _direction = d.pop("direction", UNSET)
         direction: Union[Unset, MessageLogDtoDirection]
-        if isinstance(_direction, Unset):
+        if isinstance(_direction, Unset) or _direction is None:
             direction = UNSET
         else:
             direction = MessageLogDtoDirection(_direction)
@@ -137,7 +137,7 @@ class MessageLogDto:
 
         _timestamp = d.pop("timestamp", UNSET)
         timestamp: Union[Unset, datetime.datetime]
-        if isinstance(_timestamp, Unset):
+        if isinstance(_timestamp, Unset) or _timestamp is None:
             timestamp = UNSET
         else:
             timestamp = isoparse(_timestamp)

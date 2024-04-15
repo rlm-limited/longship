@@ -111,14 +111,14 @@ class ChargePointAuthorizeGetDto:
 
         _created = d.pop("created", UNSET)
         created: Union[Unset, datetime.datetime]
-        if isinstance(_created, Unset):
+        if isinstance(_created, Unset) or _created is None:
             created = UNSET
         else:
             created = isoparse(_created)
 
         _token_info = d.pop("tokenInfo", UNSET)
         token_info: Union[Unset, TokenInfoDto]
-        if isinstance(_token_info, Unset):
+        if isinstance(_token_info, Unset) or _token_info is None:
             token_info = UNSET
         else:
             token_info = TokenInfoDto.from_dict(_token_info)
@@ -127,7 +127,7 @@ class ChargePointAuthorizeGetDto:
         authorization_request_type: Union[
             Unset, ChargePointAuthorizeGetDtoAuthorizationRequestType
         ]
-        if isinstance(_authorization_request_type, Unset):
+        if isinstance(_authorization_request_type, Unset) or _authorization_request_type is None:
             authorization_request_type = UNSET
         else:
             authorization_request_type = (
@@ -138,7 +138,7 @@ class ChargePointAuthorizeGetDto:
 
         _authorization_result = d.pop("authorizationResult", UNSET)
         authorization_result: Union[Unset, AuthorizationResultDto]
-        if isinstance(_authorization_result, Unset):
+        if isinstance(_authorization_result, Unset) or _authorization_result is None:
             authorization_result = UNSET
         else:
             authorization_result = AuthorizationResultDto.from_dict(
@@ -147,7 +147,7 @@ class ChargePointAuthorizeGetDto:
 
         _context = d.pop("context", UNSET)
         context: Union[Unset, AuthorizationContextDetailsDto]
-        if isinstance(_context, Unset):
+        if isinstance(_context, Unset) or _context is None:
             context = UNSET
         else:
             context = AuthorizationContextDetailsDto.from_dict(_context)

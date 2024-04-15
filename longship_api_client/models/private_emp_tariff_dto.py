@@ -71,7 +71,7 @@ class PrivateEmpTariffDto:
 
         _power_type = d.pop("powerType", UNSET)
         power_type: Union[Unset, PrivateEmpTariffDtoPowerType]
-        if isinstance(_power_type, Unset):
+        if isinstance(_power_type, Unset) or _power_type is None:
             power_type = UNSET
         else:
             power_type = PrivateEmpTariffDtoPowerType(_power_type)

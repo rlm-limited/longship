@@ -57,7 +57,7 @@ class AuthorizationData:
 
         _id_tag_info = d.pop("idTagInfo", UNSET)
         id_tag_info: Union[Unset, IdTagInfo]
-        if isinstance(_id_tag_info, Unset):
+        if isinstance(_id_tag_info, Unset) or _id_tag_info is None:
             id_tag_info = UNSET
         else:
             id_tag_info = IdTagInfo.from_dict(_id_tag_info)

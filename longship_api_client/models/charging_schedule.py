@@ -95,7 +95,7 @@ class ChargingSchedule:
 
         _start_schedule = d.pop("startSchedule", UNSET)
         start_schedule: Union[Unset, datetime.datetime]
-        if isinstance(_start_schedule, Unset):
+        if isinstance(_start_schedule, Unset) or _start_schedule is None:
             start_schedule = UNSET
         else:
             start_schedule = isoparse(_start_schedule)

@@ -85,14 +85,14 @@ class AuthorizationResultDto:
 
         _status = d.pop("status", UNSET)
         status: Union[Unset, AuthorizationResultDtoStatus]
-        if isinstance(_status, Unset):
+        if isinstance(_status, Unset) or _status is None:
             status = UNSET
         else:
             status = AuthorizationResultDtoStatus(_status)
 
         _reason = d.pop("reason", UNSET)
         reason: Union[Unset, AuthorizationResultDtoReason]
-        if isinstance(_reason, Unset):
+        if isinstance(_reason, Unset) or _reason is None:
             reason = UNSET
         else:
             reason = AuthorizationResultDtoReason(_reason)

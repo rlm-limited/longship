@@ -146,7 +146,7 @@ class CdrLocationDto:
 
         _power_type = d.pop("powerType", UNSET)
         power_type: Union[Unset, CdrLocationDtoPowerType]
-        if isinstance(_power_type, Unset):
+        if isinstance(_power_type, Unset) or _power_type is None:
             power_type = UNSET
         else:
             power_type = CdrLocationDtoPowerType(_power_type)
@@ -173,7 +173,7 @@ class CdrLocationDto:
 
         _coordinates = d.pop("coordinates", UNSET)
         coordinates: Union[Unset, CdrGeoLocationDto]
-        if isinstance(_coordinates, Unset):
+        if isinstance(_coordinates, Unset) or _coordinates is None:
             coordinates = UNSET
         else:
             coordinates = CdrGeoLocationDto.from_dict(_coordinates)

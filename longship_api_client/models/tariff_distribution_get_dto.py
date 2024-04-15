@@ -145,21 +145,21 @@ class TariffDistributionGetDto:
 
         _created = d.pop("created", UNSET)
         created: Union[Unset, datetime.datetime]
-        if isinstance(_created, Unset):
+        if isinstance(_created, Unset) or _created is None:
             created = UNSET
         else:
             created = isoparse(_created)
 
         _deleted = d.pop("deleted", UNSET)
         deleted: Union[Unset, datetime.datetime]
-        if isinstance(_deleted, Unset):
+        if isinstance(_deleted, Unset) or _deleted is None:
             deleted = UNSET
         else:
             deleted = isoparse(_deleted)
 
         _updated = d.pop("updated", UNSET)
         updated: Union[Unset, datetime.datetime]
-        if isinstance(_updated, Unset):
+        if isinstance(_updated, Unset) or _updated is None:
             updated = UNSET
         else:
             updated = isoparse(_updated)

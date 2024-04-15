@@ -68,7 +68,7 @@ class TariffDistributionHistoryDto:
         d = src_dict.copy()
         _valid_from = d.pop("validFrom", UNSET)
         valid_from: Union[Unset, datetime.datetime]
-        if isinstance(_valid_from, Unset):
+        if isinstance(_valid_from, Unset) or _valid_from is None:
             valid_from = UNSET
         else:
             valid_from = isoparse(_valid_from)

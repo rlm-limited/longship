@@ -134,14 +134,14 @@ class WebhookGetDto:
 
         _created = d.pop("created", UNSET)
         created: Union[Unset, datetime.datetime]
-        if isinstance(_created, Unset):
+        if isinstance(_created, Unset) or _created is None:
             created = UNSET
         else:
             created = isoparse(_created)
 
         _updated = d.pop("updated", UNSET)
         updated: Union[Unset, datetime.datetime]
-        if isinstance(_updated, Unset):
+        if isinstance(_updated, Unset) or _updated is None:
             updated = UNSET
         else:
             updated = isoparse(_updated)

@@ -69,7 +69,7 @@ class PublishTokenTypeDto:
 
         _type = d.pop("type", UNSET)
         type: Union[Unset, PublishTokenTypeDtoType]
-        if isinstance(_type, Unset):
+        if isinstance(_type, Unset) or _type is None:
             type = UNSET
         else:
             type = PublishTokenTypeDtoType(_type)

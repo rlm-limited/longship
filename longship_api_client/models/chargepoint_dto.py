@@ -319,7 +319,7 @@ class ChargepointDto:
 
         _date_deleted = d.pop("dateDeleted", UNSET)
         date_deleted: Union[Unset, datetime.datetime]
-        if isinstance(_date_deleted, Unset):
+        if isinstance(_date_deleted, Unset) or _date_deleted is None:
             date_deleted = UNSET
         else:
             date_deleted = isoparse(_date_deleted)
@@ -340,7 +340,7 @@ class ChargepointDto:
 
         _connectivity_status = d.pop("connectivityStatus", UNSET)
         connectivity_status: Union[Unset, ChargepointDtoConnectivityStatus]
-        if isinstance(_connectivity_status, Unset):
+        if isinstance(_connectivity_status, Unset) or _connectivity_status is None:
             connectivity_status = UNSET
         else:
             connectivity_status = ChargepointDtoConnectivityStatus(_connectivity_status)
@@ -372,14 +372,14 @@ class ChargepointDto:
 
         _date_created = d.pop("dateCreated", UNSET)
         date_created: Union[Unset, datetime.datetime]
-        if isinstance(_date_created, Unset):
+        if isinstance(_date_created, Unset) or _date_created is None:
             date_created = UNSET
         else:
             date_created = isoparse(_date_created)
 
         _updated = d.pop("updated", UNSET)
         updated: Union[Unset, datetime.datetime]
-        if isinstance(_updated, Unset):
+        if isinstance(_updated, Unset) or _updated is None:
             updated = UNSET
         else:
             updated = isoparse(_updated)

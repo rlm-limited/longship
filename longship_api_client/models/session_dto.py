@@ -325,7 +325,7 @@ class SessionDto:
 
         _session_location = d.pop("sessionLocation", UNSET)
         session_location: Union[Unset, SessionLocationDto]
-        if isinstance(_session_location, Unset):
+        if isinstance(_session_location, Unset) or _session_location is None:
             session_location = UNSET
         else:
             session_location = SessionLocationDto.from_dict(_session_location)
@@ -334,7 +334,7 @@ class SessionDto:
 
         _started_by_info = d.pop("startedByInfo", UNSET)
         started_by_info: Union[Unset, StartedByInfoDto]
-        if isinstance(_started_by_info, Unset):
+        if isinstance(_started_by_info, Unset) or _started_by_info is None:
             started_by_info = UNSET
         else:
             started_by_info = StartedByInfoDto.from_dict(_started_by_info)
@@ -343,7 +343,7 @@ class SessionDto:
 
         _session_start = d.pop("sessionStart", UNSET)
         session_start: Union[Unset, datetime.datetime]
-        if isinstance(_session_start, Unset):
+        if isinstance(_session_start, Unset) or _session_start is None:
             session_start = UNSET
         else:
             session_start = isoparse(_session_start)
@@ -370,28 +370,28 @@ class SessionDto:
 
         _session_stop = d.pop("sessionStop", UNSET)
         session_stop: Union[Unset, datetime.datetime]
-        if isinstance(_session_stop, Unset):
+        if isinstance(_session_stop, Unset) or _session_stop is None:
             session_stop = UNSET
         else:
             session_stop = isoparse(_session_stop)
 
         _status = d.pop("status", UNSET)
         status: Union[Unset, SessionDtoStatus]
-        if isinstance(_status, Unset):
+        if isinstance(_status, Unset) or _status is None:
             status = UNSET
         else:
             status = SessionDtoStatus(_status)
 
         _approval_status = d.pop("approvalStatus", UNSET)
         approval_status: Union[Unset, SessionDtoApprovalStatus]
-        if isinstance(_approval_status, Unset):
+        if isinstance(_approval_status, Unset) or _approval_status is None:
             approval_status = UNSET
         else:
             approval_status = SessionDtoApprovalStatus(_approval_status)
 
         _review_scenario_type = d.pop("reviewScenarioType", UNSET)
         review_scenario_type: Union[Unset, SessionDtoReviewScenarioType]
-        if isinstance(_review_scenario_type, Unset):
+        if isinstance(_review_scenario_type, Unset) or _review_scenario_type is None:
             review_scenario_type = UNSET
         else:
             review_scenario_type = SessionDtoReviewScenarioType(_review_scenario_type)
@@ -402,14 +402,14 @@ class SessionDto:
 
         _created = d.pop("created", UNSET)
         created: Union[Unset, datetime.datetime]
-        if isinstance(_created, Unset):
+        if isinstance(_created, Unset) or _created is None:
             created = UNSET
         else:
             created = isoparse(_created)
 
         _last_updated = d.pop("lastUpdated", UNSET)
         last_updated: Union[Unset, datetime.datetime]
-        if isinstance(_last_updated, Unset):
+        if isinstance(_last_updated, Unset) or _last_updated is None:
             last_updated = UNSET
         else:
             last_updated = isoparse(_last_updated)
@@ -422,14 +422,14 @@ class SessionDto:
 
         _tariff_info = d.pop("tariffInfo", UNSET)
         tariff_info: Union[Unset, TariffInfoDto]
-        if isinstance(_tariff_info, Unset):
+        if isinstance(_tariff_info, Unset) or _tariff_info is None:
             tariff_info = UNSET
         else:
             tariff_info = TariffInfoDto.from_dict(_tariff_info)
 
         _price_info = d.pop("priceInfo", UNSET)
         price_info: Union[Unset, PriceInfoDto]
-        if isinstance(_price_info, Unset):
+        if isinstance(_price_info, Unset) or _price_info is None:
             price_info = UNSET
         else:
             price_info = PriceInfoDto.from_dict(_price_info)
@@ -446,7 +446,7 @@ class SessionDto:
 
         _thresholds = d.pop("thresholds", UNSET)
         thresholds: Union[Unset, SessionThresholdsDto]
-        if isinstance(_thresholds, Unset):
+        if isinstance(_thresholds, Unset) or _thresholds is None:
             thresholds = UNSET
         else:
             thresholds = SessionThresholdsDto.from_dict(_thresholds)
@@ -457,7 +457,7 @@ class SessionDto:
 
         _parking_time_start = d.pop("parkingTimeStart", UNSET)
         parking_time_start: Union[Unset, datetime.datetime]
-        if isinstance(_parking_time_start, Unset):
+        if isinstance(_parking_time_start, Unset) or _parking_time_start is None:
             parking_time_start = UNSET
         else:
             parking_time_start = isoparse(_parking_time_start)

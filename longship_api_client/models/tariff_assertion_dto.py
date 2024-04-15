@@ -58,7 +58,7 @@ class TariffAssertionDto:
         d = src_dict.copy()
         _tariff_type = d.pop("tariffType", UNSET)
         tariff_type: Union[Unset, TariffAssertionDtoTariffType]
-        if isinstance(_tariff_type, Unset):
+        if isinstance(_tariff_type, Unset) or _tariff_type is None:
             tariff_type = UNSET
         else:
             tariff_type = TariffAssertionDtoTariffType(_tariff_type)

@@ -143,14 +143,14 @@ class TariffPriceDto:
         d = src_dict.copy()
         _created_timestamp = d.pop("createdTimestamp", UNSET)
         created_timestamp: Union[Unset, datetime.datetime]
-        if isinstance(_created_timestamp, Unset):
+        if isinstance(_created_timestamp, Unset) or _created_timestamp is None:
             created_timestamp = UNSET
         else:
             created_timestamp = isoparse(_created_timestamp)
 
         _valid_from = d.pop("validFrom", UNSET)
         valid_from: Union[Unset, datetime.datetime]
-        if isinstance(_valid_from, Unset):
+        if isinstance(_valid_from, Unset) or _valid_from is None:
             valid_from = UNSET
         else:
             valid_from = isoparse(_valid_from)
@@ -186,7 +186,7 @@ class TariffPriceDto:
 
         _approval_status = d.pop("approvalStatus", UNSET)
         approval_status: Union[Unset, TariffPriceDtoApprovalStatus]
-        if isinstance(_approval_status, Unset):
+        if isinstance(_approval_status, Unset) or _approval_status is None:
             approval_status = UNSET
         else:
             approval_status = TariffPriceDtoApprovalStatus(_approval_status)

@@ -265,21 +265,21 @@ class TariffDto:
 
         _last_updated = d.pop("last_updated", UNSET)
         last_updated: Union[Unset, datetime.datetime]
-        if isinstance(_last_updated, Unset):
+        if isinstance(_last_updated, Unset) or _last_updated is None:
             last_updated = UNSET
         else:
             last_updated = isoparse(_last_updated)
 
         _usage_type = d.pop("usageType", UNSET)
         usage_type: Union[Unset, TariffDtoUsageType]
-        if isinstance(_usage_type, Unset):
+        if isinstance(_usage_type, Unset) or _usage_type is None:
             usage_type = UNSET
         else:
             usage_type = TariffDtoUsageType(_usage_type)
 
         _tariff_type = d.pop("tariffType", UNSET)
         tariff_type: Union[Unset, TariffDtoTariffType]
-        if isinstance(_tariff_type, Unset):
+        if isinstance(_tariff_type, Unset) or _tariff_type is None:
             tariff_type = UNSET
         else:
             tariff_type = TariffDtoTariffType(_tariff_type)
@@ -298,7 +298,7 @@ class TariffDto:
 
         _private_emp_tariff = d.pop("privateEmpTariff", UNSET)
         private_emp_tariff: Union[Unset, PrivateEmpTariffDto]
-        if isinstance(_private_emp_tariff, Unset):
+        if isinstance(_private_emp_tariff, Unset) or _private_emp_tariff is None:
             private_emp_tariff = UNSET
         else:
             private_emp_tariff = PrivateEmpTariffDto.from_dict(_private_emp_tariff)
@@ -335,7 +335,7 @@ class TariffDto:
 
         _deleted = d.pop("deleted", UNSET)
         deleted: Union[Unset, datetime.datetime]
-        if isinstance(_deleted, Unset):
+        if isinstance(_deleted, Unset) or _deleted is None:
             deleted = UNSET
         else:
             deleted = isoparse(_deleted)

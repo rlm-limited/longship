@@ -144,7 +144,7 @@ class TariffPutDto:
 
         _private_emp_tariff = d.pop("privateEmpTariff", UNSET)
         private_emp_tariff: Union[Unset, PrivateEmpTariffDto]
-        if isinstance(_private_emp_tariff, Unset):
+        if isinstance(_private_emp_tariff, Unset) or _private_emp_tariff is None:
             private_emp_tariff = UNSET
         else:
             private_emp_tariff = PrivateEmpTariffDto.from_dict(_private_emp_tariff)
@@ -178,7 +178,7 @@ class TariffPutDto:
 
         _deleted = d.pop("deleted", UNSET)
         deleted: Union[Unset, datetime.datetime]
-        if isinstance(_deleted, Unset):
+        if isinstance(_deleted, Unset) or _deleted is None:
             deleted = UNSET
         else:
             deleted = isoparse(_deleted)

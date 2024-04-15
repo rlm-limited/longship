@@ -116,7 +116,7 @@ class ChargepointConnectorDto:
 
         _operational_status = d.pop("operationalStatus", UNSET)
         operational_status: Union[Unset, ChargepointConnectorDtoOperationalStatus]
-        if isinstance(_operational_status, Unset):
+        if isinstance(_operational_status, Unset) or _operational_status is None:
             operational_status = UNSET
         else:
             operational_status = ChargepointConnectorDtoOperationalStatus(
@@ -125,21 +125,21 @@ class ChargepointConnectorDto:
 
         _standard = d.pop("standard", UNSET)
         standard: Union[Unset, ChargepointConnectorDtoStandard]
-        if isinstance(_standard, Unset):
+        if isinstance(_standard, Unset) or _standard is None:
             standard = UNSET
         else:
             standard = ChargepointConnectorDtoStandard(_standard)
 
         _format_ = d.pop("format", UNSET)
         format_: Union[Unset, ChargepointConnectorDtoFormat]
-        if isinstance(_format_, Unset):
+        if isinstance(_format_, Unset) or _format_ is None:
             format_ = UNSET
         else:
             format_ = ChargepointConnectorDtoFormat(_format_)
 
         _power_type = d.pop("powerType", UNSET)
         power_type: Union[Unset, ChargepointConnectorDtoPowerType]
-        if isinstance(_power_type, Unset):
+        if isinstance(_power_type, Unset) or _power_type is None:
             power_type = UNSET
         else:
             power_type = ChargepointConnectorDtoPowerType(_power_type)

@@ -59,7 +59,7 @@ class TokenInfoDto:
 
         _token_type = d.pop("tokenType", UNSET)
         token_type: Union[Unset, TokenInfoDtoTokenType]
-        if isinstance(_token_type, Unset):
+        if isinstance(_token_type, Unset) or _token_type is None:
             token_type = UNSET
         else:
             token_type = TokenInfoDtoTokenType(_token_type)

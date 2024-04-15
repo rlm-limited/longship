@@ -55,7 +55,7 @@ class LongshipError:
 
         _error_details = d.pop("errorDetails", UNSET)
         error_details: Union[Unset, LongshipErrorDetail]
-        if isinstance(_error_details, Unset):
+        if isinstance(_error_details, Unset) or _error_details is None:
             error_details = UNSET
         else:
             error_details = LongshipErrorDetail.from_dict(_error_details)

@@ -65,7 +65,7 @@ class AuthorizationAssertionDto:
         d = src_dict.copy()
         _auth_scenario_type = d.pop("authScenarioType", UNSET)
         auth_scenario_type: Union[Unset, AuthorizationAssertionDtoAuthScenarioType]
-        if isinstance(_auth_scenario_type, Unset):
+        if isinstance(_auth_scenario_type, Unset) or _auth_scenario_type is None:
             auth_scenario_type = UNSET
         else:
             auth_scenario_type = AuthorizationAssertionDtoAuthScenarioType(
@@ -76,7 +76,7 @@ class AuthorizationAssertionDto:
 
         _status = d.pop("status", UNSET)
         status: Union[Unset, AuthorizationAssertionDtoStatus]
-        if isinstance(_status, Unset):
+        if isinstance(_status, Unset) or _status is None:
             status = UNSET
         else:
             status = AuthorizationAssertionDtoStatus(_status)

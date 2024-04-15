@@ -84,7 +84,7 @@ class SessionThresholdValueDtoInt32:
         threshold_hit_outcome: Union[
             Unset, SessionThresholdValueDtoInt32ThresholdHitOutcome
         ]
-        if isinstance(_threshold_hit_outcome, Unset):
+        if isinstance(_threshold_hit_outcome, Unset) or _threshold_hit_outcome is None:
             threshold_hit_outcome = UNSET
         else:
             threshold_hit_outcome = SessionThresholdValueDtoInt32ThresholdHitOutcome(
@@ -93,7 +93,7 @@ class SessionThresholdValueDtoInt32:
 
         _status = d.pop("status", UNSET)
         status: Union[Unset, SessionThresholdValueDtoInt32Status]
-        if isinstance(_status, Unset):
+        if isinstance(_status, Unset) or _status is None:
             status = UNSET
         else:
             status = SessionThresholdValueDtoInt32Status(_status)

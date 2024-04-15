@@ -45,7 +45,7 @@ class CdrPatchDto:
         d = src_dict.copy()
         _approval_status = d.pop("approvalStatus", UNSET)
         approval_status: Union[Unset, CdrPatchDtoApprovalStatus]
-        if isinstance(_approval_status, Unset):
+        if isinstance(_approval_status, Unset) or _approval_status is None:
             approval_status = UNSET
         else:
             approval_status = CdrPatchDtoApprovalStatus(_approval_status)

@@ -71,7 +71,7 @@ class SessionThresholdCheckDto:
         d = src_dict.copy()
         _threshold_hit_outcome = d.pop("thresholdHitOutcome", UNSET)
         threshold_hit_outcome: Union[Unset, SessionThresholdCheckDtoThresholdHitOutcome]
-        if isinstance(_threshold_hit_outcome, Unset):
+        if isinstance(_threshold_hit_outcome, Unset) or _threshold_hit_outcome is None:
             threshold_hit_outcome = UNSET
         else:
             threshold_hit_outcome = SessionThresholdCheckDtoThresholdHitOutcome(
@@ -80,7 +80,7 @@ class SessionThresholdCheckDto:
 
         _status = d.pop("status", UNSET)
         status: Union[Unset, SessionThresholdCheckDtoStatus]
-        if isinstance(_status, Unset):
+        if isinstance(_status, Unset) or _status is None:
             status = UNSET
         else:
             status = SessionThresholdCheckDtoStatus(_status)

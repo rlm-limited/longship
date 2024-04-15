@@ -70,6 +70,8 @@ class ImageDto:
 
     @classmethod
     def from_dict(cls: Type[T], src_dict: Dict[str, Any]) -> T:
+        if src_dict is None:
+            return UNSET
         d = src_dict.copy()
         url = d.pop("url", UNSET)
 
@@ -77,7 +79,7 @@ class ImageDto:
 
         _category = d.pop("category", UNSET)
         category: Union[Unset, ImageDtoCategory]
-        if isinstance(_category, Unset):
+        if isinstance(_category, Unset) or _category is None:
             category = UNSET
         else:
             category = ImageDtoCategory(_category)

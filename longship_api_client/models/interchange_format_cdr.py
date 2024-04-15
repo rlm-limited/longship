@@ -162,14 +162,14 @@ class InterchangeFormatCdr:
 
         _start_date_time = d.pop("startDateTime", UNSET)
         start_date_time: Union[Unset, datetime.datetime]
-        if isinstance(_start_date_time, Unset):
+        if isinstance(_start_date_time, Unset) or _start_date_time is None:
             start_date_time = UNSET
         else:
             start_date_time = isoparse(_start_date_time)
 
         _end_date_time = d.pop("endDateTime", UNSET)
         end_date_time: Union[Unset, datetime.datetime]
-        if isinstance(_end_date_time, Unset):
+        if isinstance(_end_date_time, Unset) or _end_date_time is None:
             end_date_time = UNSET
         else:
             end_date_time = isoparse(_end_date_time)

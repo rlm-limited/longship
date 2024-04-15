@@ -63,7 +63,7 @@ class AdditionalGeoLocationDto:
 
         _name = d.pop("name", UNSET)
         name: Union[Unset, DisplayTextDto]
-        if isinstance(_name, Unset):
+        if isinstance(_name, Unset) or _name is None:
             name = UNSET
         else:
             name = DisplayTextDto.from_dict(_name)

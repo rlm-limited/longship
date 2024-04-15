@@ -146,35 +146,35 @@ class SessionThresholdsDto:
 
         _min_kwh_ac = d.pop("minKwhAc", UNSET)
         min_kwh_ac: Union[Unset, SessionThresholdValueDtoDecimal]
-        if isinstance(_min_kwh_ac, Unset):
+        if isinstance(_min_kwh_ac, Unset) or _min_kwh_ac is None:
             min_kwh_ac = UNSET
         else:
             min_kwh_ac = SessionThresholdValueDtoDecimal.from_dict(_min_kwh_ac)
 
         _max_kwh_ac = d.pop("maxKwhAc", UNSET)
         max_kwh_ac: Union[Unset, SessionThresholdValueDtoDecimal]
-        if isinstance(_max_kwh_ac, Unset):
+        if isinstance(_max_kwh_ac, Unset) or _max_kwh_ac is None:
             max_kwh_ac = UNSET
         else:
             max_kwh_ac = SessionThresholdValueDtoDecimal.from_dict(_max_kwh_ac)
 
         _min_kwh_dc = d.pop("minKwhDc", UNSET)
         min_kwh_dc: Union[Unset, SessionThresholdValueDtoDecimal]
-        if isinstance(_min_kwh_dc, Unset):
+        if isinstance(_min_kwh_dc, Unset) or _min_kwh_dc is None:
             min_kwh_dc = UNSET
         else:
             min_kwh_dc = SessionThresholdValueDtoDecimal.from_dict(_min_kwh_dc)
 
         _max_kwh_dc = d.pop("maxKwhDc", UNSET)
         max_kwh_dc: Union[Unset, SessionThresholdValueDtoDecimal]
-        if isinstance(_max_kwh_dc, Unset):
+        if isinstance(_max_kwh_dc, Unset) or _max_kwh_dc is None:
             max_kwh_dc = UNSET
         else:
             max_kwh_dc = SessionThresholdValueDtoDecimal.from_dict(_max_kwh_dc)
 
         _min_duration_in_minutes_ac = d.pop("minDurationInMinutesAc", UNSET)
         min_duration_in_minutes_ac: Union[Unset, SessionThresholdValueDtoInt32]
-        if isinstance(_min_duration_in_minutes_ac, Unset):
+        if isinstance(_min_duration_in_minutes_ac, Unset) or _min_duration_in_minutes_ac is None:
             min_duration_in_minutes_ac = UNSET
         else:
             min_duration_in_minutes_ac = SessionThresholdValueDtoInt32.from_dict(
@@ -183,7 +183,7 @@ class SessionThresholdsDto:
 
         _min_duration_in_minutes_dc = d.pop("minDurationInMinutesDc", UNSET)
         min_duration_in_minutes_dc: Union[Unset, SessionThresholdValueDtoInt32]
-        if isinstance(_min_duration_in_minutes_dc, Unset):
+        if isinstance(_min_duration_in_minutes_dc, Unset) or _min_duration_in_minutes_dc is None:
             min_duration_in_minutes_dc = UNSET
         else:
             min_duration_in_minutes_dc = SessionThresholdValueDtoInt32.from_dict(
@@ -192,7 +192,7 @@ class SessionThresholdsDto:
 
         _max_session_age_in_days = d.pop("maxSessionAgeInDays", UNSET)
         max_session_age_in_days: Union[Unset, SessionThresholdValueDtoInt32]
-        if isinstance(_max_session_age_in_days, Unset):
+        if isinstance(_max_session_age_in_days, Unset) or _max_session_age_in_days is None:
             max_session_age_in_days = UNSET
         else:
             max_session_age_in_days = SessionThresholdValueDtoInt32.from_dict(
@@ -201,7 +201,7 @@ class SessionThresholdsDto:
 
         _check_charging_speed = d.pop("checkChargingSpeed", UNSET)
         check_charging_speed: Union[Unset, SessionThresholdCheckDto]
-        if isinstance(_check_charging_speed, Unset):
+        if isinstance(_check_charging_speed, Unset) or _check_charging_speed is None:
             check_charging_speed = UNSET
         else:
             check_charging_speed = SessionThresholdCheckDto.from_dict(
@@ -210,7 +210,7 @@ class SessionThresholdsDto:
 
         _check_session_in_future = d.pop("checkSessionInFuture", UNSET)
         check_session_in_future: Union[Unset, SessionThresholdCheckDto]
-        if isinstance(_check_session_in_future, Unset):
+        if isinstance(_check_session_in_future, Unset) or _check_session_in_future is None:
             check_session_in_future = UNSET
         else:
             check_session_in_future = SessionThresholdCheckDto.from_dict(

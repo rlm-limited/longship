@@ -84,7 +84,7 @@ class SessionThresholdValueDtoDecimal:
         threshold_hit_outcome: Union[
             Unset, SessionThresholdValueDtoDecimalThresholdHitOutcome
         ]
-        if isinstance(_threshold_hit_outcome, Unset):
+        if isinstance(_threshold_hit_outcome, Unset) or _threshold_hit_outcome is None:
             threshold_hit_outcome = UNSET
         else:
             threshold_hit_outcome = SessionThresholdValueDtoDecimalThresholdHitOutcome(
@@ -93,7 +93,7 @@ class SessionThresholdValueDtoDecimal:
 
         _status = d.pop("status", UNSET)
         status: Union[Unset, SessionThresholdValueDtoDecimalStatus]
-        if isinstance(_status, Unset):
+        if isinstance(_status, Unset) or _status is None:
             status = UNSET
         else:
             status = SessionThresholdValueDtoDecimalStatus(_status)

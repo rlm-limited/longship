@@ -84,21 +84,21 @@ class ChargepointConfigurationItemsDto:
 
         _created = d.pop("created", UNSET)
         created: Union[Unset, datetime.datetime]
-        if isinstance(_created, Unset):
+        if isinstance(_created, Unset) or _created is None:
             created = UNSET
         else:
             created = isoparse(_created)
 
         _modified = d.pop("modified", UNSET)
         modified: Union[Unset, datetime.datetime]
-        if isinstance(_modified, Unset):
+        if isinstance(_modified, Unset) or _modified is None:
             modified = UNSET
         else:
             modified = isoparse(_modified)
 
         _deleted = d.pop("deleted", UNSET)
         deleted: Union[Unset, datetime.datetime]
-        if isinstance(_deleted, Unset):
+        if isinstance(_deleted, Unset) or _deleted is None:
             deleted = UNSET
         else:
             deleted = isoparse(_deleted)

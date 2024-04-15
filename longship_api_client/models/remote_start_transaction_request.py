@@ -65,7 +65,7 @@ class RemoteStartTransactionRequest:
 
         _charging_profile = d.pop("chargingProfile", UNSET)
         charging_profile: Union[Unset, ChargingProfile]
-        if isinstance(_charging_profile, Unset):
+        if isinstance(_charging_profile, Unset) or _charging_profile is None:
             charging_profile = UNSET
         else:
             charging_profile = ChargingProfile.from_dict(_charging_profile)

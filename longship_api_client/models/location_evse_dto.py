@@ -206,7 +206,7 @@ class LocationEVSEDto:
 
         _status = d.pop("status", UNSET)
         status: Union[Unset, LocationEVSEDtoStatus]
-        if isinstance(_status, Unset):
+        if isinstance(_status, Unset) or _status is None:
             status = UNSET
         else:
             status = LocationEVSEDtoStatus(_status)
@@ -238,7 +238,7 @@ class LocationEVSEDto:
 
         _coordinates = d.pop("coordinates", UNSET)
         coordinates: Union[Unset, GeoLocationDto]
-        if isinstance(_coordinates, Unset):
+        if isinstance(_coordinates, Unset) or _coordinates is None:
             coordinates = UNSET
         else:
             coordinates = GeoLocationDto.from_dict(_coordinates)
@@ -270,7 +270,7 @@ class LocationEVSEDto:
 
         _last_updated = d.pop("last_updated", UNSET)
         last_updated: Union[Unset, datetime.datetime]
-        if isinstance(_last_updated, Unset):
+        if isinstance(_last_updated, Unset) or _last_updated is None:
             last_updated = UNSET
         else:
             last_updated = isoparse(_last_updated)

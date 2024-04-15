@@ -63,14 +63,14 @@ class AuthorizationContextDetailsDto:
         d = src_dict.copy()
         _charger = d.pop("charger", UNSET)
         charger: Union[Unset, AuthorizationChargerContextDto]
-        if isinstance(_charger, Unset):
+        if isinstance(_charger, Unset) or _charger is None:
             charger = UNSET
         else:
             charger = AuthorizationChargerContextDto.from_dict(_charger)
 
         _tenant = d.pop("tenant", UNSET)
         tenant: Union[Unset, AuthorizationTenantContextDto]
-        if isinstance(_tenant, Unset):
+        if isinstance(_tenant, Unset) or _tenant is None:
             tenant = UNSET
         else:
             tenant = AuthorizationTenantContextDto.from_dict(_tenant)

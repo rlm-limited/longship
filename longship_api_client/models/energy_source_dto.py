@@ -49,7 +49,7 @@ class EnergySourceDto:
         d = src_dict.copy()
         _source = d.pop("source", UNSET)
         source: Union[Unset, EnergySourceDtoSource]
-        if isinstance(_source, Unset):
+        if isinstance(_source, Unset) or _source is None:
             source = UNSET
         else:
             source = EnergySourceDtoSource(_source)

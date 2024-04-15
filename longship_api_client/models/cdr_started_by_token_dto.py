@@ -109,7 +109,7 @@ class CdrStartedByTokenDto:
 
         _token_type = d.pop("tokenType", UNSET)
         token_type: Union[Unset, CdrStartedByTokenDtoTokenType]
-        if isinstance(_token_type, Unset):
+        if isinstance(_token_type, Unset) or _token_type is None:
             token_type = UNSET
         else:
             token_type = CdrStartedByTokenDtoTokenType(_token_type)
@@ -118,7 +118,7 @@ class CdrStartedByTokenDto:
 
         _auth_method = d.pop("authMethod", UNSET)
         auth_method: Union[Unset, CdrStartedByTokenDtoAuthMethod]
-        if isinstance(_auth_method, Unset):
+        if isinstance(_auth_method, Unset) or _auth_method is None:
             auth_method = UNSET
         else:
             auth_method = CdrStartedByTokenDtoAuthMethod(_auth_method)

@@ -143,14 +143,14 @@ class TariffPostDto:
 
         _usage_type = d.pop("usageType", UNSET)
         usage_type: Union[Unset, TariffPostDtoUsageType]
-        if isinstance(_usage_type, Unset):
+        if isinstance(_usage_type, Unset) or _usage_type is None:
             usage_type = UNSET
         else:
             usage_type = TariffPostDtoUsageType(_usage_type)
 
         _private_emp_tariff = d.pop("privateEmpTariff", UNSET)
         private_emp_tariff: Union[Unset, PrivateEmpTariffDto]
-        if isinstance(_private_emp_tariff, Unset):
+        if isinstance(_private_emp_tariff, Unset) or _private_emp_tariff is None:
             private_emp_tariff = UNSET
         else:
             private_emp_tariff = PrivateEmpTariffDto.from_dict(_private_emp_tariff)

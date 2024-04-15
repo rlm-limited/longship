@@ -270,21 +270,21 @@ class CdrDto:
 
         _cdr_location = d.pop("cdrLocation", UNSET)
         cdr_location: Union[Unset, CdrLocationDto]
-        if isinstance(_cdr_location, Unset):
+        if isinstance(_cdr_location, Unset) or _cdr_location is None:
             cdr_location = UNSET
         else:
             cdr_location = CdrLocationDto.from_dict(_cdr_location)
 
         _start_datetime = d.pop("startDatetime", UNSET)
         start_datetime: Union[Unset, datetime.datetime]
-        if isinstance(_start_datetime, Unset):
+        if isinstance(_start_datetime, Unset) or _start_datetime is None:
             start_datetime = UNSET
         else:
             start_datetime = isoparse(_start_datetime)
 
         _end_date_time = d.pop("endDateTime", UNSET)
         end_date_time: Union[Unset, datetime.datetime]
-        if isinstance(_end_date_time, Unset):
+        if isinstance(_end_date_time, Unset) or _end_date_time is None:
             end_date_time = UNSET
         else:
             end_date_time = isoparse(_end_date_time)
@@ -295,7 +295,7 @@ class CdrDto:
 
         _started_by_info = d.pop("startedByInfo", UNSET)
         started_by_info: Union[Unset, CdrStartedByInfoDto]
-        if isinstance(_started_by_info, Unset):
+        if isinstance(_started_by_info, Unset) or _started_by_info is None:
             started_by_info = UNSET
         else:
             started_by_info = CdrStartedByInfoDto.from_dict(_started_by_info)
@@ -317,14 +317,14 @@ class CdrDto:
 
         _created = d.pop("created", UNSET)
         created: Union[Unset, datetime.datetime]
-        if isinstance(_created, Unset):
+        if isinstance(_created, Unset) or _created is None:
             created = UNSET
         else:
             created = isoparse(_created)
 
         _last_updated = d.pop("lastUpdated", UNSET)
         last_updated: Union[Unset, datetime.datetime]
-        if isinstance(_last_updated, Unset):
+        if isinstance(_last_updated, Unset) or _last_updated is None:
             last_updated = UNSET
         else:
             last_updated = isoparse(_last_updated)
@@ -349,35 +349,35 @@ class CdrDto:
 
         _price_info = d.pop("priceInfo", UNSET)
         price_info: Union[Unset, PriceInfoDto]
-        if isinstance(_price_info, Unset):
+        if isinstance(_price_info, Unset) or _price_info is None:
             price_info = UNSET
         else:
             price_info = PriceInfoDto.from_dict(_price_info)
 
         _local_start_date_time = d.pop("localStartDateTime", UNSET)
         local_start_date_time: Union[Unset, datetime.datetime]
-        if isinstance(_local_start_date_time, Unset):
+        if isinstance(_local_start_date_time, Unset) or _local_start_date_time is None:
             local_start_date_time = UNSET
         else:
             local_start_date_time = isoparse(_local_start_date_time)
 
         _local_end_date_time = d.pop("localEndDateTime", UNSET)
         local_end_date_time: Union[Unset, datetime.datetime]
-        if isinstance(_local_end_date_time, Unset):
+        if isinstance(_local_end_date_time, Unset) or _local_end_date_time is None:
             local_end_date_time = UNSET
         else:
             local_end_date_time = isoparse(_local_end_date_time)
 
         _approval_status = d.pop("approvalStatus", UNSET)
         approval_status: Union[Unset, CdrDtoApprovalStatus]
-        if isinstance(_approval_status, Unset):
+        if isinstance(_approval_status, Unset) or _approval_status is None:
             approval_status = UNSET
         else:
             approval_status = CdrDtoApprovalStatus(_approval_status)
 
         _financial_type = d.pop("financialType", UNSET)
         financial_type: Union[Unset, CdrDtoFinancialType]
-        if isinstance(_financial_type, Unset):
+        if isinstance(_financial_type, Unset) or _financial_type is None:
             financial_type = UNSET
         else:
             financial_type = CdrDtoFinancialType(_financial_type)

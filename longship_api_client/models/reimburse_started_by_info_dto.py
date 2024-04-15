@@ -75,14 +75,14 @@ class ReimburseStartedByInfoDto:
 
         _token_info = d.pop("tokenInfo", UNSET)
         token_info: Union[Unset, ReimburseStartedByTokenDto]
-        if isinstance(_token_info, Unset):
+        if isinstance(_token_info, Unset) or _token_info is None:
             token_info = UNSET
         else:
             token_info = ReimburseStartedByTokenDto.from_dict(_token_info)
 
         _authorization_state = d.pop("authorizationState", UNSET)
         authorization_state: Union[Unset, ReimburseStartedByInfoDtoAuthorizationState]
-        if isinstance(_authorization_state, Unset):
+        if isinstance(_authorization_state, Unset) or _authorization_state is None:
             authorization_state = UNSET
         else:
             authorization_state = ReimburseStartedByInfoDtoAuthorizationState(

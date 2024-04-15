@@ -153,7 +153,7 @@ class ReimbursementCdrLocationDto:
 
         _power_type = d.pop("powerType", UNSET)
         power_type: Union[Unset, ReimbursementCdrLocationDtoPowerType]
-        if isinstance(_power_type, Unset):
+        if isinstance(_power_type, Unset) or _power_type is None:
             power_type = UNSET
         else:
             power_type = ReimbursementCdrLocationDtoPowerType(_power_type)
@@ -180,7 +180,7 @@ class ReimbursementCdrLocationDto:
 
         _coordinates = d.pop("coordinates", UNSET)
         coordinates: Union[Unset, ReimbursementCdrGeoLocationDto]
-        if isinstance(_coordinates, Unset):
+        if isinstance(_coordinates, Unset) or _coordinates is None:
             coordinates = UNSET
         else:
             coordinates = ReimbursementCdrGeoLocationDto.from_dict(_coordinates)

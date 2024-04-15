@@ -53,7 +53,7 @@ class EntityTagHeaderValue:
         d = src_dict.copy()
         _tag = d.pop("tag", UNSET)
         tag: Union[Unset, StringSegment]
-        if isinstance(_tag, Unset):
+        if isinstance(_tag, Unset) or _tag is None:
             tag = UNSET
         else:
             tag = StringSegment.from_dict(_tag)
