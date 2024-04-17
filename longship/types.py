@@ -63,12 +63,13 @@ class ConnectivityStatusChangedData:
 class SessionStartData:
     chargepointid: str
     connectornumber: int
+    transactionid: str
+    locationid: Optional[str] = attr.ib(default=None)
+    evseid: Optional[str] = attr.ib(default=None)
 
 
 @attr.s(auto_attribs=True)
-class SessionUpdateData:
-    chargepointid: str
-    connectornumber: int
+class SessionUpdateData(SessionStartData):
     totalenergyinkwh: float
     totalduration: str
     totalcosts: float
