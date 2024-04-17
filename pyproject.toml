@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "longship"
-version = "2024.04.17"
+version = "2024.04.18"
 description = "A client library for accessing Longship API"
 
 authors = ["Wojtek Siudzinski <admin@suda.pl>"]

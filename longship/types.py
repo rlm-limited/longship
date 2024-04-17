@@ -60,24 +60,30 @@ class ConnectivityStatusChangedData:
 
 
 @attr.s(auto_attribs=True)
-class SessionStartData:
+class BaseSessionData:
     chargepointid: str
     connectornumber: int
     transactionid: str
+
+@attr.s(auto_attribs=True)
+class SessionStartData(BaseSessionData):
     locationid: Optional[str] = attr.ib(default=None)
     evseid: Optional[str] = attr.ib(default=None)
 
 
 @attr.s(auto_attribs=True)
-class SessionUpdateData(SessionStartData):
+class SessionUpdateData(BaseSessionData):
     totalenergyinkwh: float
     totalduration: str
     totalcosts: float
+    locationid: Optional[str] = attr.ib(default=None)
+    evseid: Optional[str] = attr.ib(default=None)
 
 
 @attr.s(auto_attribs=True)
 class SessionStopData(SessionUpdateData):
-    pass
+    locationid: Optional[str] = attr.ib(default=None)
+    evseid: Optional[str] = attr.ib(default=None)
 
 
 @attr.s(auto_attribs=True)
