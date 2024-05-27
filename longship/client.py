@@ -4,6 +4,7 @@ from datetime import datetime
 from typing import List
 from urllib.parse import parse_qs, urlsplit
 
+
 from longship.errors import ChargepointNotFoundError, CompositeScheduleNotFoundError
 from longship_api_client import Client
 from longship_api_client.api.chargepoint_status import (
@@ -14,14 +15,18 @@ from longship_api_client.api.chargepoints import (
     chargepoint_get,
     get_all_chargepointmessages,
 )
+
+from longship_api_client.api.cdrs import cdr_get
+from longship_api_client.models.cdr_dto import CdrDto
+
 from longship_api_client.api.commands import (
     send_get_composite_schedule_request,
-    send_set_charging_profile_request,
+    send_set_charging_profile_request
 )
-from longship_api_client.api.sessions import get_all_sessions
+from longship_api_client.api.sessions import get_all_sessions, session_get
 from longship_api_client.models import (
     GetCompositeScheduleRequest,
-    SetChargingProfileRequest,
+    SetChargingProfileRequest
 )
 from longship_api_client.models.chargepoint_dto import ChargepointDto
 from longship_api_client.models.chargepoint_status_dto import ChargepointStatusDto
@@ -29,6 +34,8 @@ from longship_api_client.models.charging_schedule import ChargingSchedule
 from longship_api_client.models.charging_schedule_charging_rate_unit import (
     ChargingScheduleChargingRateUnit,
 )
+
+
 from longship_api_client.models.charging_schedule_period import ChargingSchedulePeriod
 from longship_api_client.models.cs_charging_profiles import CsChargingProfiles
 from longship_api_client.models.cs_charging_profiles_charging_profile_kind import (
@@ -42,6 +49,16 @@ from longship_api_client.models.get_composite_schedule_request_charging_rate_uni
 )
 from longship_api_client.models.message_log_dto import MessageLogDto
 from longship_api_client.models.session_dto import SessionDto
+
+
+from longship_api_client.api.commands import (
+    send_remote_start_transaction_request,
+    send_remote_stop_transaction_request
+)
+
+from longship_api_client.models.remote_start_transaction_request import RemoteStartTransactionRequest
+from longship_api_client.models.remote_stop_transaction_request import RemoteStopTransactionRequest
+from longship_api_client.models.charging_profile import ChargingProfile
 
 
 class Longship:
@@ -195,7 +212,7 @@ class Longship:
         )
         return response.parsed
 
-    async def get_sessions(
+    async def get_all_sessions(
         self, chargepoint_id=None, connector_number=None, running_only=True
     ) -> List[SessionDto]:
         response = await get_all_sessions.asyncio_detailed(
@@ -204,4 +221,25 @@ class Longship:
             running_only=running_only,
             client=self._client,
         )
+        return response.parsed
+
+    async def get_session(self, session_id: str) -> SessionDto:
+        response = await session_get.asyncio_detailed(id=session_id, client=self._client)
+        return response.parsed
+
+    async def remote_start_session(self, chargepoint_id: str, connector_id: int , id_tag: str, charging_profile: ChargingProfile | None = None) -> RemoteStartTransactionRequest:
+        if isinstance(charging_profile, ChargingProfile):
+            transaction = RemoteStartTransactionRequest(id_tag=id_tag, connector_id=connector_id, charging_profile=charging_profile)
+        else:
+            transaction = RemoteStartTransactionRequest(id_tag=id_tag, connector_id=connector_id)
+        response = await send_remote_start_transaction_request.asyncio_detailed(id=chargepoint_id, client=self._client, body=transaction)
+        return response.parsed
+
+    async def remote_stop_session(self, chargepoint_id: str, session_id: str) -> RemoteStopTransactionRequest:
+        session = await self.get_session(session_id=session_id)
+        response = await send_remote_stop_transaction_request.asyncio_detailed(id=chargepoint_id, body=RemoteStopTransactionRequest(transaction_id=session.transaction_id), client=self._client)
+        return response.parsed
+
+    async def get_charging_details_record(self, session_id: str) -> CdrDto:
+        response = await cdr_get.asyncio_detailed(id=session_id, client=self._client)
         return response.parsed
