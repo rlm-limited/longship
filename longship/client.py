@@ -4,7 +4,6 @@ from datetime import datetime
 from typing import List
 from urllib.parse import parse_qs, urlsplit
 
-
 from longship.errors import ChargepointNotFoundError, CompositeScheduleNotFoundError
 from longship_api_client import Client
 from longship_api_client.api.chargepoint_status import (
@@ -15,50 +14,33 @@ from longship_api_client.api.chargepoints import (
     chargepoint_get,
     get_all_chargepointmessages,
 )
-
 from longship_api_client.api.cdrs import cdr_get
-from longship_api_client.models.cdr_dto import CdrDto
-
 from longship_api_client.api.commands import (
     send_get_composite_schedule_request,
-    send_set_charging_profile_request
+    send_set_charging_profile_request,
+    send_remote_start_transaction_request,
+    send_remote_stop_transaction_request
 )
 from longship_api_client.api.sessions import get_all_sessions, session_get
 from longship_api_client.models import (
     GetCompositeScheduleRequest,
-    SetChargingProfileRequest
-)
-from longship_api_client.models.chargepoint_dto import ChargepointDto
-from longship_api_client.models.chargepoint_status_dto import ChargepointStatusDto
-from longship_api_client.models.charging_schedule import ChargingSchedule
-from longship_api_client.models.charging_schedule_charging_rate_unit import (
+    SetChargingProfileRequest,
+    ChargepointDto,
+    ChargepointStatusDto,
+    ChargingSchedule,
     ChargingScheduleChargingRateUnit,
-)
-
-
-from longship_api_client.models.charging_schedule_period import ChargingSchedulePeriod
-from longship_api_client.models.cs_charging_profiles import CsChargingProfiles
-from longship_api_client.models.cs_charging_profiles_charging_profile_kind import (
+    ChargingSchedulePeriod,
+    CsChargingProfiles,
     CsChargingProfilesChargingProfileKind,
-)
-from longship_api_client.models.cs_charging_profiles_charging_profile_purpose import (
     CsChargingProfilesChargingProfilePurpose,
-)
-from longship_api_client.models.get_composite_schedule_request_charging_rate_unit import (
     GetCompositeScheduleRequestChargingRateUnit,
+    MessageLogDto,
+    SessionDto,
+    RemoteStartTransactionRequest,
+    RemoteStopTransactionRequest,
+    ChargingProfile,
+    CdrDto
 )
-from longship_api_client.models.message_log_dto import MessageLogDto
-from longship_api_client.models.session_dto import SessionDto
-
-
-from longship_api_client.api.commands import (
-    send_remote_start_transaction_request,
-    send_remote_stop_transaction_request
-)
-
-from longship_api_client.models.remote_start_transaction_request import RemoteStartTransactionRequest
-from longship_api_client.models.remote_stop_transaction_request import RemoteStopTransactionRequest
-from longship_api_client.models.charging_profile import ChargingProfile
 
 
 class Longship:
@@ -84,7 +66,7 @@ class Longship:
         request = GetCompositeScheduleRequest(
             connector_id=connector_id, duration=duration, charging_rate_unit=unit
         )
-        response = await send_get_composite_schedule_request.asyncio_detailed(
+        response = send_get_composite_schedule_request.sync_detailed(
             id=chargepoint_id, json_body=request, client=self._client
         )
         if response.status_code == 404:
@@ -95,7 +77,7 @@ class Longship:
         message_id = params["messageId"]
         await asyncio.sleep(1)
 
-        response = await self.get_messages(
+        response = self.get_messages(
             chargepoint_id, response_only=True, message_id=message_id
         )
         if response.status_code != 200:
@@ -126,7 +108,7 @@ class Longship:
         )
         return schedule
 
-    async def set_charge_point_max_power(
+    def set_charge_point_max_power(
         self,
         chargepoint_id: str,
         max_power: int,
@@ -146,11 +128,11 @@ class Longship:
         request = SetChargingProfileRequest(
             connector_id=0, cs_charging_profiles=profiles
         )
-        return await send_set_charging_profile_request.asyncio_detailed(
+        return send_set_charging_profile_request.sync_detailed(
             id=chargepoint_id, json_body=request, client=self._client
         )
 
-    async def set_transaction_max_power(
+    def set_transaction_max_power(
         self,
         chargepoint_id: str,
         connector_id: int,
@@ -173,18 +155,18 @@ class Longship:
         request = SetChargingProfileRequest(
             connector_id=connector_id, cs_charging_profiles=profiles
         )
-        return await send_set_charging_profile_request.asyncio_detailed(
+        return send_set_charging_profile_request.sync_detailed(
             id=chargepoint_id, json_body=request, client=self._client
         )
 
-    async def get_messages(
+    def get_messages(
         self,
         chargepoint_id: str,
         response_only=False,
         message_id=None,
         message_types=None,
     ) -> List[MessageLogDto]:
-        return await get_all_chargepointmessages.asyncio_detailed(
+        return get_all_chargepointmessages.sync_detailed(
             id=chargepoint_id,
             response_only=response_only,
             message_id=message_id,
@@ -192,30 +174,30 @@ class Longship:
             client=self._client,
         )
 
-    async def get_chargepoint(self, chargepoint_id: str) -> ChargepointDto:
-        response = await chargepoint_get.asyncio_detailed(
+    def get_chargepoint(self, chargepoint_id: str) -> ChargepointDto:
+        response = chargepoint_get.sync_detailed(
             id=chargepoint_id, client=self._client
         )
         return response.parsed
 
-    async def list_chargepoint_statuses(
+    def list_chargepoint_statuses(
         self, skip: int = None, take: int = None
     ) -> ChargepointStatusDto:
-        response = await get_all_chargepointstatus.asyncio_detailed(
+        response = get_all_chargepointstatus.sync_detailed(
             skip=skip, take=take, client=self._client
         )
         return response.parsed
 
-    async def get_chargepoint_status(self, chargepoint_id: str) -> ChargepointStatusDto:
-        response = await chargepoint_status_get.asyncio_detailed(
+    def get_chargepoint_status(self, chargepoint_id: str) -> ChargepointStatusDto:
+        response = chargepoint_status_get.sync_detailed(
             id=chargepoint_id, client=self._client
         )
         return response.parsed
 
-    async def get_all_sessions(
+    def get_all_sessions(
         self, chargepoint_id=None, connector_number=None, running_only=True
     ) -> List[SessionDto]:
-        response = await get_all_sessions.asyncio_detailed(
+        response = get_all_sessions.sync_detailed(
             chargepoint_id=chargepoint_id,
             connector_number=connector_number,
             running_only=running_only,
@@ -223,23 +205,23 @@ class Longship:
         )
         return response.parsed
 
-    async def get_session(self, session_id: str) -> SessionDto:
-        response = await session_get.asyncio_detailed(id=session_id, client=self._client)
+    def get_session(self, session_id: str) -> SessionDto:
+        response = session_get.sync_detailed(id=session_id, client=self._client)
         return response.parsed
 
-    async def remote_start_session(self, chargepoint_id: str, connector_id: int , id_tag: str, charging_profile: ChargingProfile | None = None) -> RemoteStartTransactionRequest:
+    def remote_start_session(self, chargepoint_id: str, connector_id: int , id_tag: str, charging_profile: ChargingProfile | None = None) -> RemoteStartTransactionRequest:
         if isinstance(charging_profile, ChargingProfile):
             transaction = RemoteStartTransactionRequest(id_tag=id_tag, connector_id=connector_id, charging_profile=charging_profile)
         else:
             transaction = RemoteStartTransactionRequest(id_tag=id_tag, connector_id=connector_id)
-        response = await send_remote_start_transaction_request.asyncio_detailed(id=chargepoint_id, client=self._client, body=transaction)
+        response = send_remote_start_transaction_request.sync_detailed(id=chargepoint_id, client=self._client, body=transaction)
         return response.parsed
 
-    async def remote_stop_session(self, chargepoint_id: str, session_id: str) -> RemoteStopTransactionRequest:
-        session = await self.get_session(session_id=session_id)
-        response = await send_remote_stop_transaction_request.asyncio_detailed(id=chargepoint_id, body=RemoteStopTransactionRequest(transaction_id=session.transaction_id), client=self._client)
+    def remote_stop_session(self, chargepoint_id: str, session_id: str) -> RemoteStopTransactionRequest:
+        session = self.get_session(session_id=session_id)
+        response = send_remote_stop_transaction_request.sync_detailed(id=chargepoint_id, body=RemoteStopTransactionRequest(transaction_id=session.transaction_id), client=self._client)
         return response.parsed
 
-    async def get_charging_details_record(self, session_id: str) -> CdrDto:
-        response = await cdr_get.asyncio_detailed(id=session_id, client=self._client)
+    def get_charging_details_record(self, session_id: str) -> CdrDto:
+        response = cdr_get.sync_detailed(id=session_id, client=self._client)
         return response.parsed
