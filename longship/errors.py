@@ -1,6 +1,10 @@
-class CompositeScheduleNotFoundError(Exception):
+class ChargepointNotFoundError(Exception):
     pass
 
 
-class ChargepointNotFoundError(Exception):
+class HTTPRequestError(Exception):
+    pass
+
+
+class CreateTokenError(Exception):
     pass
