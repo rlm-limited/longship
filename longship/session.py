@@ -8,6 +8,10 @@ from longship.messages import get_command_status
 import json
 import time
 from typing import List
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 
 def filter_sessions(client: LongshipClient, chargepoint_id=None, connector_id=None, running_only=True) -> List[SessionDto]:
@@ -26,25 +30,34 @@ def get_session_id(client: LongshipClient, chargepoint_id: str = None, connector
 
 
 def remote_start_session(client: LongshipClient, chargepoint_id: str, connector_id: int , id_tag: str) -> str:
-    response = send_remote_start_transaction_request.sync_detailed(id=chargepoint_id, client=client.client, body=RemoteStartTransactionRequest(id_tag=id_tag, connector_id=connector_id))
-    if response.status_code != 202:
-        raise ValueError(f"Failed to send remote start session command: {json.loads(response.content.decode('utf8'))['errorDetails']['message']}")
-    time.sleep(5)
-    if "Accepted" == get_command_status(chargepoint_id=chargepoint_id, location_url=response.headers['location'], client=client):
-        session = filter_sessions(client=client, chargepoint_id=chargepoint_id, connector_id=connector_id, running_only=True)
-        return json.loads(session.content.decode("utf-8"))[0]['id']
-    else:
-        raise ValueError(f"Failed to start session with chargepoint: {chargepoint_id} and id tag: {id_tag}")
+    try:
+        response = send_remote_start_transaction_request.sync_detailed(id=chargepoint_id, client=client.client, body=RemoteStartTransactionRequest(id_tag=id_tag, connector_id=connector_id))
+        if response.status_code != 202:
+            logging.CRITICAL(f"Failed to send remote start session command: {json.loads(response.content.decode('utf8'))['errorDetails']['message']}")
+        time.sleep(5)
+        status = get_command_status(chargepoint_id=chargepoint_id, location_url=response.headers['location'], client=client)
+        if status == 'Accepted':
+            session = filter_sessions(client=client, chargepoint_id=chargepoint_id, connector_id=connector_id, running_only=True)
+            return json.loads(session.content.decode("utf-8"))[0]['id']
+        else:
+            logging.INFO(f"Remote Start Command at chargepoint: {chargepoint_id} with Id Tag: {id_tag} was {status}!")
+    except IndexError as e:
+        logging.error(f"Failed to start session with chargepoint: {chargepoint_id} and id tag: {id_tag}", exc_info=e)
+    except Exception as e:
+        logging.error(f"Failed to start session with chargepoint: {chargepoint_id} and id tag: {id_tag}", exc_info=e)
 
 
 def remote_stop_session(client: LongshipClient, chargepoint_id: str, session_id: str) -> str:
-    session = get_session_status_with_id(session_id=session_id, client=client)
-    response = send_remote_stop_transaction_request.sync_detailed(id=chargepoint_id, body=RemoteStopTransactionRequest(transaction_id=session.transaction_id), client=client.client)
-    if response.status_code != 202:
-        raise ValueError(f"Failed to send remote stop session command: {json.loads(response.content.decode('utf8'))['errorDetails']['message']}")
-    time.sleep(5)
-    status = get_command_status(chargepoint_id=chargepoint_id, location_url=response.headers['location'], client=client)
-    if status == 'Accepted':
-        return session_id
-    else:
-        raise ValueError(f"Failed to stop session: {status}")
+    try:
+        session = get_session_status_with_id(session_id=session_id, client=client)
+        response = send_remote_stop_transaction_request.sync_detailed(id=chargepoint_id, body=RemoteStopTransactionRequest(transaction_id=session.transaction_id), client=client.client)
+        if response.status_code != 202:
+            logging.CRITICAL(f"Failed to send remote stop session command: {json.loads(response.content.decode('utf8'))['errorDetails']['message']}")
+        time.sleep(5)
+        status = get_command_status(chargepoint_id=chargepoint_id, location_url=response.headers['location'], client=client)
+        if status == 'Accepted':
+            return session_id
+        else:
+            logging.INFO(f"Remote Stop Command at chargepoint: {chargepoint_id} with Session Id: {session_id} was {status}!")
+    except Exception as e:
+        logging.error(f"Failed to stop session with chargepoint: {chargepoint_id} and session id: {session_id}", exc_info=e)
