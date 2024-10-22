@@ -29,7 +29,7 @@ def remote_start_session(client: LongshipClient, chargepoint_id: str, connector_
     response = send_remote_start_transaction_request.sync_detailed(id=chargepoint_id, client=client.client, body=RemoteStartTransactionRequest(id_tag=id_tag, connector_id=connector_id))
     if response.status_code != 202:
         raise ValueError(f"Failed to send remote start session command: {json.loads(response.content.decode('utf8'))['errorDetails']['message']}")
-    time.sleep(3)
+    time.sleep(5)
     if "Accepted" == get_command_status(chargepoint_id=chargepoint_id, location_url=response.headers['location'], client=client):
         session = filter_sessions(client=client, chargepoint_id=chargepoint_id, connector_id=connector_id, running_only=True)
         return json.loads(session.content.decode("utf-8"))[0]['id']
@@ -42,7 +42,7 @@ def remote_stop_session(client: LongshipClient, chargepoint_id: str, session_id:
     response = send_remote_stop_transaction_request.sync_detailed(id=chargepoint_id, body=RemoteStopTransactionRequest(transaction_id=session.transaction_id), client=client.client)
     if response.status_code != 202:
         raise ValueError(f"Failed to send remote stop session command: {json.loads(response.content.decode('utf8'))['errorDetails']['message']}")
-    time.sleep(3)
+    time.sleep(5)
     status = get_command_status(chargepoint_id=chargepoint_id, location_url=response.headers['location'], client=client)
     if status == 'Accepted':
         return session_id
