@@ -37,6 +37,7 @@ def remote_start_session(client: LongshipClient, chargepoint_id: str, connector_
         time.sleep(5)
         status = get_command_status(chargepoint_id=chargepoint_id, location_url=response.headers['location'], client=client)
         if status == 'Accepted':
+            time.sleep(10)
             session = filter_sessions(client=client, chargepoint_id=chargepoint_id, connector_id=connector_id, running_only=True)
             return json.loads(session.content.decode("utf-8"))[0]['id']
         else:
