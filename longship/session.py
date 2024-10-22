@@ -39,11 +39,15 @@ def remote_start_session(client: LongshipClient, chargepoint_id: str, connector_
         if status == 'Accepted':
             time.sleep(10)
             session = filter_sessions(client=client, chargepoint_id=chargepoint_id, connector_id=connector_id, running_only=True)
-            return json.loads(session.content.decode("utf-8"))[0]['id']
+            logging.INFO(f"Remote Start Command at chargepoint: {chargepoint_id} with Id Tag: {id_tag} was {status}!")
+            session_id = json.loads(session.content.decode("utf-8"))[0]['id']
+            if len(session_id) == 0:
+                logging.CRITICAL(f"Failed to retrieve session id with chargepoint: {chargepoint_id} and id tag: {id_tag}")
+            return session_id
         else:
             logging.INFO(f"Remote Start Command at chargepoint: {chargepoint_id} with Id Tag: {id_tag} was {status}!")
     except IndexError as e:
-        logging.error(f"Failed to retrieve session id with chargepoint: {chargepoint_id} and id tag: {id_tag} with response as {json.loads(session.content.decode("utf-8"))}", exc_info=e)
+        logging.error(f"Failed to retrieve session id with chargepoint: {chargepoint_id} and id tag: {id_tag}", exc_info=e)
     except Exception as e:
         logging.error(f"Failed to start session with chargepoint: {chargepoint_id} and id tag: {id_tag}", exc_info=e)
 
