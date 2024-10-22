@@ -1,9 +1,9 @@
 [tool.poetry]
 name = "longship"
-version = "2024.08.7"
+version = "2024.10.22"
 description = "A client library for accessing Longship API"
 
-authors = ["Wojtek Siudzinski <admin@suda.pl>"]
+authors = ["Wojtek Siudzinski <admin@suda.pl>", "Arnaud Kayonga <a.kayonga@meshpower.co.rw>"]
 
 readme = "README.md"
 packages = [
