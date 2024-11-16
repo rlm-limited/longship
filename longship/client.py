@@ -1,4 +1,4 @@
-from longship_api_client.client import Client
+from core.client import Client
 
 
 class LongshipClient:

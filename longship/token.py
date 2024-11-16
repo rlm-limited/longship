@@ -1,5 +1,5 @@
-from longship_api_client.api.localtokengroupstoken import local_token_group_token_post
-from longship_api_client.models.local_token_group_token_post_dto import LocalTokenGroupTokenPostDto
+from core.api.localtokengroupstoken import local_token_group_token_post
+from core.models.local_token_group_token_post_dto import LocalTokenGroupTokenPostDto
 from longship.client import LongshipClient
 from longship.errors import CreateTokenError
 import json

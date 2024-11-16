@@ -1,7 +1,7 @@
-from longship_api_client.models.chargepoint_dto import ChargepointDto
-from longship_api_client.models.chargepoint_status_dto import ChargepointStatusDto
-from longship_api_client.api.chargepoints import chargepoint_get
-from longship_api_client.api.chargepoint_status import chargepoint_status_get
+from core.models.chargepoint_dto import ChargepointDto
+from core.models.chargepoint_status_dto import ChargepointStatusDto
+from core.api.chargepoints import chargepoint_get, get_all_chargepoints
+from core.api.chargepoint_status import chargepoint_status_get
 from longship.client import LongshipClient
 
 

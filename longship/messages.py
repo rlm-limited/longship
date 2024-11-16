@@ -1,5 +1,5 @@
-from longship_api_client.models.message_log_dto import MessageLogDto
-from longship_api_client.api.chargepoints import get_all_chargepointmessages
+from core.models.message_log_dto import MessageLogDto
+from core.api.chargepoints import get_all_chargepointmessages
 from longship.client import LongshipClient
 from typing import List
 import json

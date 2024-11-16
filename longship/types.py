@@ -3,10 +3,10 @@ from typing import Optional, Union
 
 import attr
 
-from longship_api_client.models.chargepoint_dto_connectivity_status import (
+from core.models.chargepoint_dto_connectivity_status import (
     ChargepointDtoConnectivityStatus,
 )
-from longship_api_client.models.connector_operational_status_dto_operational_status import (
+from core.models.connector_operational_status_dto_operational_status import (
     ConnectorOperationalStatusDtoOperationalStatus,
 )
 
